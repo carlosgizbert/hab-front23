@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -15,18 +19,46 @@
     "jsx": "preserve",
     "baseUrl": "./",
     "paths": {
-      "@/pages/*": ["pages/*"],
-      "@/tasteless/*": ["tasteless/*"],
-      "@/hooks/*": ["hooks/*"],
-      "@/contexts/*": ["contexts/*"],
-      "@/services/*": ["services/*"],
-      "@/ui/*": ["ui/components/*"],
-      "@/config/*": ["ui/config/*"],
-      "@/styles/*": ["ui/styles/*"],
-      "@/tests/*": ["ui/tests/*"]
+      "@/pages/*": [
+        "pages/*"
+      ],
+      "@/tasteless/*": [
+        "tasteless/*"
+      ],
+      "@/hooks/*": [
+        "hooks/*"
+      ],
+      "@/contexts/*": [
+        "contexts/*"
+      ],
+      "@/services/*": [
+        "services/*"
+      ],
+      "@/ui/*": [
+        "ui/components/*"
+      ],
+      "@/ui/utils/*": [
+        "ui/utils/*"
+      ],
+      "@/config/*": [
+        "ui/config/*"
+      ],
+      "@/styles/*": [
+        "ui/styles/*"
+      ],
+      "@/tests/*": [
+        "ui/tests/*"
+      ]
     },
     "incremental": true
   },
-  "include": ["src", "next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "include": [
+    "src",
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

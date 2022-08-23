@@ -3,8 +3,8 @@ import { ThemeProvider } from 'styled-components'
 
 import themes from '../../styles/themes'
 
-function Theme({ children }: any) {
+function ThemeStyled({ children }: any) {
   return <ThemeProvider theme={themes.easy}>{children}</ThemeProvider>
 }
 
-export default Theme
+export default ThemeStyled

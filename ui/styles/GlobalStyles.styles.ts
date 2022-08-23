@@ -13,35 +13,10 @@ const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased !important;
     -moz-osx-font-smoothing: grayscale;
     background-color: ${(props) => props.theme.colors.neutral_70};
-    color: ${(props) => props.theme.colors.info_130};
+    color: ${(props) => props.theme.colors.black};
   }
   body html #root {
     height: 100%;
-  }
-  :root {
-    .Toastify__toast-container {
-      width: fit-content;
-    }
-    .Toastify__toast--success {
-      .Toastify__toast-body {
-        .Toastify__toast-icon svg {
-          fill: ${(props) => props.theme.colors.sucess_100};
-        }
-      }
-    }
-    .Toastify__progress-bar--success {
-      background: ${(props) => props.theme.colors.sucess_100};
-    }
-    .Toastify__toast--error {
-      .Toastify__toast-body {
-        .Toastify__toast-icon svg {
-          fill: ${(props) => props.theme.colors.error_100};
-        }
-      }
-    }
-    .Toastify__progress-bar--error {
-      background: ${(props) => props.theme.colors.error_100};
-    }
   }
 `
 
