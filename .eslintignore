@@ -1,0 +1,8 @@
+.next
+public
+node_modules
+build
+vite.config.ts
+src/assets
+jest.config.ts
+package-lock.json
