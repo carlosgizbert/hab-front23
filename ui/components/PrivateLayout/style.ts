@@ -15,8 +15,8 @@ export const Body = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 720px;
-  padding: 3rem 0;
+  max-width: 1200px;
+  padding: 3rem 2rem;
 `
 
 export const Header = styled.div`
@@ -26,12 +26,13 @@ export const Header = styled.div`
   justify-content: center;
   height: 120px;
   width: 100%;
-  color: ${(props) => props.theme.colors.black};
-  background-color: ${(props) => props.theme.colors.neutral_70};
+  color: ${(props) => props.theme.colors.white};
+  background-color: ${(props) => props.theme.colors.primary_90};
 `
 export const HeaderContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 720px;
+  max-width: 1200px;
+  padding: 3rem 2rem;
 `

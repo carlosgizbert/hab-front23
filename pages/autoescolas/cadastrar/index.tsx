@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import type { NextPage } from 'next'
 import PrivateLayout from '@/ui/PrivateLayout'
 
@@ -8,7 +8,6 @@ import { useRouter } from 'next/router'
 import Grid from '@/ui/atoms/Grid'
 import MediaQuery from '@/ui/utils/MediaQuery'
 
-import { ISchool } from '@/services/admin/schools/interfaces'
 import { useForm } from "react-hook-form";
 import { schoolSchema } from './school.schema'
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -23,6 +22,8 @@ const NewSchool: NextPage = () => {
     resolver: yupResolver(schoolSchema)
   });
   const router = useRouter()
+
+  const firstInputRef = useRef()
 
   const {
     isLoading: loading,
@@ -57,6 +58,7 @@ const NewSchool: NextPage = () => {
         desktop={<>
           <Grid columns='1fr' gap={2}>
             <TextField
+            autoFocus
             {...register("name")}
             label="Nome"
             helperText={getErrorMessage(errors.name?.message)}
@@ -87,31 +89,39 @@ const NewSchool: NextPage = () => {
             />
             <TextField
               {...register("whatsapp")}
-              label="Whatsapp"
+              label="Whatsapp (opcional)"
               helperText={getErrorMessage(errors.whatsapp?.message)}
               error={!!errors.whatsapp?.message}
               />
             <TextField
               {...register("instagram")}
-              label="Instagram"
+              label="Instagram (opcional)"
               helperText={getErrorMessage(errors.instagram?.message)}
               error={!!errors.instagram?.message}
             />
           </Grid>
         </>}
         mobile={<>
-          <TextField
-            {...register("whatsapp")}
-            label="Whatsapp"
-            helperText={getErrorMessage(errors.whatsapp?.message)}
-            error={!!errors.whatsapp?.message}
-          />
-          <TextField
-            {...register("instagram")}
-            label="Instagram"
-            helperText={getErrorMessage(errors.instagram?.message)}
-            error={!!errors.instagram?.message}
-          />
+          <Grid columns="1fr" gap={2}>
+            <TextField
+            label="Telefone"
+            {...register("phone")}
+            helperText={getErrorMessage(errors.phone?.message)}
+            error={!!errors.phone?.message}
+            />
+            <TextField
+              {...register("whatsapp")}
+              label="Whatsapp (opcional)"
+              helperText={getErrorMessage(errors.whatsapp?.message)}
+              error={!!errors.whatsapp?.message}
+              />
+            <TextField
+              {...register("instagram")}
+              label="Instagram (opcional)"
+              helperText={getErrorMessage(errors.instagram?.message)}
+              error={!!errors.instagram?.message}
+            />
+          </Grid>
         </>}
         />
         <MediaQuery
@@ -137,6 +147,29 @@ const NewSchool: NextPage = () => {
             />
           </Grid>
           </>}
+          mobile={<>
+          <Grid columns="1fr" gap={2}>
+            <TextField
+            {...register("address_postal")}
+            label="CEP"
+            helperText={getErrorMessage(errors.address_postal?.message)}
+            error={!!errors.address_postal?.message}
+            />
+            <TextField
+            {...register("address_uf")}
+            label="Estado"
+            helperText={getErrorMessage(errors.address_uf?.message)}
+            error={!!errors.address_uf?.message}
+            />
+            <TextField
+            {...register("address_city")}
+            label="Cidade"
+            helperText={getErrorMessage(errors.address_city?.message)}
+            error={!!errors.address_city?.message}
+            />
+          </Grid>
+          </>
+          }
         />
 
         <MediaQuery
@@ -156,6 +189,22 @@ const NewSchool: NextPage = () => {
             />
           </Grid>
           </>}
+          mobile={<>
+            <Grid columns="1fr" gap={2}>
+              <TextField
+              {...register("address_district")}
+              label="Bairro"
+              helperText={getErrorMessage(errors.address_district?.message)}
+              error={!!errors.address_district?.message}
+              />
+              <TextField
+              {...register("address_number")}
+              label="Número"
+              helperText={getErrorMessage(errors.address_number?.message)}
+              error={!!errors.address_number?.message}
+              />
+            </Grid>
+            </>}
         />
 
         <Grid columns='1fr 1fr' gap={2}>
