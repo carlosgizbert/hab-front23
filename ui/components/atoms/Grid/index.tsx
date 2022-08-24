@@ -1,6 +1,6 @@
 import { IGrid } from '@/ui/interfaces/IGrid'
 
-import * as S from './Grid.styles'
+import * as S from './styles'
 
 export default function Grid({ columns, gap, children }: IGrid) {
   return (

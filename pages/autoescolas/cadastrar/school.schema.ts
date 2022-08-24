@@ -2,12 +2,12 @@ import * as yup from 'yup'
 
 export const schoolSchema = yup.object().shape({
   name: yup.string().required("Insira o nome."),
-  phone: yup.string().required(),
-  whatsapp: yup.string().required(),
-  instagram: yup.string().required(),
-  address_uf: yup.string().required(),
-  address_city: yup.string().required(),
-  address_district: yup.string().required(),
-  address_postal: yup.string().required(),
-  address_number: yup.string().required(),
+  phone: yup.string().required("Insira o telefone."),
+  whatsapp: yup.string().required("Insira o whatsapp."),
+  instagram: yup.string().required("Insira o instagram."),
+  address_uf: yup.string().required("Insira o estado."),
+  address_city: yup.string().required("Selecione a cidade."),
+  address_district: yup.string().required("Insira o bairro."),
+  address_postal: yup.string().required("Insira o CEP."),
+  address_number: yup.string().required("Insira o número."),
 });

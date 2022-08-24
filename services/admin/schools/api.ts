@@ -10,7 +10,6 @@ export async function getSchools() {
     headers: HEADERS
   }
   )
-
   const normalized = response.data.map((obj) => {
     obj['id'] = obj['_id']
     delete obj['_id']
@@ -18,4 +17,21 @@ export async function getSchools() {
   })
 
   return normalized
+}
+
+export async function createSchool(schoolDto: Omit<ISchool, 'id'>) {
+  const response = axios.post(`${API_URL}/schools`, schoolDto, {
+    headers: HEADERS,
+  })
+  return response
+}
+
+export async function deleteSchool(id: string) {
+  const response = await axios.delete(
+    `${API_URL}/schools/${id}`,
+    {
+      headers: HEADERS,
+    }
+  )
+  return response.data
 }

@@ -16,6 +16,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import toast, { Toaster } from 'react-hot-toast';
 
 import * as S from './styles'
+import { useCreateSchool } from '@/services/admin/schools'
 
 const initialForm: ISchool = {
   id: '',
@@ -30,29 +31,41 @@ const initialForm: ISchool = {
 }
 
 const NewSchool: NextPage = () => {
-  const [formValues, setFormValues] = useState<ISchool>()
-  const router = useRouter()
-
+  const [formValues, setFormValues] = useState<ISchool>(initialForm)
+  const [formIsError, setFormIsError] = useState<boolean>(false)
   const { register, handleSubmit, formState: { errors }, reset } = useForm({
     resolver: yupResolver(schoolSchema)
   });
+  const router = useRouter()
 
-  const onSubmitHandler = (data: any) => {
-    setFormValues(data)
-    // reset();
-  };
-
-  console.log(errors)
+  const {
+    isLoading: loading,
+    isSuccess: success,
+    mutate: createSchool,
+  } = useCreateSchool(
+    formValues,
+    () => toast.success('Apontamento criado com sucesso!'),
+    () => toast.error('Ops! Tente novamente.')
+  )
 
   const getErrorMessage = (msg: any) => {
     if (msg) return msg
     return ''
   }
-  
+
+  const onSubmitHandler = (data: any) => {
+    setFormValues(data)
+    createSchool()
+  };
+
   useEffect(() => {
-    if (Object.keys(errors).length) toast.error('Corrija os campos em vermelho.')
+    if (!!Object.keys(errors).length) toast.error('Corrija os campos em vermelho.')
   }, [errors])
 
+  useEffect(() => {
+    if (success) reset()
+  }, [success])
+  
   return (
     <PrivateLayout title='Nova autoescola'>
       <S.Form onSubmit={handleSubmit(onSubmitHandler)}>
@@ -174,6 +187,7 @@ const NewSchool: NextPage = () => {
             type="submit"
             variant="contained"
             size="large"
+            disabled={loading}
           >
           Cadastrar
           </Button>
