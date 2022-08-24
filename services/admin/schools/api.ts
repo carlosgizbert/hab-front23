@@ -5,8 +5,8 @@ import { ISchool } from './interfaces'
 
 import { API_URL } from '..'
 
-export async function getSchools() {
-  const response = await axios.get<ISchool[]>(`${API_URL}/schools`, {
+export async function getSchools(id = '') {
+  const response = await axios.get<ISchool[]>(`${API_URL}/schools/${id}`, {
     headers: HEADERS
   }
   )
@@ -21,6 +21,13 @@ export async function getSchools() {
 
 export async function createSchool(schoolDto: Omit<ISchool, 'id'>) {
   const response = axios.post(`${API_URL}/schools`, schoolDto, {
+    headers: HEADERS,
+  })
+  return response
+}
+
+export async function updateSchool(schoolDto: ISchool) {
+  const response = axios.patch(`${API_URL}/schools/${schoolDto.id}`, schoolDto, {
     headers: HEADERS,
   })
   return response

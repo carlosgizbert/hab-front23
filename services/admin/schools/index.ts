@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query'
 
 import {
   createSchool,
+  updateSchool,
   deleteSchool,
   getSchools,
 } from './api'
@@ -11,20 +12,19 @@ import { ISchool } from './interfaces'
 
 const INVALIDATE_QUERIES: any[] = ['getSchools']
 
-function useGetSchools() {
-  return useQuery(['getSchools'], () => getSchools(), {
+function useGetSchools(id = '') {
+  return useQuery(['getSchools'], () => getSchools(id), {
     ...QUERIES_CONFIG,
   })
 }
 
 
 function useCreateSchool(
-  school: Omit<ISchool, 'id'>,
   handleOnSuccess: () => void,
   handleOnError: () => void
 ) {
   const queryClient = useQueryClient()
-  return useMutation(() => createSchool(school), {
+  return useMutation((school: ISchool) => createSchool(school), {
     onSuccess: () => {
       INVALIDATE_QUERIES.map((q) => queryClient.invalidateQueries(q))
       handleOnSuccess()
@@ -33,6 +33,25 @@ function useCreateSchool(
       handleOnError()
     },
   })
+}
+
+function useUpdateSchool(
+  handleOnSuccess: () => void,
+  handleOnError: () => void
+) {
+  const queryClient = useQueryClient()
+  return useMutation(
+    (school: ISchool) => updateSchool(school),
+    {
+      onSuccess: () => {
+        INVALIDATE_QUERIES.map((q) => queryClient.invalidateQueries(q))
+        handleOnSuccess()
+      },
+      onError: () => {
+        handleOnError()
+      },
+    }
+  )
 }
 
 function useDeleteSchool(
@@ -55,5 +74,6 @@ function useDeleteSchool(
 export {
   useGetSchools,
   useCreateSchool,
+  useUpdateSchool,
   useDeleteSchool,
 }

@@ -16,21 +16,41 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import toast, { Toaster } from 'react-hot-toast';
 
 import * as S from './styles'
-import { useCreateSchool } from '@/services/admin/schools'
+import { useCreateSchool, useGetSchools, useUpdateSchool } from '@/services/admin/schools'
+
+const initialForm: ISchool = {
+  id: '',
+  name: '',
+  phone: '',
+  whatsapp: '',
+  instagram: '',
+  address_uf: '',
+  address_postal: '',
+  address_city: '',
+  address_district: '',
+}
 
 const NewSchool: NextPage = () => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm({
-    resolver: yupResolver(schoolSchema)
+    resolver: yupResolver(schoolSchema),
   });
+  
   const router = useRouter()
+  const SCHOOL_ID = router.query.id
 
   const {
-    isLoading: loading,
-    isSuccess: success,
-    mutate: createSchool,
-  } = useCreateSchool(
-    () => toast.success('Autoescola criada com sucesso!'),
-    () => toast.error('Ops! Tente novamente.')
+    data: getSchools,
+    isLoading: getLoading
+  } = useGetSchools(SCHOOL_ID)
+
+  const {
+    isLoading: updateLoading,
+    mutate: updateSchool
+  } = useUpdateSchool (
+      () => {
+        toast.success('Autoescola atualizada com sucesso!')
+      },
+      () => toast.error('Erro ao atualizar, tente novamente.')
   )
 
   const getErrorMessage = (msg: any) => {
@@ -38,20 +58,21 @@ const NewSchool: NextPage = () => {
     return ''
   }
 
-  const onSubmitHandler = (data: any) => {
-    createSchool(data)
+  const onSubmitHandler = (data: any) => {    
+    const querySchoolId = router.query.id
+    if (querySchoolId) updateSchool(data) // mandar uma escola
   };
+
+  useEffect(() => {
+    if(getSchools) reset(getSchools[0])
+  },[getSchools])
 
   useEffect(() => {
     if (!!Object.keys(errors).length) toast.error('Corrija os campos em vermelho.')
   }, [errors])
-
-  useEffect(() => {
-    if (success) reset()
-  }, [success])
   
   return (
-    <PrivateLayout title='Nova autoescola'>
+    <PrivateLayout title='Editar autoescola'>
       <S.Form onSubmit={handleSubmit(onSubmitHandler)}>
         <MediaQuery
         desktop={<>
@@ -171,9 +192,9 @@ const NewSchool: NextPage = () => {
             type="submit"
             variant="contained"
             size="large"
-            disabled={loading}
+            disabled={getLoading || updateLoading}
           >
-          Cadastrar
+          Salvar
           </Button>
         </Grid>
       </S.Form>

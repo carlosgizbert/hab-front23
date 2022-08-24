@@ -6,17 +6,15 @@ import { DataGrid, GridActionsCellItem} from "@mui/x-data-grid";
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import toast, { Toaster } from "react-hot-toast";
-import { useRouter } from "next/router";
+import Router from "next/router";
 import ModalDialog from "@/ui/organism/ModalDialog";
+import { Stack } from "@mui/material";
 
 export default function GridSchools() {
   const [rows, setRows] = useState<ISchool[]>([])
   const [modalOpen, setModalOpen] = useState(false);
   const {data: getSchools, isLoading: loading} = useGetSchools()
   const [cId, setCid] = useState<string>('')
-
-  const router = useRouter()
-
   const {
     mutate: deleteSchool,
     error,
@@ -32,7 +30,12 @@ export default function GridSchools() {
     }
   )
 
-  const editSchool = (id: string) => router.push('/autoescolas/cadastrar')
+  const goEditRefund = (cId: string) => {
+    Router.push({
+      pathname: '/autoescolas/editar/[id]',
+      query: { id: cId },
+    })
+  }
 
   const openConfirmDelete = (id: string) => {
     setCid(id)
@@ -42,7 +45,7 @@ export default function GridSchools() {
   const columns = useMemo(
     () => [
       { field: 'name', headerName: 'Nome', type: 'string', width: 200 },
-      { field: 'uf', headerName: 'UF', type: 'string' },
+      { field: 'address_uf', headerName: 'UF', type: 'string' },
       { field: 'address_city', headerName: 'Cidade', type: 'string', width: 200 },
       { field: 'address_postal', headerName: 'CEP', type: 'string', width: 120 },
       {
@@ -53,7 +56,7 @@ export default function GridSchools() {
           <GridActionsCellItem
             icon={<EditRoundedIcon />}
             label="Editar"
-            onClick={() => editSchool(params.id)}
+            onClick={() => goEditRefund(params.id)}
           />,
           <GridActionsCellItem
             icon={<DeleteRoundedIcon />}
@@ -64,7 +67,7 @@ export default function GridSchools() {
         ],
       },
     ],
-    [editSchool, openConfirmDelete],
+    [openConfirmDelete],
   )
 
   useEffect(() => {
@@ -78,6 +81,18 @@ export default function GridSchools() {
         columns={columns}
         pageSize={10}
         rowsPerPageOptions={[10]}
+        components={{
+          NoRowsOverlay: () => (
+            <Stack height="100%" alignItems="center" justifyContent="center">
+              Nenhuma autoescola cadastrada, por enquanto...
+            </Stack>
+          ),
+          NoResultsOverlay: () => (
+            <Stack height="100%" alignItems="center" justifyContent="center">
+              Nenhum resultado encontrado.
+            </Stack>
+          )
+        }}
       />
       {modalOpen && (
       <ModalDialog
