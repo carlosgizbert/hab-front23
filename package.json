@@ -24,6 +24,7 @@
     "babel-plugin-styled-components": "^2.0.7",
     "material-table": "^2.0.3",
     "next": "12.2.5",
+    "query-string": "^7.1.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.34.2",

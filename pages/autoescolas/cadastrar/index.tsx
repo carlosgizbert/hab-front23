@@ -44,7 +44,7 @@ const NewSchool: NextPage = () => {
   };
 
   useEffect(() => {
-    if (!!Object.keys(errors).length) toast.error('Corrija os campos em vermelho.')
+    if (!!Object.keys(errors).length) toast.error('Corrija os campos vermelhos.')
   }, [errors])
 
   useEffect(() => {
@@ -212,7 +212,7 @@ const NewSchool: NextPage = () => {
           variant="contained"
           color="secondary"
           size="large"
-          onClick={() => router.push('/autoescolas/')}
+          onClick={() => router.back()}
           >
           Cancelar
           </Button>

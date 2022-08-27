@@ -1,20 +1,23 @@
 import { useEffect, useMemo, useState } from "react";
 import { useDeleteSchool, useGetSchools } from "@/services/admin/schools";
-import { ISchool } from "@/services/admin/schools/interfaces";
-import { DataGrid, GridActionsCellItem} from "@mui/x-data-grid";
+import { ISchoolDTO } from "@/services/admin/schools/interfaces";
+import { DataGrid, GridActionsCellItem, GridRowParams} from "@mui/x-data-grid";
 
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import toast, { Toaster } from "react-hot-toast";
-import Router from "next/router";
+import { useRouter } from "next/router";
 import ModalDialog from "@/ui/organism/ModalDialog";
 import { Stack } from "@mui/material";
 
 export default function GridSchools() {
-  const [rows, setRows] = useState<ISchool[]>([])
+  const [rows, setRows] = useState<ISchoolDTO[]>([])
   const [modalOpen, setModalOpen] = useState(false);
   const {data: getSchools, isLoading: loading} = useGetSchools()
   const [cId, setCid] = useState<string>('')
+
+  const router = useRouter()
+
   const {
     mutate: deleteSchool,
     error,
@@ -30,10 +33,10 @@ export default function GridSchools() {
     }
   )
 
-  const goEditRefund = (cId: string) => {
-    Router.push({
+  const goEditRefund = (id: string) => {
+    router.push({
       pathname: '/autoescolas/editar/[id]',
-      query: { id: cId },
+      query: { id },
     })
   }
 
@@ -52,22 +55,22 @@ export default function GridSchools() {
         field: 'actions',
         type: 'actions',
         width: 80,
-        getActions: (params: any) => [
+        getActions: (params: GridRowParams) => [
           <GridActionsCellItem
             icon={<EditRoundedIcon />}
             label="Editar"
-            onClick={() => goEditRefund(params.id)}
+            onClick={() => goEditRefund(String(params.id))}
           />,
           <GridActionsCellItem
             icon={<DeleteRoundedIcon />}
             label="Apagar"
-            onClick={() => openConfirmDelete(params.id)}
+            onClick={() => openConfirmDelete(String(params.id))}
             showInMenu
           />,
         ],
       },
     ],
-    [openConfirmDelete],
+    [goEditRefund, openConfirmDelete],
   )
 
   useEffect(() => {

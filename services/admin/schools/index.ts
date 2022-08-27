@@ -5,26 +5,30 @@ import {
   updateSchool,
   deleteSchool,
   getSchools,
+  getSchool,
 } from './api'
 
 import { QUERIES_CONFIG } from '..'
-import { ISchool } from './interfaces'
+import { ISchoolDTO } from './interfaces'
 
 const INVALIDATE_QUERIES: any[] = ['getSchools']
 
-function useGetSchools(id = '') {
-  return useQuery(['getSchools'], () => getSchools(id), {
+function useGetSchools() {
+  return useQuery(['getSchools'], () => getSchools(), {
     ...QUERIES_CONFIG,
   })
 }
 
+function useGetSchool(id: string) {
+  return useQuery([], () => getSchool(id))
+}
 
 function useCreateSchool(
   handleOnSuccess: () => void,
   handleOnError: () => void
 ) {
   const queryClient = useQueryClient()
-  return useMutation((school: ISchool) => createSchool(school), {
+  return useMutation((school: ISchoolDTO) => createSchool(school), {
     onSuccess: () => {
       INVALIDATE_QUERIES.map((q) => queryClient.invalidateQueries(q))
       handleOnSuccess()
@@ -41,7 +45,7 @@ function useUpdateSchool(
 ) {
   const queryClient = useQueryClient()
   return useMutation(
-    (school: ISchool) => updateSchool(school),
+    (school: ISchoolDTO) => updateSchool(school),
     {
       onSuccess: () => {
         INVALIDATE_QUERIES.map((q) => queryClient.invalidateQueries(q))
@@ -73,6 +77,7 @@ function useDeleteSchool(
 
 export {
   useGetSchools,
+  useGetSchool,
   useCreateSchool,
   useUpdateSchool,
   useDeleteSchool,

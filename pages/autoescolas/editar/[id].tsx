@@ -8,40 +8,32 @@ import { useRouter } from 'next/router'
 import Grid from '@/ui/atoms/Grid'
 import MediaQuery from '@/ui/utils/MediaQuery'
 
-import { ISchool } from '@/services/admin/schools/interfaces'
 import { useForm } from "react-hook-form";
 import { schoolSchema } from './school.schema'
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import toast, { Toaster } from 'react-hot-toast';
 
-import * as S from './styles'
-import { useCreateSchool, useGetSchools, useUpdateSchool } from '@/services/admin/schools'
+import { useGetSchool, useUpdateSchool } from '@/services/admin/schools'
 
-const initialForm: ISchool = {
-  id: '',
-  name: '',
-  phone: '',
-  whatsapp: '',
-  instagram: '',
-  address_uf: '',
-  address_postal: '',
-  address_city: '',
-  address_district: '',
-}
+import * as S from './styles'
+import { ISchoolDTO } from '@/services/admin/schools/interfaces'
 
 const NewSchool: NextPage = () => {
-  const { register, handleSubmit, formState: { errors }, reset } = useForm({
+  const router = useRouter()
+  const {id} = router.query
+
+  const [school, setSchool] = useState<ISchoolDTO>()
+
+  const { register, handleSubmit, formState: { errors }, setValue, reset } = useForm({
     resolver: yupResolver(schoolSchema),
   });
   
-  const router = useRouter()
-  const SCHOOL_ID = router.query.id
-
   const {
-    data: getSchools,
+    data: getSchool,
     isLoading: getLoading
-  } = useGetSchools(SCHOOL_ID)
+    
+  } = useGetSchool(String(id))
 
   const {
     isLoading: updateLoading,
@@ -58,22 +50,29 @@ const NewSchool: NextPage = () => {
     return ''
   }
 
-  const onSubmitHandler = (data: any) => {    
-    const querySchoolId = router.query.id
-    if (querySchoolId) updateSchool(data) // mandar uma escola
+  const onSubmitHandler = (data: any) => {   
+    const schoolUpdated = { id, ...data }
+    
+    if (id) updateSchool(schoolUpdated) // mandar uma escola
   };
 
   useEffect(() => {
-    if(getSchools) reset(getSchools[0])
-  },[getSchools])
+    if(!id) return
+    if(id && getSchool) return setSchool(getSchool)
+  }, [id, getSchool])
 
   useEffect(() => {
-    if (!!Object.keys(errors).length) toast.error('Corrija os campos em vermelho.')
+    reset(school);
+}, [school]);
+
+  useEffect(() => {
+    if (!!Object.keys(errors).length) toast.error('Corrija os campos vermelhos.')
   }, [errors])
   
   return (
     <PrivateLayout title='Editar autoescola'>
       <S.Form onSubmit={handleSubmit(onSubmitHandler)}>
+      {school && <>
         <MediaQuery
         desktop={<>
           <Grid columns='1fr' gap={2}>
@@ -184,7 +183,7 @@ const NewSchool: NextPage = () => {
           variant="contained"
           color="secondary"
           size="large"
-          onClick={() => router.push('/autoescolas/')}
+          onClick={() => router.back()}
           >
           Cancelar
           </Button>
@@ -197,6 +196,7 @@ const NewSchool: NextPage = () => {
           Salvar
           </Button>
         </Grid>
+      </>}
       </S.Form>
       <Toaster />
     </PrivateLayout>
