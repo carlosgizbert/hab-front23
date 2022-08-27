@@ -1,5 +1,4 @@
-import { useEffect, useRef } from 'react'
-import type { NextPage } from 'next'
+import { useEffect } from 'react'
 import PrivateLayout from '@/ui/PrivateLayout'
 
 import { Button, TextField } from '@mui/material'
