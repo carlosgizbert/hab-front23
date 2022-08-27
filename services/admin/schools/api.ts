@@ -21,7 +21,7 @@ export async function getSchool(id: string) {
     headers: HEADERS
   }
   )
-  const transformed = response.data
+  const transformed: any = response.data
   transformed['_id'] = transformed['id']
 
   return transformed
