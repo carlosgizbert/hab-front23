@@ -15,8 +15,8 @@ import toast, { Toaster } from 'react-hot-toast'
 import { useGetSchool, useUpdateSchool } from '@/services/admin/schools'
 
 import { ISchoolDTO } from '@/services/admin/schools/interfaces'
-import * as S from './styles'
-import { schoolSchema } from './school.schema'
+import * as S from '../../../styles/autoescolas/editar'
+import { schoolSchema } from '../../../schemas/school'
 
 function NewSchool() {
   const router = useRouter()

@@ -13,8 +13,8 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import toast, { Toaster } from 'react-hot-toast'
 
 import { useCreateSchool } from '@/services/admin/schools'
-import * as S from './styles'
-import { schoolSchema } from './school.schema'
+import * as S from '../../../styles/autoescolas/cadastrar'
+import { schoolSchema } from '../../../schemas/school'
 
 function NewSchool() {
   const {

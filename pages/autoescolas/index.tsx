@@ -4,7 +4,7 @@ import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import PrivateLayout from '../../ui/components/PrivateLayout'
 
-import * as S from './styles'
+import * as S from '../../styles/autoescolas'
 import GridSchools from './table'
 
 function Home(_props: NextPage) {
