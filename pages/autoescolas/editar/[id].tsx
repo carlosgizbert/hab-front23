@@ -58,8 +58,12 @@ const NewSchool: NextPage = () => {
 
   useEffect(() => {
     if(!id) return
-    if(id && getSchool) return setSchool(getSchool)
-  }, [id, getSchool])
+    // loading
+  }, [id])
+
+  useEffect(() => {
+    if(getSchool) setSchool(getSchool)
+  }, [getSchool])
 
   useEffect(() => {
     reset(school);

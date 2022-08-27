@@ -17,15 +17,13 @@ export async function getSchools() {
 }
 
 export async function getSchool(id: string) {
-  console.log(id)
-  const response = await axios.get<ISchoolR>(`${API_URL}/schools/${id}`, {
+  const response = await axios.get<ISchoolDTO>(`${API_URL}/schools/${id}`, {
     headers: HEADERS
   }
   )
-
   const transformed = response.data
   transformed['_id'] = transformed['id']
-  console.log(transformed)
+
   return transformed
 }
 
