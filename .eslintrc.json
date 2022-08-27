@@ -14,7 +14,6 @@
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:jest/recommended",
-    "next/babel",
     "next/core-web-vitals",
     "prettier"
   ],
