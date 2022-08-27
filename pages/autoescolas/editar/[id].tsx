@@ -125,6 +125,12 @@ const NewSchool: NextPage = () => {
         </>}
         mobile={<>
           <TextField
+            label="Telefone"
+            {...register("phone")}
+            helperText={getErrorMessage(errors.phone?.message)}
+            error={!!errors.phone?.message}
+            />
+          <TextField
             {...register("whatsapp")}
             label="Whatsapp"
             helperText={getErrorMessage(errors.whatsapp?.message)}
@@ -161,6 +167,26 @@ const NewSchool: NextPage = () => {
             />
           </Grid>
           </>}
+          mobile={<>
+            <TextField
+            {...register("address_postal")}
+            label="CEP"
+            helperText={getErrorMessage(errors.address_postal?.message)}
+            error={!!errors.address_postal?.message}
+            />
+            <TextField
+            {...register("address_uf")}
+            label="Estado"
+            helperText={getErrorMessage(errors.address_uf?.message)}
+            error={!!errors.address_uf?.message}
+            />
+            <TextField
+            {...register("address_city")}
+            label="Cidade"
+            helperText={getErrorMessage(errors.address_city?.message)}
+            error={!!errors.address_city?.message}
+            />
+            </>}
         />
 
         <MediaQuery
@@ -180,6 +206,20 @@ const NewSchool: NextPage = () => {
             />
           </Grid>
           </>}
+          mobile={<>
+            <TextField
+            {...register("address_district")}
+            label="Bairro"
+            helperText={getErrorMessage(errors.address_district?.message)}
+            error={!!errors.address_district?.message}
+            />
+            <TextField
+            {...register("address_number")}
+            label="Número"
+            helperText={getErrorMessage(errors.address_number?.message)}
+            error={!!errors.address_number?.message}
+            />
+            </>}
         />
 
         <Grid columns='1fr 1fr' gap={2}>
