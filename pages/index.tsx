@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import PublicLayout from '@/ui/templates/PublicLayout'
 import CardSchool from '@/ui/organisms/Card'
-import { useGetSchoolsUf } from '@/services/app/search/schools'
+import { useGetSchoolsByCity } from '@/services/app/search/schools'
+import { useGetCitiesByUf } from '@/services/common/static_api'
 import { ISchoolDTO } from '@/services/app/search/schools/interfaces'
 
 import { Typography } from '@mui/material'
@@ -41,26 +42,43 @@ const UFList = [
 
 export default function Home() {
   const [schools, setSchools] = useState<ISchoolDTO[]>([])
-  const [selectedUf, setSelectedUf] = useState<string>()
+  const [selectedUf, setSelectedUf] = useState<string>('SP')
   const [currentCities, setCurrentCities] = useState<string[]>([])
-  const [selectedCity, setSelectedCity] = useState<string>()
+  const [selectedCity, setSelectedCity] = useState<string>('Praia Grande')
+
+  const {
+    data: getCities,
+    refetch: getCitiesRefetch,
+    isLoading: getCitiesIsLoading,
+    isRefetching: getCitiesIsRefetching,
+  } = useGetCitiesByUf(selectedUf)
 
   const {
     data: getSchools,
-    refetch,
-    isLoading,
-    isRefetching,
-  } = useGetSchoolsUf(selectedUf)
+    refetch: getSchoolsRefetch,
+    isLoading: getSchoolsIsLoading,
+    isRefetching: getSchoolsIsRefetching,
+  } = useGetSchoolsByCity(selectedCity)
 
   const hasSchools = !!schools && !!schools?.length
 
   useEffect(() => {
-    if (selectedUf) refetch()
-  }, [selectedUf])
+    if (getCities) setCurrentCities(getCities)
+  }, [getCities])
 
   useEffect(() => {
     if (getSchools) setSchools(getSchools)
   }, [getSchools])
+
+  useEffect(() => {
+    if (selectedUf) setSelectedUf(selectedUf)
+    getCitiesRefetch()
+  }, [selectedUf])
+
+  useEffect(() => {
+    getCitiesRefetch()
+    getSchoolsRefetch()
+  }, [selectedCity])
 
   return (
     <PublicLayout>
@@ -71,20 +89,30 @@ export default function Home() {
           </S.Header.Logo>
           <S.Header.Search>
             <ComboBox
+              key={1}
               label="Qual seu estado?"
+              value={selectedUf}
               options={UFList}
               onChange={(e) => setSelectedUf(e.value)}
             />
-            {selectedUf && (
-              <ComboBox
-                label="Qual sua cidade?"
-                options={UFList}
-                onChange={(e) => setSelectedUf(e.value)}
-              />
-            )}
+            <ComboBox
+              key={2}
+              label="Qual sua cidade?"
+              value={selectedCity}
+              options={currentCities}
+              onChange={(city) => setSelectedCity(city)}
+              disabled={getCitiesIsRefetching}
+            />
           </S.Header.Search>
         </S.Header.Wrapper>
-        {(isLoading || isRefetching) && <div>Vrum vrummm...</div>}
+        {(getSchoolsIsLoading || getSchoolsIsRefetching) && (
+          <div>Vrum vrummm...</div>
+        )}
+        {schools && (
+          <S.ResultNoSearch>
+            {schools.length} autoescolas em {selectedCity}
+          </S.ResultNoSearch>
+        )}
         {schools &&
           schools.map((school) => (
             <CardSchool
@@ -95,9 +123,17 @@ export default function Home() {
               textSub={`${school.address_uf}, ${school.address_city}, ${school.address_district}, ${school.address_postal}, ${school.address_number}`}
             />
           ))}
-        {!hasSchools && !isLoading && !isRefetching && selectedUf && (
-          <div>Nennuma autoescola parceira nessa cidade :(</div>
-        )}
+        {!hasSchools &&
+          !getSchoolsIsLoading &&
+          !getSchoolsIsRefetching &&
+          selectedUf && (
+            <S.ResultNoSearch>
+              <Typography variant="h5">{selectedCity}:</Typography>
+              <Typography variant="subtitle1">
+                Nenhuma autoescola parceira :(
+              </Typography>
+            </S.ResultNoSearch>
+          )}
       </S.Home.Wrapper>
     </PublicLayout>
   )

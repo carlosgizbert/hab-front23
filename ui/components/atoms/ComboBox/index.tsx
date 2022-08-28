@@ -1,26 +1,25 @@
 import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
 
-interface ISimpleOPtion {
-  label: string
-  value: string | number
-}
-
 interface IComboBox {
   id?: string
   width?: number
   label: string
+  value: string | number | undefined
   disablePortal?: boolean
-  options: ISimpleOPtion[]
+  options: Array<any>
+  disabled?: boolean
   onChange: (newValue: any) => any
 }
 
 export default function ComboBox({
   id,
   label,
+  value,
   options,
   width = 300,
   disablePortal = true,
+  disabled = false,
   onChange,
 }: IComboBox) {
   return (
@@ -28,7 +27,9 @@ export default function ComboBox({
       disablePortal={disablePortal}
       id={id}
       options={options}
+      value={value}
       sx={{ width }}
+      disabled={disabled}
       onChange={(event, newInputValue) => onChange(newInputValue)}
       renderInput={(params) => (
         <TextField {...params} variant="filled" label={label} />

@@ -8,8 +8,8 @@ interface IPrivateLayout {
 export default function PublicLayout({ children }: IPrivateLayout) {
   return (
     <S.Container>
-      <Navbar />
       <S.Body>{children}</S.Body>
+      <Navbar />
     </S.Container>
   )
 }

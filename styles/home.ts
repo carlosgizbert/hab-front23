@@ -35,3 +35,8 @@ export const Header = {
     max-width: 1200px;
   `,
 }
+
+export const ResultNoSearch = styled.div`
+  display: flex;
+  font-size: 18px;
+`

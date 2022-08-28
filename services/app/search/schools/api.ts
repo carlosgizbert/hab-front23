@@ -19,6 +19,17 @@ export async function getSchoolsByUf(uf: string | undefined) {
   return transformed
 }
 
+export async function getSchoolsByCity(city: string | undefined) {
+  const response = await axios.get<ISchoolR[]>(
+    `${API_URL}/schools/cidade/${city}`,
+    {
+      headers: HEADERS,
+    }
+  )
+  const transformed = response.data.map(({ _id, ...s }) => ({ id: _id, ...s }))
+  return transformed
+}
+
 export async function getSchool(id: string) {
   const response = await axios.get<ISchoolDTO>(`${API_URL}/schools/${id}`, {
     headers: HEADERS,

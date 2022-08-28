@@ -11,5 +11,5 @@ export const Body = styled.div`
   flex-direction: column;
   width: 100%;
   max-width: 90vw;
-  min-height: calc(100vh - 240px);
+  min-height: 100%;
 `
