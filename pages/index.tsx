@@ -41,20 +41,22 @@ const UFList = [
 
 export default function Home() {
   const [schools, setSchools] = useState<ISchoolDTO[]>([])
-  const [uf, setUf] = useState<string>()
+  const [selectedUf, setSelectedUf] = useState<string>()
+  const [currentCities, setCurrentCities] = useState<string[]>([])
+  const [selectedCity, setSelectedCity] = useState<string>()
 
   const {
     data: getSchools,
     refetch,
     isLoading,
     isRefetching,
-  } = useGetSchoolsUf(uf)
+  } = useGetSchoolsUf(selectedUf)
 
   const hasSchools = !!schools && !!schools?.length
 
   useEffect(() => {
-    if (uf) refetch()
-  }, [uf])
+    if (selectedUf) refetch()
+  }, [selectedUf])
 
   useEffect(() => {
     if (getSchools) setSchools(getSchools)
@@ -71,13 +73,13 @@ export default function Home() {
             <ComboBox
               label="Qual seu estado?"
               options={UFList}
-              onChange={(e) => setUf(e.value)}
+              onChange={(e) => setSelectedUf(e.value)}
             />
-            {uf && (
+            {selectedUf && (
               <ComboBox
                 label="Qual sua cidade?"
                 options={UFList}
-                onChange={(e) => setUf(e.value)}
+                onChange={(e) => setSelectedUf(e.value)}
               />
             )}
           </S.Header.Search>
@@ -93,7 +95,7 @@ export default function Home() {
               textSub={`${school.address_uf}, ${school.address_city}, ${school.address_district}, ${school.address_postal}, ${school.address_number}`}
             />
           ))}
-        {!hasSchools && !isLoading && !isRefetching && uf && (
+        {!hasSchools && !isLoading && !isRefetching && selectedUf && (
           <div>Nennuma autoescola parceira nessa cidade :(</div>
         )}
       </S.Home.Wrapper>
