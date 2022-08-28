@@ -251,7 +251,7 @@ function NewSchool() {
         )}
       </S.Form>
       <Toaster />
-    </PublicLa>
+    </PublicLayout>
   )
 }
 
