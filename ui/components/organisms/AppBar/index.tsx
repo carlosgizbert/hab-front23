@@ -11,13 +11,18 @@ export default function SimpleBottomNavigation() {
 
   const router = useRouter()
 
-  const goTo: any = {
-    0: () => router.push('/'),
-    1: () => router.push('/gestao/autoescolas'),
-  }
-
   useEffect(() => {
-    goTo[value]()
+    switch (value) {
+      case 0:
+        router.push('/')
+        break
+      case 1:
+        router.push('/gestao/autoescolas/')
+        break
+      default:
+        router.push('/')
+        break
+    }
   }, [value])
 
   return (

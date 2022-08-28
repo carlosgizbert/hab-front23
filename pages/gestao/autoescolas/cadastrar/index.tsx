@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import PrivateLayout from '@/ui/templates/PrivateLayout'
+import PublicLayout from '@/ui/templates/PublicLayout'
 
 import { Button, TextField } from '@mui/material'
 import { useRouter } from 'next/router'
@@ -17,6 +17,8 @@ import * as S from '../../../../styles/gestao/autoescolas/cadastrar'
 import { schoolSchema } from '../../../../schemas/school'
 
 function NewSchool() {
+  const router = useRouter()
+
   const {
     register,
     handleSubmit,
@@ -25,7 +27,6 @@ function NewSchool() {
   } = useForm({
     resolver: yupResolver(schoolSchema),
   })
-  const router = useRouter()
 
   const {
     isLoading: loading,
@@ -54,7 +55,7 @@ function NewSchool() {
   }, [success])
 
   return (
-    <PrivateLayout title="Nova autoescola">
+    <PublicLayout>
       <S.Form onSubmit={handleSubmit(onSubmitHandler)}>
         <MediaQuery
           desktop={
@@ -227,7 +228,7 @@ function NewSchool() {
         </Grid>
       </S.Form>
       <Toaster />
-    </PrivateLayout>
+    </PublicLayout>
   )
 }
 

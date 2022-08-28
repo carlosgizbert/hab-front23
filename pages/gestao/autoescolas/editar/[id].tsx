@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import PrivateLayout from '@/ui/templates/PrivateLayout'
+import PublicLayout from '@/ui/templates/PublicLayout'
 
 import { Button, TextField } from '@mui/material'
 import { useRouter } from 'next/router'
@@ -71,7 +71,7 @@ function NewSchool() {
   }, [errors])
 
   return (
-    <PrivateLayout title="Editar autoescola">
+    <PublicLayout>
       <S.Form onSubmit={handleSubmit(onSubmitHandler)}>
         {school && (
           <>
@@ -251,7 +251,7 @@ function NewSchool() {
         )}
       </S.Form>
       <Toaster />
-    </PrivateLayout>
+    </PublicLa>
   )
 }
 
