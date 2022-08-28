@@ -5,7 +5,7 @@ export const Card = {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.8rem;
 
     cursor: pointer;
   `,
@@ -36,7 +36,7 @@ export const Card = {
   Body: {
     Wrapper: styled.div`
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
       gap: 0.5rem;
     `,
     Title: styled.div`

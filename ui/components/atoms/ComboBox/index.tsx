@@ -12,6 +12,7 @@ interface IComboBox {
   label: string
   disablePortal?: boolean
   options: ISimpleOPtion[]
+  onChange: (newValue: any) => any
 }
 
 export default function ComboBox({
@@ -20,6 +21,7 @@ export default function ComboBox({
   options,
   width = 300,
   disablePortal = true,
+  onChange,
 }: IComboBox) {
   return (
     <Autocomplete
@@ -27,6 +29,7 @@ export default function ComboBox({
       id={id}
       options={options}
       sx={{ width }}
+      onChange={(event, newInputValue) => onChange(newInputValue)}
       renderInput={(params) => (
         <TextField {...params} variant="filled" label={label} />
       )}
