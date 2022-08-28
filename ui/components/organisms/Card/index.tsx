@@ -5,7 +5,7 @@ interface ICardSchool {
   textTitle: string
   textTag: string
   textSub: string
-  onClick: () => void
+  onClick?: () => void
 }
 
 export default function CardSchool({

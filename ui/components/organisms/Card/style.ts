@@ -26,7 +26,7 @@ export const Card = {
       left: 0;
 
       padding: 0.5rem;
-      border-radius: 0 0 8px 0;
+      border-radius: 8px 0 8px 0;
 
       color: white;
       background-color: rgb(0, 0, 0, 0.8);
