@@ -1,29 +1,17 @@
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
-import CardMedia from '@mui/material/CardMedia'
-import Typography from '@mui/material/Typography'
-import { CardActionArea } from '@mui/material'
+import { Card } from './style'
 
 export default function CardSchool() {
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height="140"
-          image="/static/images/cards/contemplative-reptile.jpg"
-          alt="green iguana"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Lizard
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-    </Card>
+    <Card.Container>
+      <Card.Header.Image imageUrl="https://yt3.ggpht.com/1cnC4t4JxgiLkCdXgTL8nZ_EYrQQ6I6ZDYUwCuNT_yZQAoJiGPlm5-vfRw541U4vJcZ6FJNpmw=s900-c-k-c0x00ffffff-no-rj">
+        <Card.Header.Tag>Vila Tupi</Card.Header.Tag>
+      </Card.Header.Image>
+      <Card.Body.Wrapper>
+        <Card.Body.Title>Twister</Card.Body.Title>
+        <Card.Body.Subtitle>
+          Avenida Presidente Kennedy, Praia Grande, São Paulo, 11709-000
+        </Card.Body.Subtitle>
+      </Card.Body.Wrapper>
+    </Card.Container>
   )
 }
