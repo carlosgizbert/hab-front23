@@ -10,7 +10,7 @@ import ComboBox from '@/ui/atoms/ComboBox'
 import * as S from '../styles/home'
 
 const UFList = [
-  { label: 'São Paulo', value: 'AC' },
+  { label: 'Acre', value: 'AC' },
   { label: 'Alagoas', value: 'AL' },
   { label: 'Amapá', value: 'AP' },
   { label: 'Amazonas', value: 'AM' },
@@ -41,9 +41,16 @@ const UFList = [
 
 export default function Home() {
   const [schools, setSchools] = useState<ISchoolDTO[]>([])
-  const [uf, setUf] = useState<string>('RJ')
+  const [uf, setUf] = useState<string>()
 
-  const { data: getSchools, refetch } = useGetSchoolsUf(uf)
+  const {
+    data: getSchools,
+    refetch,
+    isLoading,
+    isRefetching,
+  } = useGetSchoolsUf(uf)
+
+  const hasSchools = !!schools && !!schools?.length
 
   useEffect(() => {
     if (uf) refetch()
@@ -66,24 +73,29 @@ export default function Home() {
               options={UFList}
               onChange={(e) => setUf(e.value)}
             />
-            <ComboBox
-              label="Qual sua cidade?"
-              options={UFList}
-              onChange={(e) => setUf(e.value)}
-            />
+            {uf && (
+              <ComboBox
+                label="Qual sua cidade?"
+                options={UFList}
+                onChange={(e) => setUf(e.value)}
+              />
+            )}
           </S.Header.Search>
         </S.Header.Wrapper>
-
+        {(isLoading || isRefetching) && <div>Vrum vrummm...</div>}
         {schools &&
           schools.map((school) => (
             <CardSchool
               key={school.id}
               imageUrl="https://portalpopline.com.br/wp-content/uploads/2022/08/harry-potter-serie.jpg"
               textTitle={school.name}
-              textTag={school.address_district}
+              textTag={`bairro: ${school.address_district}`}
               textSub={`${school.address_uf}, ${school.address_city}, ${school.address_district}, ${school.address_postal}, ${school.address_number}`}
             />
           ))}
+        {!hasSchools && !isLoading && !isRefetching && uf && (
+          <div>Nennuma autoescola parceira nessa cidade :(</div>
+        )}
       </S.Home.Wrapper>
     </PublicLayout>
   )

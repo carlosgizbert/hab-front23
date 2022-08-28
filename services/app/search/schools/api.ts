@@ -11,7 +11,7 @@ export async function getSchools() {
   return transformed
 }
 
-export async function getSchoolsByUf(uf: string) {
+export async function getSchoolsByUf(uf: string | undefined) {
   const response = await axios.get<ISchoolR[]>(`${API_URL}/schools/uf/${uf}`, {
     headers: HEADERS,
   })

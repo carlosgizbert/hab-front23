@@ -10,7 +10,7 @@ function useGetSchools() {
   })
 }
 
-function useGetSchoolsUf(uf: string) {
+function useGetSchoolsUf(uf: string | undefined) {
   return useQuery(['getSchoolsUf'], () => getSchoolsByUf(uf))
 }
 
