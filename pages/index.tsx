@@ -101,39 +101,48 @@ export default function Home() {
               value={selectedCity}
               options={currentCities}
               onChange={(city) => setSelectedCity(city)}
-              disabled={getCitiesIsRefetching}
+              disabled={getCitiesIsRefetching || getCitiesIsLoading}
             />
           </S.Header.Search>
         </S.Header.Wrapper>
-        {(getSchoolsIsLoading || getSchoolsIsRefetching) && (
-          <div>Vrum vrummm...</div>
-        )}
-        {schools && (
-          <S.ResultNoSearch>
-            {schools.length} autoescolas em {selectedCity}
-          </S.ResultNoSearch>
-        )}
-        {schools &&
-          schools.map((school) => (
-            <CardSchool
-              key={school.id}
-              imageUrl="https://portalpopline.com.br/wp-content/uploads/2022/08/harry-potter-serie.jpg"
-              textTitle={school.name}
-              textTag={`bairro: ${school.address_district}`}
-              textSub={`${school.address_uf}, ${school.address_city}, ${school.address_district}, ${school.address_postal}, ${school.address_number}`}
-            />
-          ))}
-        {!hasSchools &&
-          !getSchoolsIsLoading &&
-          !getSchoolsIsRefetching &&
-          selectedUf && (
-            <S.ResultNoSearch>
-              <Typography variant="h5">{selectedCity}:</Typography>
-              <Typography variant="subtitle1">
-                Nenhuma autoescola parceira :(
-              </Typography>
-            </S.ResultNoSearch>
-          )}
+        <S.SchoolsList.Wrapper>
+          <S.SchoolsList.Body>
+            {(getSchoolsIsLoading || getSchoolsIsRefetching) && (
+              <div>Vrum vrummm...</div>
+            )}
+            {schools && (
+              <S.ResultNoSearch>
+                <div>{schools.length} autoescolas em</div>{' '}
+                <div style={{ fontWeight: 'bold', marginLeft: '6px' }}>
+                  {selectedCity}
+                </div>
+              </S.ResultNoSearch>
+            )}
+            <S.SchoolsList.Cards>
+              {schools &&
+                schools.map((school) => (
+                  <CardSchool
+                    key={school.id}
+                    imageUrl="https://portalpopline.com.br/wp-content/uploads/2022/08/harry-potter-serie.jpg"
+                    textTitle={school.name}
+                    textTag={`bairro: ${school.address_district}`}
+                    textSub={`${school.address_uf}, ${school.address_city}, ${school.address_district}, ${school.address_postal}, ${school.address_number}`}
+                  />
+                ))}
+            </S.SchoolsList.Cards>
+            {!hasSchools &&
+              !getSchoolsIsLoading &&
+              !getSchoolsIsRefetching &&
+              selectedUf && (
+                <S.ResultNoSearch>
+                  <Typography variant="h5">{selectedCity}:</Typography>
+                  <Typography variant="subtitle1">
+                    Nenhuma autoescola parceira :(
+                  </Typography>
+                </S.ResultNoSearch>
+              )}
+          </S.SchoolsList.Body>
+        </S.SchoolsList.Wrapper>
       </S.Home.Wrapper>
     </PublicLayout>
   )
