@@ -42,9 +42,9 @@ const UFList = [
 
 export default function Home() {
   const [schools, setSchools] = useState<ISchoolDTO[]>([])
-  const [selectedUf, setSelectedUf] = useState<string>()
-  const [currentCities, setCurrentCities] = useState<string[]>([])
+  const [selectedUf, setSelectedUf] = useState<string>('')
   const [selectedCity, setSelectedCity] = useState<string>('')
+  const [currentCities, setCurrentCities] = useState<string[]>([])
 
   const {
     data: getCities,
@@ -103,7 +103,7 @@ export default function Home() {
         </S.Header.Wrapper>
         <S.SchoolsList.Wrapper>
           <S.SchoolsList.Body>
-            {(getSchoolsIsLoading || getSchoolsIsRefetching) && (
+            {(getSchoolsIsLoading || getSchoolsIsRefetching) && !hasSchools && (
               <div>Vrum vrummm...</div>
             )}
             {schools && (
@@ -115,7 +115,9 @@ export default function Home() {
               </S.ResultNoSearch>
             )}
             <S.SchoolsList.Cards>
-              {schools &&
+              {!getSchoolsIsLoading &&
+                !getSchoolsIsRefetching &&
+                schools &&
                 schools.map((school) => (
                   <CardSchool
                     key={school.id}
@@ -131,7 +133,6 @@ export default function Home() {
               !getSchoolsIsRefetching &&
               selectedUf && (
                 <S.ResultNoSearch>
-                  <Typography variant="h5">{selectedCity}:</Typography>
                   <Typography variant="subtitle1">
                     Nenhuma autoescola parceira :(
                   </Typography>

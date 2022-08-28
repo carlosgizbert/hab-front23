@@ -25,7 +25,7 @@ export default function ComboBox({
   return (
     <Autocomplete
       disablePortal={disablePortal}
-      id={id}
+      id={`${id}value`}
       options={options}
       value={value}
       sx={{ width }}
