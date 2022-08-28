@@ -10,15 +10,17 @@ function useGetSchools() {
   })
 }
 
-function useGetSchoolsUf(uf: string | undefined) {
+function useGetSchoolsUf(uf: string) {
   return useQuery(['getSchoolsByUf'], () => getSchoolsByUf(uf), {
     ...QUERIES_CONFIG,
+    enabled: false,
   })
 }
 
-function useGetSchoolsByCity(city: string | undefined) {
+function useGetSchoolsByCity(city: string, enabled: boolean) {
   return useQuery(['getSchoolsByCities'], () => getSchoolsByCity(city), {
     ...QUERIES_CONFIG,
+    enabled: false,
   })
 }
 

@@ -4,7 +4,7 @@ import { getCities } from './api'
 
 import { QUERIES_CONFIG } from '..'
 
-function useGetCitiesByUf(uf: string | undefined) {
+function useGetCitiesByUf(uf: string) {
   return useQuery(['getCitiesUf'], () => getCities(uf), {
     ...QUERIES_CONFIG,
   })

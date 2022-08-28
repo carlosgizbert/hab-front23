@@ -1,24 +1,18 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+import axios from 'axios'
 
-const UF_CITIES: any = {
-  SP: ['Praia Grande', 'Santos'],
-  RJ: ['Campos dos Goytacazes', 'Cidade de Deus'],
-}
+const API_IBGE = `http://servicodados.ibge.gov.br/api/v1/localidades/estados`
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { uf } = req.query
 
-  const selectedUF: any = Object.keys(UF_CITIES)
-    .filter((key) => key.includes(`${uf}`))
-    .reduce((cur, key) => {
-      return Object.assign(cur, { [key]: UF_CITIES[key] })
-    }, {})
+  const response = await axios.get<any>(`${API_IBGE}/${uf}/distritos`)
 
-  const cities = [] as Array<string>
-  selectedUF[String(uf)].forEach((city: string) => {
-    cities.push(city)
-  })
+  const transformed = response.data.map(({ nome, ...s }: any) => ({
+    label: nome,
+    ...s,
+  }))
 
-  res.send(cities)
+  res.send(transformed)
 }

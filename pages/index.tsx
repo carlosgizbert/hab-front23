@@ -42,23 +42,23 @@ const UFList = [
 
 export default function Home() {
   const [schools, setSchools] = useState<ISchoolDTO[]>([])
-  const [selectedUf, setSelectedUf] = useState<string>('São Paulo')
+  const [selectedUf, setSelectedUf] = useState<string>()
   const [currentCities, setCurrentCities] = useState<string[]>([])
-  const [selectedCity, setSelectedCity] = useState<string>('Praia Grande')
+  const [selectedCity, setSelectedCity] = useState<string>('')
 
   const {
     data: getCities,
     refetch: getCitiesRefetch,
     isLoading: getCitiesIsLoading,
     isRefetching: getCitiesIsRefetching,
-  } = useGetCitiesByUf(selectedUf)
+  } = useGetCitiesByUf(selectedUf!)
 
   const {
     data: getSchools,
     refetch: getSchoolsRefetch,
     isLoading: getSchoolsIsLoading,
     isRefetching: getSchoolsIsRefetching,
-  } = useGetSchoolsByCity(selectedCity)
+  } = useGetSchoolsByCity(selectedCity!, !!selectedUf)
 
   const hasSchools = !!schools && !!schools?.length
 
@@ -67,16 +67,14 @@ export default function Home() {
   }, [getCities])
 
   useEffect(() => {
-    if (getSchools) setSchools(getSchools)
-  }, [getSchools])
-
-  useEffect(() => {
-    if (selectedUf) setSelectedUf(selectedUf)
     getCitiesRefetch()
   }, [selectedUf])
 
   useEffect(() => {
-    getCitiesRefetch()
+    if (getSchools) setSchools(getSchools)
+  }, [getSchools])
+
+  useEffect(() => {
     getSchoolsRefetch()
   }, [selectedCity])
 
@@ -89,18 +87,16 @@ export default function Home() {
           </S.Header.Logo>
           <S.Header.Search>
             <ComboBox
-              key={1}
               label="Qual seu estado?"
               value={selectedUf}
               options={UFList}
               onChange={(e) => setSelectedUf(e.value)}
             />
             <ComboBox
-              key={2}
               label="Qual sua cidade?"
               value={selectedCity}
               options={currentCities}
-              onChange={(city) => setSelectedCity(city)}
+              onChange={(city) => setSelectedCity(city.label)}
               disabled={getCitiesIsRefetching || getCitiesIsLoading}
             />
           </S.Header.Search>
