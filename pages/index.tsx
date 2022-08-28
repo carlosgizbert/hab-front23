@@ -42,7 +42,7 @@ const UFList = [
 
 export default function Home() {
   const [schools, setSchools] = useState<ISchoolDTO[]>([])
-  const [selectedUf, setSelectedUf] = useState<string>('SP')
+  const [selectedUf, setSelectedUf] = useState<string>('São Paulo')
   const [currentCities, setCurrentCities] = useState<string[]>([])
   const [selectedCity, setSelectedCity] = useState<string>('Praia Grande')
 
@@ -91,7 +91,6 @@ export default function Home() {
             <ComboBox
               key={1}
               label="Qual seu estado?"
-              width={250}
               value={selectedUf}
               options={UFList}
               onChange={(e) => setSelectedUf(e.value)}
