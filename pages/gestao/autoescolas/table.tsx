@@ -7,7 +7,7 @@ import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded'
 import EditRoundedIcon from '@mui/icons-material/EditRounded'
 import toast, { Toaster } from 'react-hot-toast'
 import { useRouter } from 'next/router'
-import ModalDialog from '@/ui/organism/ModalDialog'
+import ModalDialog from '@/ui/organisms/ModalDialog'
 import { Stack } from '@mui/material'
 
 export default function GridSchools() {
@@ -35,7 +35,7 @@ export default function GridSchools() {
 
   const goEditRefund = (id: string) => {
     router.push({
-      pathname: '/autoescolas/editar/[id]',
+      pathname: '/gestao/autoescolas/editar/[id]',
       query: { id },
     })
   }
@@ -88,6 +88,10 @@ export default function GridSchools() {
   useEffect(() => {
     if (getSchools) setRows(getSchools)
   }, [getSchools])
+
+  useEffect(() => {
+    if (error) toast.error('Erro ao recuperar dados')
+  }, [error])
 
   return (
     <div style={{ height: 640, width: '100%' }}>

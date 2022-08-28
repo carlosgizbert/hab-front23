@@ -33,8 +33,8 @@ export const IBorderRadiusDefault: T.IBorderRadius = {
 }
 
 export const IShadowLevelDefault: T.IShadowLevel = {
-  level_1: 'rgba(0, 0, 0, 0.08) 0px 12px 12px',
-  level_2: 'rgba(0, 0, 0, 0.04) 0px 3px 5px',
+  level_1: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px',
+  level_2: 'rgba(17, 12, 46, 0.15) 0px 48px 100px 0px',
 }
 
 export const IFontFamilyDefault: T.IFontFamily = {

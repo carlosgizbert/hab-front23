@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Metropolis', 'Montserrat', 'Verdana', sans-serif;
     -webkit-font-smoothing: antialiased !important;
     -moz-osx-font-smoothing: grayscale;
-    background-color: ${(props) => props.theme.colors.neutral_70};
+    background-color: ${(props) => props.theme.colors.white};
     color: ${(props) => props.theme.colors.black};
   }
   body html #root {

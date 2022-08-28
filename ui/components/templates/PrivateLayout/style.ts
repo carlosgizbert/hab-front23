@@ -3,11 +3,7 @@ import styled from 'styled-components'
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 3rem;
   align-items: center;
-  width: 100vw;
-  height: 100%;
-
   background-color: #fbfbfb;
 `
 
@@ -15,11 +11,11 @@ export const Body = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 1200px;
-  padding: 3rem 2rem;
+  max-width: 90vw;
+  min-height: calc(100vh - 240px);
 `
 
-export const Header = styled.div`
+export const HeaderWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -36,3 +32,11 @@ export const HeaderContainer = styled.div`
   max-width: 1200px;
   padding: 3rem 2rem;
 `
+
+export const Footer = {
+  Wrapper: styled(HeaderWrapper)`
+    height: 120px;
+    background-color: ${(props) => props.theme.colors.black};
+  `,
+  Content: styled(HeaderContainer)``,
+}

@@ -2,9 +2,9 @@ import { Button } from '@mui/material'
 import { Stack } from '@mui/system'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import PrivateLayout from '../../ui/components/PrivateLayout'
+import PrivateLayout from '../../../ui/components/templates/PrivateLayout'
 
-import * as S from '../../styles/autoescolas'
+import * as S from '../../../styles/gestao/autoescolas'
 import GridSchools from './table'
 
 function Home(_props: NextPage) {
@@ -17,7 +17,7 @@ function Home(_props: NextPage) {
           <Button
             variant="contained"
             size="large"
-            onClick={() => router.push('/autoescolas/cadastrar')}
+            onClick={() => router.push('/gestao/autoescolas/cadastrar')}
           >
             Nova autoescola
           </Button>

@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import PrivateLayout from '@/ui/PrivateLayout'
+import PrivateLayout from '@/ui/templates/PrivateLayout'
 
 import { Button, TextField } from '@mui/material'
 import { useRouter } from 'next/router'
@@ -13,8 +13,8 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import toast, { Toaster } from 'react-hot-toast'
 
 import { useCreateSchool } from '@/services/admin/schools'
-import * as S from '../../../styles/autoescolas/cadastrar'
-import { schoolSchema } from '../../../schemas/school'
+import * as S from '../../../../styles/gestao/autoescolas/cadastrar'
+import { schoolSchema } from '../../../../schemas/school'
 
 function NewSchool() {
   const {

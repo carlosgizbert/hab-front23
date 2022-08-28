@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import PrivateLayout from '@/ui/PrivateLayout'
+import PrivateLayout from '@/ui/templates/PrivateLayout'
 
 import { Button, TextField } from '@mui/material'
 import { useRouter } from 'next/router'
@@ -15,8 +15,8 @@ import toast, { Toaster } from 'react-hot-toast'
 import { useGetSchool, useUpdateSchool } from '@/services/admin/schools'
 
 import { ISchoolDTO } from '@/services/admin/schools/interfaces'
-import * as S from '../../../styles/autoescolas/editar'
-import { schoolSchema } from '../../../schemas/school'
+import { schoolSchema } from '../../../../schemas/school'
+import * as S from '../../../../styles/gestao/autoescolas/editar'
 
 function NewSchool() {
   const router = useRouter()
