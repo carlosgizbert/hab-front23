@@ -41,7 +41,7 @@ export const SchoolsList = {
     display: flex;
     flex-direction: center;
     justify-content: center;
-    width: 100vw;
+    width: 100%;
   `,
   Body: styled.div`
     display: flex;

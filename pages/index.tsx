@@ -91,6 +91,7 @@ export default function Home() {
             <ComboBox
               key={1}
               label="Qual seu estado?"
+              width={250}
               value={selectedUf}
               options={UFList}
               onChange={(e) => setSelectedUf(e.value)}
