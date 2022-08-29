@@ -21,7 +21,7 @@ export const Wrapper = styled.div`
 export const Header = styled.div`
   display: flex;
   gap: 1rem;
-  height: 90px;
+  height: 80px;
   align-items: center;
 `
 
