@@ -1,146 +1,66 @@
-import { useEffect, useState } from 'react'
-import PublicLayout from '@/ui/templates/PublicLayout'
-import CardSchool from '@/ui/organisms/Card'
-import { useGetSchoolsByCity } from '@/services/app/search/schools'
-import { useGetCitiesByUf } from '@/services/common/static_api'
-import { ISchoolDTO } from '@/services/app/search/schools/interfaces'
-
-import { Typography } from '@mui/material'
-import ComboBox from '@/ui/atoms/ComboBox'
-
-import * as S from '../styles/home'
-
-const UFList = [
-  { label: 'Acre', value: 'AC' },
-  { label: 'Alagoas', value: 'AL' },
-  { label: 'Amapá', value: 'AP' },
-  { label: 'Amazonas', value: 'AM' },
-  { label: 'Bahia', value: 'BA' },
-  { label: 'Ceará', value: 'CE' },
-  { label: 'Distrito Federal', value: 'DF' },
-  { label: 'Espirito Santo', value: 'ES' },
-  { label: 'Goiás', value: 'GO' },
-  { label: 'Maranhão', value: 'MA' },
-  { label: 'Mato Grosso', value: 'MT' },
-  { label: 'Mato Grosso do Sul', value: 'MS' },
-  { label: 'Minas Gerais', value: 'MG' },
-  { label: 'Pará', value: 'PA' },
-  { label: 'Paraíba', value: 'PB' },
-  { label: 'Paraná', value: 'PR' },
-  { label: 'Pernambuco', value: 'PE' },
-  { label: 'Piauí', value: 'PI' },
-  { label: 'Rio de Janeiro', value: 'RJ' },
-  { label: 'Rio Grande do Norte', value: 'RN' },
-  { label: 'Rio Grande do Sul', value: 'RS' },
-  { label: 'Rondônia', value: 'RO' },
-  { label: 'Roraima', value: 'RR' },
-  { label: 'Santa Catarina', value: 'SC' },
-  { label: 'São Paulo', value: 'SP' },
-  { label: 'Sergipe', value: 'SE' },
-  { label: 'Tocantins', value: 'TO' },
-]
+import { useState } from 'react'
+import SearchView from '@/ui/pages/SearchView'
+import LayoutPublic from '@/ui/templates/PublicLayout'
+import Logo from '@/ui/atoms/Logo'
+import IconSearch from '@mui/icons-material/Search'
 
 export default function Home() {
-  const [schools, setSchools] = useState<ISchoolDTO[]>([])
-  const [selectedUf, setSelectedUf] = useState<string>('')
-  const [selectedCity, setSelectedCity] = useState<string>('')
-  const [currentCities, setCurrentCities] = useState<string[]>([])
+  const [searchOpened, setSearchIsOpen] = useState(false)
 
-  const {
-    data: getCities,
-    refetch: getCitiesRefetch,
-    isLoading: getCitiesIsLoading,
-    isRefetching: getCitiesIsRefetching,
-  } = useGetCitiesByUf(selectedUf!)
-
-  const {
-    data: getSchools,
-    refetch: getSchoolsRefetch,
-    isLoading: getSchoolsIsLoading,
-    isRefetching: getSchoolsIsRefetching,
-  } = useGetSchoolsByCity(selectedCity!, !!selectedUf)
-
-  const hasSchools = !!schools && !!schools?.length
-
-  useEffect(() => {
-    if (getCities) setCurrentCities(getCities)
-  }, [getCities])
-
-  useEffect(() => {
-    getCitiesRefetch()
-  }, [selectedUf])
-
-  useEffect(() => {
-    if (getSchools) setSchools(getSchools)
-  }, [getSchools])
-
-  useEffect(() => {
-    getSchoolsRefetch()
-  }, [selectedCity])
+  const styleHome = {
+    background:
+      'linear-gradient(to bottom, rgba(0, 71, 138, 0.24), rgba(0, 14, 24, 0.99)), url("https://images.unsplash.com/photo-1519255122284-c3acd66be602?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=795&q=80")',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center center',
+    height: 'calc(100vh - 5rem)',
+    width: '100vw',
+  }
 
   return (
-    <PublicLayout>
-      <S.Home.Wrapper>
-        <S.Header.Wrapper>
-          <S.Header.Logo>
-            <Typography variant="h5">habilita</Typography>
-          </S.Header.Logo>
-          <S.Header.Search>
-            <ComboBox
-              label="Qual seu estado?"
-              value={selectedUf}
-              options={UFList}
-              onChange={(e) => setSelectedUf(e.value)}
-            />
-            <ComboBox
-              label="Qual sua cidade?"
-              value={selectedCity}
-              options={currentCities}
-              onChange={(city) => setSelectedCity(city.label)}
-              disabled={getCitiesIsRefetching || getCitiesIsLoading}
-            />
-          </S.Header.Search>
-        </S.Header.Wrapper>
-        <S.SchoolsList.Wrapper>
-          <S.SchoolsList.Body>
-            {(getSchoolsIsLoading || getSchoolsIsRefetching) && !hasSchools && (
-              <div>Vrum vrummm...</div>
-            )}
-            {schools && (
-              <S.ResultNoSearch>
-                <div>{schools.length} autoescolas em</div>{' '}
-                <div style={{ fontWeight: 'bold', marginLeft: '6px' }}>
-                  {selectedCity}
+    <>
+      {searchOpened && (
+        <SearchView
+          setIsOpen={setSearchIsOpen}
+          onClose={() => setSearchIsOpen(false)}
+        />
+      )}
+      <LayoutPublic>
+        <div
+          style={styleHome}
+          className="
+          sticky
+          top-0
+          z-30
+          bgdark
+          flex 
+          flex-col 
+          justify-around
+          items-center 
+          py-8
+          text-white"
+        >
+          <div className="flex flex-col items-center justify-center">
+            <Logo />
+            <div className="mt-4">
+              <h1 className="text-xl text-center mb-6">
+                Encontre autoescolas perto de você
+              </h1>
+              <div
+                className="flex flex-col cursor-pointer"
+                onClick={() => setSearchIsOpen(true)}
+              >
+                <div className="h-14 text-sm border border-white/20 flex items-center px-3 rounded-xl text-gray-200">
+                  <div className="pr-2 text-white/60">
+                    <IconSearch />
+                  </div>{' '}
+                  Insira seu cep, cidade, ou rua...
                 </div>
-              </S.ResultNoSearch>
-            )}
-            <S.SchoolsList.Cards>
-              {!getSchoolsIsLoading &&
-                !getSchoolsIsRefetching &&
-                schools &&
-                schools.map((school) => (
-                  <CardSchool
-                    key={school.id}
-                    imageUrl="https://portalpopline.com.br/wp-content/uploads/2022/08/harry-potter-serie.jpg"
-                    textTitle={school.name}
-                    textTag={`bairro: ${school.address_district}`}
-                    textSub={`${school.address_uf}, ${school.address_city}, ${school.address_district}, ${school.address_postal}, ${school.address_number}`}
-                  />
-                ))}
-            </S.SchoolsList.Cards>
-            {!hasSchools &&
-              !getSchoolsIsLoading &&
-              !getSchoolsIsRefetching &&
-              selectedUf && (
-                <S.ResultNoSearch>
-                  <Typography variant="subtitle1">
-                    Nenhuma autoescola parceira :(
-                  </Typography>
-                </S.ResultNoSearch>
-              )}
-          </S.SchoolsList.Body>
-        </S.SchoolsList.Wrapper>
-      </S.Home.Wrapper>
-    </PublicLayout>
+              </div>
+            </div>
+          </div>
+        </div>
+      </LayoutPublic>
+    </>
   )
 }
