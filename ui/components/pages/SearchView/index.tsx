@@ -61,13 +61,12 @@ export default function SearchView({ onClose, value }: Props) {
                 })}
               />
             </S.Header>
-            <Divider variant="fullWidth" />
             <S.SuggestionsContainer>
               {loading && <div>Vrum.....</div>}
               {suggestions.map((suggestion) => {
                 return (
                   <div key={`suggestion${suggestion.description}`}>
-                    <S.Results.SuggestionItem
+                    <S.SuggestionItem
                       style={{
                         backgroundColor: suggestion.active
                           ? 'rgb(230, 229, 229)'
@@ -76,7 +75,7 @@ export default function SearchView({ onClose, value }: Props) {
                       {...getSuggestionItemProps(suggestion)}
                     >
                       <IconPlace /> <div>{suggestion.description}</div>
-                    </S.Results.SuggestionItem>
+                    </S.SuggestionItem>
                   </div>
                 )
               })}
