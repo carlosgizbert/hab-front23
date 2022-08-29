@@ -64,6 +64,7 @@ export default function SearchView({ onClose, value }: Props) {
             </S.Header>
             <Divider variant="fullWidth" />
             <S.SuggestionsContainer>
+              {loading && <div>Vrum.....</div>}
               {suggestions.map((suggestion) => {
                 return (
                   <div key={`suggestion${suggestion.description}`}>
