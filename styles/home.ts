@@ -4,61 +4,47 @@ export const Home = {
   Wrapper: styled.div`
     display: flex;
     flex-direction: column;
-    gap: 2rem;
-  `,
-}
-
-export const Header = {
-  Wrapper: styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    align-items: center;
     justify-content: center;
-    padding: 2rem 0;
-    width: 100%;
-    color: ${(props) => props.theme.colors.sucess_90};
-    background-color: ${(props) => props.theme.colors.neutral_70};
+    padding: 3rem;
+    gap: 2rem;
+    width: 100vw;
+    height: 100vh;
+
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.1),
+        rgba(0, 0, 0, 0.8)
+      ),
+      url('https://images.unsplash.com/photo-1519255122284-c3acd66be602?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=795&q=80');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
   `,
-  Logo: styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 1200px;
+  SubTitle: styled.div`
+    font-size: 18px;
+    text-align: center;
+    color: white;
   `,
-  Search: styled.div`
+  ButtonSearch: styled.div`
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
     align-items: center;
-    width: 100%;
-    max-width: 1200px;
+    border-radius: 0.5rem;
+    outline: 1px solid rgb(200, 200, 200, 0.6);
+    padding: 1rem;
+    gap: 0.5rem;
+    color: white;
+    cursor: pointer;
+    &:hover {
+      outline: 1px solid rgb(200, 200, 200, 1);
+      transition: ease-in-out 0.4s;
+    }
+
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
   `,
 }
-
-export const SchoolsList = {
-  Wrapper: styled.div`
-    display: flex;
-    flex-direction: center;
-    justify-content: center;
-    width: 100%;
-  `,
-  Body: styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    width: 100%;
-    max-width: 94vw;
-  `,
-  Cards: styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
-  `,
-}
-
-export const ResultNoSearch = styled.div`
-  display: flex;
-  font-size: 18px;
-`

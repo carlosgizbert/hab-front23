@@ -26,7 +26,7 @@ export const Search = {
     Header: styled.div`
       display: flex;
       gap: 1rem;
-      height: 80px;
+      height: 90px;
       align-items: center;
     `,
   },
@@ -35,5 +35,16 @@ export const Search = {
     justify-content: center;
     width: 100%;
     margin-bottom: 3rem;
+  `,
+  DropdownResults: styled.div`
+    height: 100vh;
+  `,
+  SuggestionItem: styled.div<{ active: boolean }>`
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    padding: 1rem 2rem;
+    cursor: pointer;
   `,
 }

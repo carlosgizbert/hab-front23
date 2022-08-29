@@ -20,37 +20,34 @@ import {
 import * as S from './styles'
 
 interface Props {
-  setIsOpen?: (value: boolean) => void
   onClose?: () => void
   value?: string
 }
 
-export default function SearchView({ setIsOpen, onClose, value }: Props) {
-  const router = useRouter()
-  const [address, setAddress] = useState(value || '')
-  const [coordinates, setCoordinates] = useState({
-    lat: 0,
-    lng: 0,
-  })
+export default function SearchView({ onClose, value }: Props) {
+  const [inputValue, setInputValue] = useState('')
 
-  const handleSelect = async (handleValue: any) => {
-    const results = await geocodeByAddress(value)
-    const latLng = await getLatLng(results[0])
-    setAddress(value)
-    setCoordinates(latLng)
+  // const router = useRouter()
 
-    setIsOpen(false)
-    router.push({
-      pathname: '/autoescolas/[cep]',
-      query: { cep: address },
-    })
+  // const [coordinates, setCoordinates] = useState({
+  //   lat: 0,
+  //   lng: 0,
+  // })
+
+  const handleChange = (newValue: string) => setInputValue(newValue)
+
+  const handleSelect = (nAddress: any) => {
+    geocodeByAddress(nAddress)
+      .then((results) => getLatLng(results[0]))
+      .then((latLng) => console.log('Success', latLng))
+      .catch((error) => console.error('Error', error))
   }
 
   return (
     <S.Search.Wrapper>
       <PlacesAutocomplete
-        value={address}
-        onChange={setAddress}
+        value={inputValue}
+        onChange={handleChange}
         onSelect={handleSelect}
         searchOptions={{ componentRestrictions: { country: ['br'] } }}
       >
@@ -61,40 +58,30 @@ export default function SearchView({ setIsOpen, onClose, value }: Props) {
                 <IconChevronLeft />
               </IconButton>
               <TextField
-                variant="outlined"
-                size="medium"
+                autoFocus
                 fullWidth
+                size="medium"
+                variant="outlined"
                 {...getInputProps({
-                  placeholder: 'Insira seu cep, cidade ou rua...',
+                  placeholder: 'Onde você está?',
                 })}
               />
             </S.Search.Results.Header>
             <Divider variant="fullWidth" />
-            <div className="h-full">
-              {loading ? (
-                <div className="px-3 py-4 text-center">vrummm...</div>
-              ) : null}
+            <S.Search.DropdownResults>
+              {loading && <div>Vrumm...</div>}
               {suggestions.map((suggestion) => {
                 return (
-                  <div
-                    className={`
-                          flex
-                          items-center
-                          h-auto 
-                          px-3 py-4
-                          cursor-pointer
-                          ${suggestion.active ? 'bg-slate-100' : 'bg-white'}
-                          `}
-                    {...getSuggestionItemProps(suggestion)}
-                  >
-                    <div className="mr-3 text-gray-300">
-                      <IconPlace />
-                    </div>
-                    {suggestion.description}
+                  <div key={suggestion.id}>
+                    <S.Search.SuggestionItem
+                      {...getSuggestionItemProps(suggestion)}
+                    >
+                      <IconPlace /> <div>{suggestion.description}</div>
+                    </S.Search.SuggestionItem>
                   </div>
                 )
               })}
-            </div>
+            </S.Search.DropdownResults>
           </S.Search.Results.Container>
         )}
       </PlacesAutocomplete>
