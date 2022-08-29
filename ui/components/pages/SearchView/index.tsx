@@ -29,9 +29,8 @@ export default function SearchView({ onClose, value }: Props) {
   //   lng: 0,
   // })
 
-  const handleChange = (newValue: string) => setInputValue(newValue)
-
   const handleSelect = (nAddress: any) => {
+    console.log(nAddress)
     geocodeByAddress(nAddress)
       .then((results) => getLatLng(results[0]))
       .then((latLng) => console.log('Success', latLng))
@@ -42,7 +41,7 @@ export default function SearchView({ onClose, value }: Props) {
     <S.Search>
       <PlacesAutocomplete
         value={inputValue}
-        onChange={handleChange}
+        onChange={setInputValue}
         onSelect={handleSelect}
         searchOptions={{ componentRestrictions: { country: ['br'] } }}
       >
