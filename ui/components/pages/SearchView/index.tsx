@@ -5,12 +5,10 @@ import PlacesAutocomplete, {
   getLatLng,
 } from 'react-places-autocomplete'
 import { useRouter } from 'next/router'
-
 import styled from 'styled-components'
 import InputBase from '@mui/material/InputBase'
 import IconChevronLeft from '@mui/icons-material/ChevronLeft'
 import IconPlace from '@mui/icons-material/Place'
-
 import { Button, Divider, IconButton } from '@mui/material'
 
 import * as S from './styles'
@@ -23,6 +21,8 @@ interface Props {
 export default function SearchView({ onClose, value }: Props) {
   const [inputValue, setInputValue] = useState('')
   const [cSuggestions, setCsuggestions] = useState<Array<any>>([])
+
+  const router = useRouter()
 
   // const router = useRouter()
 
@@ -91,7 +91,12 @@ export default function SearchView({ onClose, value }: Props) {
         )}
       </PlacesAutocomplete>
       <S.Button>
-        <Button fullWidth size="large" variant="contained">
+        <Button
+          fullWidth
+          size="large"
+          variant="contained"
+          onClick={() => router.push('/autoescolas')}
+        >
           Buscar
         </Button>
       </S.Button>
