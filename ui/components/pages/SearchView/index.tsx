@@ -9,13 +9,7 @@ import { useRouter } from 'next/router'
 import IconChevronLeft from '@mui/icons-material/ChevronLeft'
 import IconPlace from '@mui/icons-material/Place'
 
-import {
-  Button,
-  ButtonBase,
-  Divider,
-  IconButton,
-  TextField,
-} from '@mui/material'
+import { Button, Divider, IconButton, TextField } from '@mui/material'
 
 import * as S from './styles'
 
@@ -26,6 +20,7 @@ interface Props {
 
 export default function SearchView({ onClose, value }: Props) {
   const [inputValue, setInputValue] = useState('')
+  const [cSuggestions, setCsuggestions] = useState<Array<any>>([])
 
   // const router = useRouter()
 
@@ -44,7 +39,7 @@ export default function SearchView({ onClose, value }: Props) {
   }
 
   return (
-    <S.Search.Wrapper>
+    <S.Search>
       <PlacesAutocomplete
         value={inputValue}
         onChange={handleChange}
@@ -52,8 +47,8 @@ export default function SearchView({ onClose, value }: Props) {
         searchOptions={{ componentRestrictions: { country: ['br'] } }}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-          <S.Search.Results.Container>
-            <S.Search.Results.Header>
+          <S.Wrapper>
+            <S.Header>
               <IconButton size="large" onClick={onClose}>
                 <IconChevronLeft />
               </IconButton>
@@ -66,25 +61,34 @@ export default function SearchView({ onClose, value }: Props) {
                   placeholder: 'Onde você está?',
                 })}
               />
-            </S.Search.Results.Header>
+            </S.Header>
             <Divider variant="fullWidth" />
-            <S.Search.DropdownResults>
-              {loading && <div>Vrumm...</div>}
+            <S.SuggestionsContainer>
               {suggestions.map((suggestion) => {
                 return (
-                  <div key={suggestion.id}>
-                    <S.Search.SuggestionItem
+                  <div key={`suggestion${suggestion.description}`}>
+                    <S.Results.SuggestionItem
+                      style={{
+                        backgroundColor: suggestion.active
+                          ? 'rgb(230, 229, 229)'
+                          : 'white',
+                      }}
                       {...getSuggestionItemProps(suggestion)}
                     >
                       <IconPlace /> <div>{suggestion.description}</div>
-                    </S.Search.SuggestionItem>
+                    </S.Results.SuggestionItem>
                   </div>
                 )
               })}
-            </S.Search.DropdownResults>
-          </S.Search.Results.Container>
+            </S.SuggestionsContainer>
+          </S.Wrapper>
         )}
       </PlacesAutocomplete>
-    </S.Search.Wrapper>
+      <S.Button>
+        <Button fullWidth size="large" variant="contained">
+          Buscar
+        </Button>
+      </S.Button>
+    </S.Search>
   )
 }
