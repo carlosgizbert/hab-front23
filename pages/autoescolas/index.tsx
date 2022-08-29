@@ -8,7 +8,7 @@ import { ISchoolDTO } from '@/services/app/search/schools/interfaces'
 import { Typography } from '@mui/material'
 import ComboBox from '@/ui/atoms/ComboBox'
 
-import * as S from '../../styles/home'
+import * as S from '../../styles/autoescolas'
 
 const UFList = [
   { label: 'Acre', value: 'AC' },
@@ -80,27 +80,22 @@ export default function Home() {
 
   return (
     <PublicLayout>
-      <S.Home.Wrapper>
-        <S.Header.Wrapper>
-          <S.Header.Logo>
-            <Typography variant="h5">habilita</Typography>
-          </S.Header.Logo>
-          <S.Header.Search>
-            <ComboBox
-              label="Qual seu estado?"
-              value={selectedUf}
-              options={UFList}
-              onChange={(e) => setSelectedUf(e.value)}
-            />
-            <ComboBox
-              label="Qual sua cidade?"
-              value={selectedCity}
-              options={currentCities}
-              onChange={(city) => setSelectedCity(city.label)}
-              disabled={getCitiesIsRefetching || getCitiesIsLoading}
-            />
-          </S.Header.Search>
-        </S.Header.Wrapper>
+      <S.Wrapper>
+        <S.Header>
+          <ComboBox
+            label="Qual seu estado?"
+            value={selectedUf}
+            options={UFList}
+            onChange={(e) => setSelectedUf(e.value)}
+          />
+          <ComboBox
+            label="Qual sua cidade?"
+            value={selectedCity}
+            options={currentCities}
+            onChange={(city) => setSelectedCity(city.label)}
+            disabled={getCitiesIsRefetching || getCitiesIsLoading}
+          />
+        </S.Header>
         <S.SchoolsList.Wrapper>
           <S.SchoolsList.Body>
             {(getSchoolsIsLoading || getSchoolsIsRefetching) && !hasSchools && (
@@ -140,7 +135,7 @@ export default function Home() {
               )}
           </S.SchoolsList.Body>
         </S.SchoolsList.Wrapper>
-      </S.Home.Wrapper>
+      </S.Wrapper>
     </PublicLayout>
   )
 }

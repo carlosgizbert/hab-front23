@@ -6,10 +6,12 @@ import PlacesAutocomplete, {
 } from 'react-places-autocomplete'
 import { useRouter } from 'next/router'
 
+import styled from 'styled-components'
+import InputBase from '@mui/material/InputBase'
 import IconChevronLeft from '@mui/icons-material/ChevronLeft'
 import IconPlace from '@mui/icons-material/Place'
 
-import { Button, Divider, IconButton, TextField } from '@mui/material'
+import { Button, Divider, IconButton } from '@mui/material'
 
 import * as S from './styles'
 
@@ -37,6 +39,11 @@ export default function SearchView({ onClose, value }: Props) {
       .catch((error) => console.error('Error', error))
   }
 
+  const NoBorderInput = styled(InputBase)(({ theme }) => ({
+    border: 'none',
+    height: '56px',
+  }))
+
   return (
     <S.Search>
       <PlacesAutocomplete
@@ -51,18 +58,18 @@ export default function SearchView({ onClose, value }: Props) {
               <IconButton size="large" onClick={onClose}>
                 <IconChevronLeft />
               </IconButton>
-              <TextField
+              <NoBorderInput
                 autoFocus
                 fullWidth
                 size="medium"
-                variant="outlined"
                 {...getInputProps({
                   placeholder: 'Onde você está?',
                 })}
               />
             </S.Header>
+            <Divider />
             <S.SuggestionsContainer>
-              {loading && <div>Vrum.....</div>}
+              {loading && <div>Buscando.....</div>}
               {suggestions.map((suggestion) => {
                 return (
                   <div key={`suggestion${suggestion.description}`}>
