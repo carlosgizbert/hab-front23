@@ -5,13 +5,13 @@ export const ButtonSearch = styled.div`
   align-items: center;
   width: 100%;
   border-radius: 0.8rem;
-  outline: 1px solid rgb(200, 200, 200, 0.6);
+  border: 1px solid rgb(200, 200, 200, 0.6);
   padding: 1rem;
   gap: 0.5rem;
   color: white;
   cursor: pointer;
   &:hover {
-    outline: 1px solid rgb(200, 200, 200, 1);
+    border: 1px solid rgb(200, 200, 200, 1);
     transition: ease-in-out 0.4s;
   }
 
