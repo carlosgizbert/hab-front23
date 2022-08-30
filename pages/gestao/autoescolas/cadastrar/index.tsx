@@ -1,20 +1,51 @@
-import { useEffect } from 'react'
-import ṔrivateLayout from '@/ui/templates/PrivateLayout'
-
-import { Button, TextField } from '@mui/material'
 import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+
+import ṔrivateLayout from '@/ui/templates/PrivateLayout'
+import ComboBox from '@/ui/atoms/ComboBox'
+import { Button, TextField } from '@mui/material'
 
 import Grid from '@/ui/atoms/Grid'
 import MediaQuery from '@/ui/utils/MediaQuery'
 
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-
 import toast, { Toaster } from 'react-hot-toast'
 
 import { useCreateSchool } from '@/services/admin/schools'
-import * as S from '../../../../styles/gestao/autoescolas/cadastrar'
 import { schoolSchema } from '../../../../schemas/school'
+
+import * as S from '../../../../styles/gestao/autoescolas/cadastrar'
+
+const UF_LIST = [
+  { label: 'AC - Acre', value: 'AC' },
+  { label: 'AL - Alagoas', value: 'AL' },
+  { label: 'AP - Amapá', value: 'AP' },
+  { label: 'AM - Amazonas', value: 'AM' },
+  { label: 'BA - Bahia', value: 'BA' },
+  { label: 'CE - Ceará', value: 'CE' },
+  { label: 'DF - Distrito Federal', value: 'DF' },
+  { label: 'ES - Espirito Santo', value: 'ES' },
+  { label: 'GO - Goiás', value: 'GO' },
+  { label: 'MA - Maranhão', value: 'MA' },
+  { label: 'MT - Mato Grosso', value: 'MT' },
+  { label: 'MS - Mato Grosso do Sul', value: 'MS' },
+  { label: 'MG - Minas Gerais', value: 'MG' },
+  { label: 'PA - Pará', value: 'PA' },
+  { label: 'PB - Paraíba', value: 'PB' },
+  { label: 'PR - Paraná', value: 'PR' },
+  { label: 'PE - Pernambuco', value: 'PE' },
+  { label: 'PI - Piauí', value: 'PI' },
+  { label: 'RJ - Rio de Janeiro', value: 'RJ' },
+  { label: 'RN - Rio Grande do Norte', value: 'RN' },
+  { label: 'RS - Rio Grande do Sul', value: 'RS' },
+  { label: 'RO - Rondônia', value: 'RO' },
+  { label: 'RR - Roraima', value: 'RR' },
+  { label: 'SC - Santa Catarina', value: 'SC' },
+  { label: 'SP - São Paulo', value: 'SP' },
+  { label: 'SE - Sergipe', value: 'SE' },
+  { label: 'TO - Tocantins', value: 'TO' },
+]
 
 function NewSchool() {
   const router = useRouter()
@@ -64,6 +95,7 @@ function NewSchool() {
                 autoFocus
                 {...register('name')}
                 label="Nome"
+                variant="standard"
                 helperText={getErrorMessage(errors.name?.message)}
                 error={!!errors.name?.message}
               />
@@ -74,6 +106,7 @@ function NewSchool() {
               <TextField
                 {...register('name')}
                 label="Nome"
+                variant="standard"
                 helperText={getErrorMessage(errors.name?.message)}
                 error={!!errors.name?.message}
               />
@@ -86,18 +119,21 @@ function NewSchool() {
               <TextField
                 label="Telefone"
                 {...register('phone')}
+                variant="standard"
                 helperText={getErrorMessage(errors.phone?.message)}
                 error={!!errors.phone?.message}
               />
               <TextField
                 {...register('whatsapp')}
                 label="Whatsapp (opcional)"
+                variant="standard"
                 helperText={getErrorMessage(errors.whatsapp?.message)}
                 error={!!errors.whatsapp?.message}
               />
               <TextField
                 {...register('instagram')}
                 label="Instagram (opcional)"
+                variant="standard"
                 helperText={getErrorMessage(errors.instagram?.message)}
                 error={!!errors.instagram?.message}
               />
@@ -108,18 +144,21 @@ function NewSchool() {
               <TextField
                 label="Telefone"
                 {...register('phone')}
+                variant="standard"
                 helperText={getErrorMessage(errors.phone?.message)}
                 error={!!errors.phone?.message}
               />
               <TextField
                 {...register('whatsapp')}
                 label="Whatsapp (opcional)"
+                variant="standard"
                 helperText={getErrorMessage(errors.whatsapp?.message)}
                 error={!!errors.whatsapp?.message}
               />
               <TextField
                 {...register('instagram')}
                 label="Instagram (opcional)"
+                variant="standard"
                 helperText={getErrorMessage(errors.instagram?.message)}
                 error={!!errors.instagram?.message}
               />
@@ -128,22 +167,23 @@ function NewSchool() {
         />
         <MediaQuery
           desktop={
-            <Grid columns="220px 120px 2fr" gap={2}>
+            <Grid columns="1fr 1fr 2fr" gap={2}>
               <TextField
                 {...register('address_postal')}
                 label="CEP"
+                variant="standard"
                 helperText={getErrorMessage(errors.address_postal?.message)}
                 error={!!errors.address_postal?.message}
               />
-              <TextField
-                {...register('address_uf')}
+              <ComboBox
                 label="Estado"
-                helperText={getErrorMessage(errors.address_uf?.message)}
-                error={!!errors.address_uf?.message}
+                options={UF_LIST}
+                {...register('address_uf')}
               />
               <TextField
                 {...register('address_city')}
                 label="Cidade"
+                variant="standard"
                 helperText={getErrorMessage(errors.address_city?.message)}
                 error={!!errors.address_city?.message}
               />
@@ -154,18 +194,21 @@ function NewSchool() {
               <TextField
                 {...register('address_postal')}
                 label="CEP"
+                variant="standard"
                 helperText={getErrorMessage(errors.address_postal?.message)}
                 error={!!errors.address_postal?.message}
               />
               <TextField
                 {...register('address_uf')}
                 label="Estado"
+                variant="standard"
                 helperText={getErrorMessage(errors.address_uf?.message)}
                 error={!!errors.address_uf?.message}
               />
               <TextField
                 {...register('address_city')}
                 label="Cidade"
+                variant="standard"
                 helperText={getErrorMessage(errors.address_city?.message)}
                 error={!!errors.address_city?.message}
               />
@@ -179,12 +222,14 @@ function NewSchool() {
               <TextField
                 {...register('address_district')}
                 label="Bairro"
+                variant="standard"
                 helperText={getErrorMessage(errors.address_district?.message)}
                 error={!!errors.address_district?.message}
               />
               <TextField
                 {...register('address_number')}
                 label="Número"
+                variant="standard"
                 helperText={getErrorMessage(errors.address_number?.message)}
                 error={!!errors.address_number?.message}
               />
@@ -195,12 +240,14 @@ function NewSchool() {
               <TextField
                 {...register('address_district')}
                 label="Bairro"
+                variant="standard"
                 helperText={getErrorMessage(errors.address_district?.message)}
                 error={!!errors.address_district?.message}
               />
               <TextField
                 {...register('address_number')}
                 label="Número"
+                variant="standard"
                 helperText={getErrorMessage(errors.address_number?.message)}
                 error={!!errors.address_number?.message}
               />

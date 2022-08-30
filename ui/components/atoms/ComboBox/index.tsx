@@ -3,9 +3,9 @@ import Autocomplete from '@mui/material/Autocomplete'
 
 interface IComboBox {
   id?: string
-  width?: number
+  width?: string
   label: string
-  value: string | number | undefined
+  value?: string | number | undefined
   disablePortal?: boolean
   options: Array<any>
   disabled?: boolean
@@ -17,10 +17,9 @@ export default function ComboBox({
   label,
   value,
   options,
-  width = 300,
+  width = '100%',
   disablePortal = true,
   disabled = false,
-  onChange,
 }: IComboBox) {
   return (
     <Autocomplete
@@ -30,9 +29,8 @@ export default function ComboBox({
       value={value}
       sx={{ width }}
       disabled={disabled}
-      onChange={(event, newInputValue) => onChange(newInputValue)}
       renderInput={(params) => (
-        <TextField {...params} variant="filled" label={label} />
+        <TextField {...params} variant="standard" label={label} />
       )}
     />
   )

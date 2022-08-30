@@ -48,6 +48,9 @@
       ],
       "@/tests/*": [
         "ui/tests/*"
+      ],
+      "@/static/*": [
+        "static/*"
       ]
     },
     "incremental": true
