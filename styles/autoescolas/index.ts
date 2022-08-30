@@ -4,13 +4,13 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
 `
 
 export const Header = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
   align-items: center;
   justify-content: center;
   padding: 2rem 0;
@@ -25,11 +25,12 @@ export const HeaderWrapper = styled.div`
   gap: 1rem;
   width: 100%;
   max-width: 720px;
+  padding: 0 1rem;
 `
 
 export const SchoolsList = {
   Wrapper: styled.div`
-    margin-top: 1.5rem;
+    margin-top: 1rem;
     display: flex;
     flex-direction: center;
     justify-content: center;
@@ -46,11 +47,11 @@ export const SchoolsList = {
   Cards: styled.div`
     display: flex;
     flex-direction: column;
-    gap: 2.5rem;
+    gap: 1.8rem;
   `,
 }
 
 export const ResultNoSearch = styled.div`
   display: flex;
-  font-size: 18px;
+  font-size: 16px;
 `

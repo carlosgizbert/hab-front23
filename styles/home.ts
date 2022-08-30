@@ -35,5 +35,5 @@ export const SectionSearch = styled.div`
   height: auto;
   max-width: 500px;
 
-  padding: 2rem;
+  padding: 1.5rem;
 `
