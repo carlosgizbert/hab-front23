@@ -22,7 +22,6 @@ interface Props {
 
 export default function SearchView({ onClose, value }: Props) {
   const [inputValue, setInputValue] = useState('')
-  const [cSuggestions, setCsuggestions] = useState<Array<any>>([])
 
   const router = useRouter()
 
@@ -35,6 +34,28 @@ export default function SearchView({ onClose, value }: Props) {
     apiKey: process.env.REACT_APP_GOOGLE,
   })
 
+  const NoBorderInput = styled(InputBase)(({ theme }) => ({
+    border: 'none',
+    height: '56px',
+  }))
+
+  function renderItem(suggestion: any) {
+    return (
+      <div key={`suggestion${suggestion.description}`}>
+        <S.SuggestionItem>
+          <IconPlace /> <div>{suggestion.description}</div>
+        </S.SuggestionItem>
+      </div>
+    )
+  }
+
+  const handleInput = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setInputValue(e.target.value)
+    getPlacePredictions({ input: e.target.value })
+  }
+
   useEffect(() => {
     // fetch place details for the first element in placePredictions array
     if (placePredictions.length)
@@ -45,30 +66,6 @@ export default function SearchView({ onClose, value }: Props) {
         (placeDetails) => console.log(placeDetails)
       )
   }, [placePredictions])
-
-  // const router = useRouter()
-
-  // const [coordinates, setCoordinates] = useState({
-  //   lat: 0,
-  //   lng: 0,
-  // })
-
-  // const handleSelect = (nAddress: any) => {
-  //   geocodeByAddress(nAddress)
-  //     .then((results) => getLatLng(results[0]))
-  //     .then((latLng) => console.log('Success', latLng))
-  //     .catch((error) => console.error('Error', error))
-  // }
-
-  const NoBorderInput = styled(InputBase)(({ theme }) => ({
-    border: 'none',
-    height: '56px',
-  }))
-
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value)
-    getPlacePredictions({ input: e.target.value })
-  }
 
   return (
     <S.Search>
@@ -81,6 +78,7 @@ export default function SearchView({ onClose, value }: Props) {
             autoFocus
             fullWidth
             size="medium"
+            placeholder="Onde você está?"
             value={inputValue}
             onChange={(e) => {
               handleInput(e)
@@ -89,16 +87,12 @@ export default function SearchView({ onClose, value }: Props) {
         </S.Header>
         <Divider />
         <S.SuggestionsContainer>
-          {isPlacePredictionsLoading && <div>Buscando.....</div>}
-          {placePredictions.map((suggestion) => {
-            return (
-              <div key={`suggestion${suggestion.description}`}>
-                <S.SuggestionItem>
-                  <IconPlace /> <div>{suggestion.description}</div>
-                </S.SuggestionItem>
-              </div>
-            )
-          })}
+          {isPlacePredictionsLoading && (
+            <div style={{ textAlign: 'center', marginTop: '1rem' }}>
+              Buscando.....
+            </div>
+          )}
+          {placePredictions.map((suggestion) => renderItem(suggestion))}
         </S.SuggestionsContainer>
       </S.Wrapper>
       <S.Button>

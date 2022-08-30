@@ -26,6 +26,7 @@ export const Header = styled.div`
 `
 
 export const SuggestionsContainer = styled.div`
+  margin-top: 0.5rem;
   height: 100%;
 `
 
@@ -38,6 +39,10 @@ export const SuggestionItem = styled.div`
   padding: 0 1rem;
   border-radius: 0.8rem;
   cursor: pointer;
+
+  &:hover {
+    background-color: ${(props) => props.theme.colors.neutral_70};
+  }
 `
 
 export const Button = styled.div`
