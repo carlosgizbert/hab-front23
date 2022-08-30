@@ -3,7 +3,8 @@ import styled from 'styled-components'
 export const ButtonSearch = styled.div`
   display: flex;
   align-items: center;
-  border-radius: 0.5rem;
+  width: 100%;
+  border-radius: 0.8rem;
   outline: 1px solid rgb(200, 200, 200, 0.6);
   padding: 1rem;
   gap: 0.5rem;

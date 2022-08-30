@@ -2,7 +2,7 @@ import IconSearch from '@mui/icons-material/Search'
 import * as S from './styles'
 
 interface IButtonProps {
-  onClick: () => void
+  onClick?: () => void
   text: string
 }
 

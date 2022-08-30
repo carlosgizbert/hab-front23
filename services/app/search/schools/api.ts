@@ -19,9 +19,9 @@ export async function getSchoolsByUf(uf: string | undefined) {
   return transformed
 }
 
-export async function getSchoolsByCity(city: string | undefined) {
+export async function getSchoolsByCity() {
   const response = await axios.get<ISchoolR[]>(
-    `${API_URL}/schools/cidade/${city}`,
+    `${API_URL}/schools/cidade/Praia Grande`,
     {
       headers: HEADERS,
     }

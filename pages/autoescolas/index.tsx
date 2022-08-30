@@ -8,6 +8,8 @@ import { ISchoolDTO } from '@/services/app/search/schools/interfaces'
 import { Typography } from '@mui/material'
 import ComboBox from '@/ui/atoms/ComboBox'
 
+import Logo from '@/ui/atoms/Logo'
+import ButtonSearch from '@/ui/atoms/ButtonSearch'
 import * as S from '../../styles/autoescolas'
 
 const UFList = [
@@ -45,6 +47,7 @@ export default function Home() {
   const [selectedUf, setSelectedUf] = useState<string>('')
   const [selectedCity, setSelectedCity] = useState<string>('')
   const [currentCities, setCurrentCities] = useState<string[]>([])
+  const [searchOpened, setSearchOpen] = useState(false)
 
   const {
     data: getCities,
@@ -58,7 +61,7 @@ export default function Home() {
     refetch: getSchoolsRefetch,
     isLoading: getSchoolsIsLoading,
     isRefetching: getSchoolsIsRefetching,
-  } = useGetSchoolsByCity(selectedCity!, !!selectedUf)
+  } = useGetSchoolsByCity()
 
   const hasSchools = !!schools && !!schools?.length
 
@@ -82,19 +85,13 @@ export default function Home() {
     <PublicLayout>
       <S.Wrapper>
         <S.Header>
-          <ComboBox
-            label="Qual seu estado?"
-            value={selectedUf}
-            options={UFList}
-            onChange={(e) => setSelectedUf(e.value)}
-          />
-          <ComboBox
-            label="Qual sua cidade?"
-            value={selectedCity}
-            options={currentCities}
-            onChange={(city) => setSelectedCity(city.label)}
-            disabled={getCitiesIsRefetching || getCitiesIsLoading}
-          />
+          <S.HeaderWrapper>
+            <Logo />
+            <ButtonSearch
+              text="Praia Grande"
+              onClick={() => setSearchOpen(true)}
+            />
+          </S.HeaderWrapper>
         </S.Header>
         <S.SchoolsList.Wrapper>
           <S.SchoolsList.Body>

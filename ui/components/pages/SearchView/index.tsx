@@ -55,7 +55,7 @@ export default function SearchView({ onClose, value }: Props) {
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <S.Wrapper>
             <S.Header>
-              <IconButton size="large" onClick={onClose}>
+              <IconButton size="large" color="primary" onClick={onClose}>
                 <IconChevronLeft />
               </IconButton>
               <NoBorderInput

@@ -17,8 +17,8 @@ function useGetSchoolsUf(uf: string) {
   })
 }
 
-function useGetSchoolsByCity(city: string, enabled: boolean) {
-  return useQuery(['getSchoolsByCities'], () => getSchoolsByCity(city), {
+function useGetSchoolsByCity() {
+  return useQuery(['getSchoolsByCities'], () => getSchoolsByCity(), {
     ...QUERIES_CONFIG,
     enabled: false,
   })

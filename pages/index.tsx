@@ -14,12 +14,16 @@ export default function Home() {
       {searchOpened && <SearchView onClose={() => setSearchOpen(false)} />}
       <LayoutPublic>
         <S.Home.Wrapper>
-          <Logo />
-          <S.Home.SubTitle>Encontre autoescolas perto de você</S.Home.SubTitle>
-          <ButtonSearch
-            onClick={() => setSearchOpen(true)}
-            text="Insira seu cep, cidade, ou rua..."
-          />
+          <S.SectionSearch>
+            <Logo />
+            <S.Home.SubTitle>
+              Encontre autoescolas perto de você
+            </S.Home.SubTitle>
+            <ButtonSearch
+              onClick={() => setSearchOpen(true)}
+              text="Insira seu cep, cidade, ou rua..."
+            />
+          </S.SectionSearch>
         </S.Home.Wrapper>
       </LayoutPublic>
     </>

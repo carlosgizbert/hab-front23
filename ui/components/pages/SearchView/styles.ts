@@ -36,7 +36,7 @@ export const SuggestionItem = styled.div`
   width: 100%;
   height: 70px;
   padding: 0 1rem;
-  border-radius: 4px;
+  border-radius: 0.8rem;
   cursor: pointer;
 `
 

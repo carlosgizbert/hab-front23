@@ -5,8 +5,7 @@ export const Home = {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 3rem;
-    gap: 2rem;
+    align-items: center;
     width: 100vw;
     height: 100vh;
 
@@ -26,3 +25,15 @@ export const Home = {
     color: white;
   `,
 }
+
+export const SectionSearch = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+  width: 100%;
+  height: auto;
+  max-width: 500px;
+
+  padding: 2rem;
+`

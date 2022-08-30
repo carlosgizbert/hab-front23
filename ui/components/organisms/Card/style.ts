@@ -18,7 +18,7 @@ export const Card = {
       background-size: cover;
       width: 100%;
       height: 120px;
-      border-radius: 8px;
+      border-radius: 0.8rem;
     `,
     Tag: styled.div`
       position: absolute;
@@ -26,7 +26,7 @@ export const Card = {
       left: 0;
 
       padding: 0.5rem;
-      border-radius: 8px 0 8px 0;
+      border-radius: 0.8rem 0 0.8rem 0;
 
       color: white;
       background-color: rgb(0, 0, 0, 0.8);
