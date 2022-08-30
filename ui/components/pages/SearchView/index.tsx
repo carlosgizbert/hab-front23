@@ -32,6 +32,13 @@ export default function SearchView({ onClose, value }: Props) {
     isPlacePredictionsLoading,
   } = usePlacesService({
     apiKey: process.env.REACT_APP_GOOGLE,
+    options: {
+      componentRestrictions: {
+        country: 'br',
+      },
+      language: 'pt-BR',
+      input: inputValue,
+    },
   })
 
   const NoBorderInput = styled(InputBase)(({ theme }) => ({
@@ -43,7 +50,7 @@ export default function SearchView({ onClose, value }: Props) {
     return (
       <div key={`suggestion${suggestion.description}`}>
         <S.SuggestionItem>
-          <IconPlace /> <div>{suggestion.description}</div>
+          <IconPlace color="primary" /> <div>{suggestion.description}</div>
         </S.SuggestionItem>
       </div>
     )
