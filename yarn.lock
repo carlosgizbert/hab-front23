@@ -2665,7 +2665,7 @@
   "resolved" "https://registry.npmjs.org/prettier/-/prettier-2.7.1.tgz"
   "version" "2.7.1"
 
-"prop-types@^15.5.8", "prop-types@^15.6.1", "prop-types@^15.6.2", "prop-types@^15.7.2", "prop-types@^15.8.1":
+"prop-types@^15.5.0", "prop-types@^15.5.8", "prop-types@^15.6.1", "prop-types@^15.6.2", "prop-types@^15.7.2", "prop-types@^15.8.1":
   "integrity" "sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg=="
   "resolved" "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   "version" "15.8.1"
@@ -2744,6 +2744,14 @@
   "integrity" "sha512-dLz3/WBIpgFnzFY0Kb4aIYBMT2BWomHuW2DH6/9jXfS6/zxRRBUFQ04My4HIB7Ma7QoRBpcy8NtkPeFgcGBpgg=="
   "resolved" "https://registry.npmjs.org/react-double-scrollbar/-/react-double-scrollbar-0.0.15.tgz"
   "version" "0.0.15"
+
+"react-google-autocomplete@^2.7.0":
+  "integrity" "sha512-yYhPQC3TDiqhT3pBjslfkn7g6Y4/ihGv0Ch7YG4/PBrpOgA0n+rwJJrcpmPxeqK03sCwvGozTcBKqkJECo3bvA=="
+  "resolved" "https://registry.npmjs.org/react-google-autocomplete/-/react-google-autocomplete-2.7.0.tgz"
+  "version" "2.7.0"
+  dependencies:
+    "lodash.debounce" "^4.0.8"
+    "prop-types" "^15.5.0"
 
 "react-hook-form@^7.34.2":
   "integrity" "sha512-1lYWbEqr0GW7HHUjMScXMidGvV0BE2RJV3ap2BL7G0EJirkqpccTaawbsvBO8GZaB3JjCeFBEbnEWI1P8ZoLRQ=="

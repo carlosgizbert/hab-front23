@@ -26,7 +26,7 @@ export const Header = styled.div`
 `
 
 export const SuggestionsContainer = styled.div`
-  height: auto;
+  height: 100%;
 `
 
 export const SuggestionItem = styled.div`

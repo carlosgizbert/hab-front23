@@ -96,7 +96,7 @@ export default function Home() {
         <S.SchoolsList.Wrapper>
           <S.SchoolsList.Body>
             {(getSchoolsIsLoading || getSchoolsIsRefetching) && !hasSchools && (
-              <div>Vrum vrummm...</div>
+              <div>Buscando...</div>
             )}
             {schools && (
               <S.ResultNoSearch>
