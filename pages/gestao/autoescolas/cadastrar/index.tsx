@@ -94,7 +94,7 @@ function NewSchool() {
               <TextField
                 autoFocus
                 {...register('name')}
-                label="Nome"
+                label="Nome da autoescola"
                 variant="standard"
                 helperText={getErrorMessage(errors.name?.message)}
                 error={!!errors.name?.message}
