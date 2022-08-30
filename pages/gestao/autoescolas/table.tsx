@@ -94,7 +94,7 @@ export default function GridSchools() {
   }, [error])
 
   return (
-    <div style={{ height: 640, width: '100%' }}>
+    <div style={{ height: 540, width: '100%' }}>
       <DataGrid
         rows={rows}
         columns={columns}

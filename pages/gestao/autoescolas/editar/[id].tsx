@@ -1,21 +1,18 @@
 import { useState, useEffect } from 'react'
-import PublicLayout from '@/ui/templates/PublicLayout'
-
-import { Button, TextField } from '@mui/material'
 import { useRouter } from 'next/router'
-
 import Grid from '@/ui/atoms/Grid'
 import MediaQuery from '@/ui/utils/MediaQuery'
 
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-
 import toast, { Toaster } from 'react-hot-toast'
 
 import { useGetSchool, useUpdateSchool } from '@/services/admin/schools'
-
 import { ISchoolDTO } from '@/services/admin/schools/interfaces'
+import PrivateLayout from '@/ui/templates/PrivateLayout'
+import { Button, TextField } from '@mui/material'
 import { schoolSchema } from '../../../../schemas/school'
+
 import * as S from '../../../../styles/gestao/autoescolas/editar'
 
 function NewSchool() {
@@ -71,7 +68,7 @@ function NewSchool() {
   }, [errors])
 
   return (
-    <PublicLayout>
+    <PrivateLayout title="Editar autoescola">
       <S.Form onSubmit={handleSubmit(onSubmitHandler)}>
         {school && (
           <>
@@ -251,7 +248,7 @@ function NewSchool() {
         )}
       </S.Form>
       <Toaster />
-    </PublicLayout>
+    </PrivateLayout>
   )
 }
 

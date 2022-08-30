@@ -1,42 +1,49 @@
 import styled from 'styled-components'
 
-export const Container = styled.div`
+export const Page = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #fbfbfb;
+  justify-content: center;
+  width: 100vw;
+`
+
+export const Header = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 1.8rem 0;
+
+  color: ${(props) => props.theme.colors.white};
+  background-color: ${(props) => props.theme.colors.primary_80};
+`
+
+export const HeaderContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 900px;
+  padding: 0 1rem;
+`
+
+export const Title = styled.h1`
+  font-size: 2rem;
 `
 
 export const Body = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
-  max-width: 90vw;
-  min-height: calc(100vh - 240px);
-`
-
-export const HeaderWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 120px;
   width: 100%;
-  color: ${(props) => props.theme.colors.white};
-  background-color: ${(props) => props.theme.colors.primary_90};
+
+  padding-top: 32px;
 `
-export const HeaderContainer = styled.div`
+
+export const BodyContent = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 1200px;
-  padding: 3rem 2rem;
+  max-width: 900px;
+  padding: 0 1rem;
 `
-
-export const Footer = {
-  Wrapper: styled(HeaderWrapper)`
-    height: 120px;
-    background-color: ${(props) => props.theme.colors.black};
-  `,
-  Content: styled(HeaderContainer)``,
-}

@@ -2,17 +2,17 @@ import { Button } from '@mui/material'
 import { Stack } from '@mui/system'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import PublicLayout from '@/ui/templates/PublicLayout'
-import * as S from '../../../styles/gestao/autoescolas'
+import PrivateLayout from '@/ui/templates/PrivateLayout'
 import GridSchools from './table'
+import * as S from '../../../styles/gestao/autoescolas'
 
 function Home(_props: NextPage) {
   const router = useRouter()
 
   return (
-    <PublicLayout>
+    <PrivateLayout title="Autoescolas">
       <S.Container>
-        <Stack height="100%" alignItems="end" justifyContent="flex-end">
+        <Stack height="100%">
           <Button
             variant="contained"
             size="large"
@@ -23,7 +23,7 @@ function Home(_props: NextPage) {
         </Stack>
         <GridSchools />
       </S.Container>
-    </PublicLayout>
+    </PrivateLayout>
   )
 }
 

@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import PublicLayout from '@/ui/templates/PublicLayout'
+import ṔrivateLayout from '@/ui/templates/PrivateLayout'
 
 import { Button, TextField } from '@mui/material'
 import { useRouter } from 'next/router'
@@ -55,7 +55,7 @@ function NewSchool() {
   }, [success])
 
   return (
-    <PublicLayout>
+    <ṔrivateLayout title="Nova autoescola">
       <S.Form onSubmit={handleSubmit(onSubmitHandler)}>
         <MediaQuery
           desktop={
@@ -228,7 +228,7 @@ function NewSchool() {
         </Grid>
       </S.Form>
       <Toaster />
-    </PublicLayout>
+    </ṔrivateLayout>
   )
 }
 
