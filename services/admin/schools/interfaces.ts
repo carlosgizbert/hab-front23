@@ -22,4 +22,6 @@ export interface ISchoolR {
   address_city: string
   address_district: string
   address_postal: string
+  address_lat: string
+  address_long: string
 }
