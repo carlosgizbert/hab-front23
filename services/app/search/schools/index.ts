@@ -1,8 +1,20 @@
 import { useQuery } from 'react-query'
 
-import { getSchools, getSchool, getSchoolsByUf, getSchoolsByCity } from './api'
+import {
+  getSchools,
+  getSchool,
+  getSchoolsByUf,
+  getSchoolsByCity,
+  getRegionyByLatLong,
+} from './api'
 
 import { QUERIES_CONFIG } from '..'
+
+function useGetUserRegion(latitude: string, longitude: string) {
+  return useQuery([], () => getRegionyByLatLong(latitude, longitude), {
+    enabled: false,
+  })
+}
 
 function useGetSchools() {
   return useQuery(['getSchools'], () => getSchools(), {
@@ -28,4 +40,10 @@ function useGetSchool(id: string) {
   return useQuery([], () => getSchool(id))
 }
 
-export { useGetSchools, useGetSchool, useGetSchoolsUf, useGetSchoolsByCity }
+export {
+  useGetSchools,
+  useGetSchool,
+  useGetSchoolsUf,
+  useGetSchoolsByCity,
+  useGetUserRegion,
+}

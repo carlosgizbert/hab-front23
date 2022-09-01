@@ -24,6 +24,7 @@
     "@types/react-places-autocomplete": "^7.2.9",
     "axios": "^0.27.2",
     "babel-plugin-styled-components": "^2.0.7",
+    "geolib": "^3.3.3",
     "material-table": "^2.0.3",
     "next": "12.2.5",
     "query-string": "^7.1.1",

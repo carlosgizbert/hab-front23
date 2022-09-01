@@ -36,7 +36,7 @@ function NewSchool() {
     resolver: yupResolver(schoolSchema),
   })
 
-  const { data: getSchool, isLoading: getLoading } = useGetSchool(String(id))
+  const { data: getSchool, isLoading: getIsLoading } = useGetSchool(String(id))
 
   const { isLoading: updateLoading, mutate: updateSchool } = useUpdateSchool(
     () => {
@@ -293,7 +293,7 @@ function NewSchool() {
                 type="submit"
                 variant="contained"
                 size="large"
-                disabled={getLoading || updateLoading}
+                disabled={getIsLoading || updateLoading}
               >
                 Salvar
               </Button>

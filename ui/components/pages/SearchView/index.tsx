@@ -1,9 +1,4 @@
 import { useEffect, useState } from 'react'
-import PlacesAutocomplete, {
-  geocodeByAddress,
-  geocodeByPlaceId,
-  getLatLng,
-} from 'react-places-autocomplete'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import InputBase from '@mui/material/InputBase'
@@ -11,9 +6,22 @@ import IconChevronLeft from '@mui/icons-material/ChevronLeft'
 import IconPlace from '@mui/icons-material/Place'
 import { Button, Divider, IconButton } from '@mui/material'
 
+import { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete'
 import usePlacesService from 'react-google-autocomplete/lib/usePlacesAutocompleteService'
+import LoadingView from '@/ui/atoms/LoadingView'
 
+import { useGetUserRegion } from '@/services/app/search/schools'
 import * as S from './styles'
+
+interface ILatLong {
+  lat: number
+  long: number
+}
+
+interface IUserRegion {
+  city: string
+  uf: string
+}
 
 interface Props {
   onClose?: () => void
@@ -22,13 +30,21 @@ interface Props {
 
 export default function SearchView({ onClose, value }: Props) {
   const [inputValue, setInputValue] = useState('')
+  const [userLatLong, setUserLatLong] = useState<ILatLong>()
+  const [userRegion, setUserRegion] = useState<IUserRegion>()
 
   const router = useRouter()
 
   const {
-    placesService,
-    placePredictions,
-    getPlacePredictions,
+    data: getCity,
+    isLoading: getCityIsLoading,
+    isFetching: getCityIsFetching,
+    refetch: getCityRefetch,
+  } = useGetUserRegion(String(userLatLong?.lat), String(userLatLong?.long))
+
+  const {
+    placePredictions: addressSuggestions,
+    getPlacePredictions: getAddressSuggestions,
     isPlacePredictionsLoading,
   } = usePlacesService({
     apiKey: process.env.REACT_APP_GOOGLE,
@@ -46,36 +62,57 @@ export default function SearchView({ onClose, value }: Props) {
     height: '56px',
   }))
 
-  function renderItem(suggestion: any) {
+  const handleInput = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setInputValue(e.target.value)
+    getAddressSuggestions({ input: e.target.value })
+  }
+
+  const handleSuggestionClicked = async (suggestionAddress: any) => {
+    if (suggestionAddress) {
+      await geocodeByAddress(suggestionAddress)
+        .then((results: any) => getLatLng(results[0]))
+        .then(({ lat, lng }) => setUserLatLong({ lat, long: lng }))
+        .finally(() => {
+          if (userLatLong) getCityRefetch()
+        })
+        .catch((e) => console.log(e))
+    }
+  }
+
+  useEffect(() => {
+    if (userLatLong) getCityRefetch()
+  }, [userLatLong])
+
+  useEffect(() => {
+    if (getCity) setUserRegion(getCity)
+  }, [getCity])
+
+  useEffect(() => {
+    if (userRegion)
+      router.push({
+        pathname: '/autoescolas/[id]',
+        query: { city: userRegion.city, uf: userRegion.uf },
+      })
+  }, [userRegion])
+
+  function renderItem(address: any) {
     return (
-      <div key={`suggestion${suggestion.description}`}>
+      <div
+        key={`suggestion${address.description}`}
+        onClick={() => handleSuggestionClicked(address.description)}
+      >
         <S.SuggestionItem>
-          <IconPlace color="primary" /> <div>{suggestion.description}</div>
+          <IconPlace color="primary" /> <div>{address.description}</div>
         </S.SuggestionItem>
       </div>
     )
   }
 
-  const handleInput = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setInputValue(e.target.value)
-    getPlacePredictions({ input: e.target.value })
-  }
-
-  useEffect(() => {
-    // fetch place details for the first element in placePredictions array
-    if (placePredictions.length)
-      placesService?.getDetails(
-        {
-          placeId: placePredictions[0].place_id,
-        },
-        (placeDetails) => console.log('searchView', placeDetails)
-      )
-  }, [placePredictions])
-
   return (
     <S.Search>
+      {(getCityIsFetching || getCityIsLoading) && <LoadingView />}
       <S.Wrapper>
         <S.Header>
           <IconButton size="large" color="primary" onClick={onClose}>
@@ -99,7 +136,7 @@ export default function SearchView({ onClose, value }: Props) {
               Buscando.....
             </div>
           )}
-          {placePredictions.map((suggestion) => renderItem(suggestion))}
+          {addressSuggestions.map((suggestion) => renderItem(suggestion))}
         </S.SuggestionsContainer>
       </S.Wrapper>
       <S.Button>

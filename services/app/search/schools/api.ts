@@ -3,6 +3,29 @@ import { HEADERS, API_URL } from '../index'
 
 import { ISchoolDTO, ISchoolR } from './interfaces'
 
+export async function getRegionyByLatLong(latitude: string, longitude: string) {
+  const response = await axios.get<any>(
+    `http://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyDbL7Ty4i6Dbu76TaWN_8WQxWOFuI3zq6E`
+  )
+  let uf = 'UF não encontrado'
+  let city = 'Cidade não encontrada'
+  const parts = response.data.results[0].address_components
+  parts.forEach((part: any) => {
+    if (part.types.includes('administrative_area_level_1')) {
+      uf = part.long_name
+    }
+    if (part.types.includes('administrative_area_level_2')) {
+      city = part.long_name
+    }
+  })
+  const transformed = {
+    city,
+    uf,
+  }
+  console.log(transformed)
+  return transformed
+}
+
 export async function getSchools() {
   const response = await axios.get<ISchoolR[]>(`${API_URL}/schools`, {
     headers: HEADERS,
