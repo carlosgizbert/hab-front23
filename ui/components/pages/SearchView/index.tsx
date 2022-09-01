@@ -94,6 +94,7 @@ export default function SearchView({ onClose }: Props) {
         pathname: '/autoescolas/[uf]/[city]',
         query: { uf: userRegion.uf, city: userRegion.city },
       })
+    setUserRegion()
   }, [userRegion])
 
   function renderItem(address: any) {
