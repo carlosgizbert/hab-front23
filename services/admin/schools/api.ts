@@ -4,9 +4,9 @@ import { ISchoolDTO, ISchoolR } from './interfaces'
 import { HEADERS, API_URL } from '../index'
 
 export async function getSchools(params?: ISchoolQ): Promise<ISchoolDTO[]> {
-  const response = await axios.get<ISchoolR[]>(`${API_URL}/schools`, {
+  const query = new URLSearchParams({ ...params })
+  const response = await axios.get<ISchoolR[]>(`${API_URL}/schools?${query}`, {
     headers: HEADERS,
-    params,
   })
   const transformed = response.data.map(({ _id, ...s }) => ({ id: _id, ...s }))
   return transformed

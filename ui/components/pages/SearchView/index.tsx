@@ -25,10 +25,9 @@ interface IUserRegion {
 
 interface Props {
   onClose?: () => void
-  value?: string
 }
 
-export default function SearchView({ onClose, value }: Props) {
+export default function SearchView({ onClose }: Props) {
   const [inputValue, setInputValue] = useState('')
   const [userLatLong, setUserLatLong] = useState<ILatLong>()
   const [userRegion, setUserRegion] = useState<IUserRegion>()

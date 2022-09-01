@@ -13,40 +13,27 @@ import { useGetSchools } from '@/services/admin/schools'
 
 import * as S from '../../../styles/autoescolas'
 
-interface IUserRegion {
-  uf: string
-  city: string
-}
-
 export default function Home() {
   const [schools, setSchools] = useState<ISchoolDTO[]>([])
-  const [userRegion, setUserRegion] = useState<IUserRegion>()
   const [searchOpened, setSearchOpen] = useState(false)
-  const route = useRouter()
-
+  const router = useRouter()
+  const { uf, city } = router.query
   const {
     data: getSchools,
     isFetching: getSchoolsIsFetching,
     isLoading: getSchoolsIsLoading,
     isRefetching: getSchoolsIsRefetching,
   } = useGetSchools({
-    address_uf: userRegion?.uf,
-    address_city: userRegion?.city,
+    address_uf: String(uf!),
+    address_city: String(city)!,
   })
 
   const hasSchools = !!schools && !!schools?.length
 
   useEffect(() => {
-    if (route.query)
-      setUserRegion({
-        city: String(route.query.city),
-        uf: String(route.query.uf),
-      })
-  }, [route.query])
-
-  useEffect(() => {
-    if (userRegion && getSchools) setSchools(getSchools)
-  }, [userRegion, getSchools])
+    if (!uf && !city) return
+    if (getSchools) setSchools(getSchools)
+  }, [getSchools])
 
   return (
     <>
@@ -71,7 +58,7 @@ export default function Home() {
                 <S.ResultNoSearch>
                   <div>{schools.length} autoescolas em</div>{' '}
                   <div style={{ fontWeight: 'bold', marginLeft: '6px' }}>
-                    {userRegion?.city}
+                    {city}, {uf}
                   </div>
                 </S.ResultNoSearch>
               )}
@@ -92,7 +79,7 @@ export default function Home() {
               {!hasSchools &&
                 !getSchoolsIsLoading &&
                 !getSchoolsIsRefetching &&
-                userRegion?.uf && (
+                uf && (
                   <S.ResultNoSearch>
                     <Typography variant="subtitle1">
                       Nenhuma autoescola parceira nessa região :(

@@ -9,7 +9,7 @@ import {
 } from './api'
 
 import { QUERIES_CONFIG } from '..'
-import { ISchoolDTO, ISchoolQ } from './interfaces'
+import { ISchoolQ } from './interfaces'
 
 function useGetUserRegion(latitude: string, longitude: string) {
   return useQuery([], () => getRegionyByLatLong(latitude, longitude), {

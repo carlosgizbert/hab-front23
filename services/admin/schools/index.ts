@@ -8,12 +8,13 @@ import {
   getSchools,
   getSchool,
 } from './api'
-import { QUERIES_CONFIG } from '..'
 
 const INVALIDATE_QUERIES: any[] = ['getSchools']
 
 function useGetSchools(params?: ISchoolQ) {
-  return useQuery(['getSchools'], () => getSchools(params))
+  return useQuery(['getSchools'], () => getSchools(params), {
+    refetchOnWindowFocus: false,
+  })
 }
 
 function useGetSchool(id: string) {
