@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { HEADERS, API_URL } from '../index'
 
-import { ISchoolDTO, ISchoolR } from './interfaces'
+import { ISchoolDTO, ISchoolQ, ISchoolR } from './interfaces'
 
 export async function getRegionyByLatLong(latitude: string, longitude: string) {
   const response = await axios.get<any>(
@@ -26,7 +26,7 @@ export async function getRegionyByLatLong(latitude: string, longitude: string) {
   return transformed
 }
 
-export async function getSchools() {
+export async function getSchools(params: ISchoolQ) {
   const response = await axios.get<ISchoolR[]>(`${API_URL}/schools`, {
     headers: HEADERS,
   })

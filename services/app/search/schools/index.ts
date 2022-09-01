@@ -9,6 +9,7 @@ import {
 } from './api'
 
 import { QUERIES_CONFIG } from '..'
+import { ISchoolDTO, ISchoolQ } from './interfaces'
 
 function useGetUserRegion(latitude: string, longitude: string) {
   return useQuery([], () => getRegionyByLatLong(latitude, longitude), {
@@ -16,8 +17,8 @@ function useGetUserRegion(latitude: string, longitude: string) {
   })
 }
 
-function useGetSchools() {
-  return useQuery(['getSchools'], () => getSchools(), {
+function useGetSchools(queryParams: ISchoolQ) {
+  return useQuery(['getSchools'], () => getSchools(queryParams), {
     ...QUERIES_CONFIG,
   })
 }

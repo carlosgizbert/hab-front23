@@ -92,8 +92,8 @@ export default function SearchView({ onClose, value }: Props) {
   useEffect(() => {
     if (userRegion)
       router.push({
-        pathname: '/autoescolas/[id]',
-        query: { city: userRegion.city, uf: userRegion.uf },
+        pathname: '/autoescolas/[uf]/[city]',
+        query: { uf: userRegion.uf, city: userRegion.city },
       })
   }, [userRegion])
 

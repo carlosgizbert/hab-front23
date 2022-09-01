@@ -1,26 +1,24 @@
 import axios from 'axios'
+import { ISchoolQ } from '@/services/app/search/schools/interfaces'
+import { ISchoolDTO, ISchoolR } from './interfaces'
 import { HEADERS, API_URL } from '../index'
 
-import { ISchoolDTO, ISchoolR } from './interfaces'
-
-export async function getSchools() {
+export async function getSchools(params?: ISchoolQ): Promise<ISchoolDTO[]> {
   const response = await axios.get<ISchoolR[]>(`${API_URL}/schools`, {
     headers: HEADERS,
+    params,
   })
-
   const transformed = response.data.map(({ _id, ...s }) => ({ id: _id, ...s }))
-
   return transformed
 }
 
-export async function getSchool(id: string) {
-  const response = await axios.get<ISchoolDTO>(`${API_URL}/schools/`, {
+export async function getSchool(id: string): Promise<ISchoolDTO[]> {
+  const response = await axios.get<ISchoolR>(`${API_URL}/schools/`, {
     params: { _id: id },
     headers: HEADERS,
   })
   const transformed: any = response.data
   transformed._id = transformed.id
-
   return transformed
 }
 
