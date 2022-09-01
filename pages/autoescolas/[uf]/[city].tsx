@@ -95,7 +95,7 @@ export default function Home() {
                 userRegion?.uf && (
                   <S.ResultNoSearch>
                     <Typography variant="subtitle1">
-                      Nenhuma autoescola parceira :(
+                      Nenhuma autoescola parceira nessa região :(
                     </Typography>
                   </S.ResultNoSearch>
                 )}
