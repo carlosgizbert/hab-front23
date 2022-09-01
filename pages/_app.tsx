@@ -13,7 +13,10 @@ function MyApp({ Component, pageProps }: AppProps) {
       <GlobalStyle />
       <QueryClientProvider client={queryClient}>
         <header>
-          <Script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbL7Ty4i6Dbu76TaWN_8WQxWOFuI3zq6E&libraries=places" />
+          <Script
+            type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbL7Ty4i6Dbu76TaWN_8WQxWOFuI3zq6E&libraries=places"
+          />
         </header>
         <Component {...pageProps} />
       </QueryClientProvider>

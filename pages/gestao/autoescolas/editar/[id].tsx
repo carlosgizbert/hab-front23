@@ -1,29 +1,35 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
+import PrivateLayout from '@/ui/templates/PrivateLayout'
 import Grid from '@/ui/atoms/Grid'
 import MediaQuery from '@/ui/utils/MediaQuery'
+import toast, { Toaster } from 'react-hot-toast'
 
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import toast, { Toaster } from 'react-hot-toast'
 
 import { useGetSchool, useUpdateSchool } from '@/services/admin/schools'
+import { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete'
 import { ISchoolDTO } from '@/services/admin/schools/interfaces'
-import PrivateLayout from '@/ui/templates/PrivateLayout'
+
 import { Button, TextField } from '@mui/material'
 import { schoolSchema } from '../../../../schemas/school'
 
 import * as S from '../../../../styles/gestao/autoescolas/editar'
 
 function NewSchool() {
+  const [latLong, setLatLong] = useState({ lat: '0', long: '0' })
+
   const router = useRouter()
   const { id } = router.query
 
   const [school, setSchool] = useState<ISchoolDTO>()
 
   const {
-    register,
-    handleSubmit,
+    register: formRegister,
+    handleSubmit: handleFormSubmit,
+    getValues: getFormValues,
+    setValue: setFormValue,
     formState: { errors },
     reset,
   } = useForm({
@@ -44,19 +50,39 @@ function NewSchool() {
     return ''
   }
 
-  const onSubmitHandler = (data: any) => {
-    const schoolUpdated = { id, ...data }
+  const getLatLong = async () => {
+    const {
+      address_postal: postal,
+      address_number: number,
+      address_uf: uf,
+      address_city: city,
+      address_district: district,
+    } = getFormValues()
 
-    if (id) updateSchool(schoolUpdated) // mandar uma escola
+    if (postal || number || uf || city || district) {
+      await geocodeByAddress(
+        ` ${postal}, ${number}, ${district}, ${city}, ${uf}`
+      )
+        .then((results: any) => getLatLng(results[0]))
+        .then(({ lat, lng }) =>
+          setLatLong({ lat: String(lat), long: String(lng) })
+        )
+      setFormValue('address_lat', latLong.lat, { shouldValidate: true })
+      setFormValue('address_long', latLong.long, { shouldValidate: true })
+    }
   }
 
-  // useEffect(() => {
-  //   if (!id) return
-  //   // loading
-  // }, [id])
+  const onSubmitHandler = (data: any) => {
+    const payload = {
+      id,
+      ...data,
+      ...latLong,
+    }
+    if (id) updateSchool(payload) // mandar uma escola
+  }
 
   useEffect(() => {
-    if (getSchool) setSchool(getSchool)
+    if (getSchool) setSchool(getSchool[0])
   }, [getSchool])
 
   useEffect(() => {
@@ -69,14 +95,14 @@ function NewSchool() {
 
   return (
     <PrivateLayout title="Editar autoescola">
-      <S.Form onSubmit={handleSubmit(onSubmitHandler)}>
+      <S.Form onSubmit={handleFormSubmit(onSubmitHandler)}>
         {school && (
           <>
             <MediaQuery
               desktop={
                 <Grid columns="1fr" gap={2}>
                   <TextField
-                    {...register('name')}
+                    {...formRegister('name')}
                     label="Nome"
                     helperText={getErrorMessage(errors.name?.message)}
                     error={!!errors.name?.message}
@@ -86,7 +112,7 @@ function NewSchool() {
               mobile={
                 <Grid columns="1fr" gap={2}>
                   <TextField
-                    {...register('name')}
+                    {...formRegister('name')}
                     label="Nome"
                     helperText={getErrorMessage(errors.name?.message)}
                     error={!!errors.name?.message}
@@ -99,18 +125,18 @@ function NewSchool() {
                 <Grid columns="220px 1fr 1fr" gap={2}>
                   <TextField
                     label="Telefone"
-                    {...register('phone')}
+                    {...formRegister('phone')}
                     helperText={getErrorMessage(errors.phone?.message)}
                     error={!!errors.phone?.message}
                   />
                   <TextField
-                    {...register('whatsapp')}
+                    {...formRegister('whatsapp')}
                     label="Whatsapp"
                     helperText={getErrorMessage(errors.whatsapp?.message)}
                     error={!!errors.whatsapp?.message}
                   />
                   <TextField
-                    {...register('instagram')}
+                    {...formRegister('instagram')}
                     label="Instagram"
                     helperText={getErrorMessage(errors.instagram?.message)}
                     error={!!errors.instagram?.message}
@@ -121,18 +147,18 @@ function NewSchool() {
                 <>
                   <TextField
                     label="Telefone"
-                    {...register('phone')}
+                    {...formRegister('phone')}
                     helperText={getErrorMessage(errors.phone?.message)}
                     error={!!errors.phone?.message}
                   />
                   <TextField
-                    {...register('whatsapp')}
+                    {...formRegister('whatsapp')}
                     label="Whatsapp"
                     helperText={getErrorMessage(errors.whatsapp?.message)}
                     error={!!errors.whatsapp?.message}
                   />
                   <TextField
-                    {...register('instagram')}
+                    {...formRegister('instagram')}
                     label="Instagram"
                     helperText={getErrorMessage(errors.instagram?.message)}
                     error={!!errors.instagram?.message}
@@ -142,21 +168,21 @@ function NewSchool() {
             />
             <MediaQuery
               desktop={
-                <Grid columns="220px 120px 2fr" gap={2}>
+                <Grid columns="1fr 1fr 1fr" gap={2}>
                   <TextField
-                    {...register('address_postal')}
+                    {...formRegister('address_postal')}
                     label="CEP"
                     helperText={getErrorMessage(errors.address_postal?.message)}
                     error={!!errors.address_postal?.message}
                   />
                   <TextField
-                    {...register('address_uf')}
+                    {...formRegister('address_uf')}
                     label="Estado"
                     helperText={getErrorMessage(errors.address_uf?.message)}
                     error={!!errors.address_uf?.message}
                   />
                   <TextField
-                    {...register('address_city')}
+                    {...formRegister('address_city')}
                     label="Cidade"
                     helperText={getErrorMessage(errors.address_city?.message)}
                     error={!!errors.address_city?.message}
@@ -166,19 +192,19 @@ function NewSchool() {
               mobile={
                 <>
                   <TextField
-                    {...register('address_postal')}
+                    {...formRegister('address_postal')}
                     label="CEP"
                     helperText={getErrorMessage(errors.address_postal?.message)}
                     error={!!errors.address_postal?.message}
                   />
                   <TextField
-                    {...register('address_uf')}
+                    {...formRegister('address_uf')}
                     label="Estado"
                     helperText={getErrorMessage(errors.address_uf?.message)}
                     error={!!errors.address_uf?.message}
                   />
                   <TextField
-                    {...register('address_city')}
+                    {...formRegister('address_city')}
                     label="Cidade"
                     helperText={getErrorMessage(errors.address_city?.message)}
                     error={!!errors.address_city?.message}
@@ -189,9 +215,9 @@ function NewSchool() {
 
             <MediaQuery
               desktop={
-                <Grid columns="1fr 1fr" gap={2}>
+                <Grid columns="1fr 1fr 1FR 1FR" gap={2}>
                   <TextField
-                    {...register('address_district')}
+                    {...formRegister('address_district')}
                     label="Bairro"
                     helperText={getErrorMessage(
                       errors.address_district?.message
@@ -199,17 +225,31 @@ function NewSchool() {
                     error={!!errors.address_district?.message}
                   />
                   <TextField
-                    {...register('address_number')}
+                    {...formRegister('address_number')}
                     label="Número"
                     helperText={getErrorMessage(errors.address_number?.message)}
                     error={!!errors.address_number?.message}
+                  />
+                  <TextField
+                    {...formRegister('address_lat')}
+                    label="Longitude"
+                    helperText={getErrorMessage(errors.address_lat?.message)}
+                    error={!!errors.address_lat?.message}
+                    onBlur={() => getLatLong()}
+                  />
+                  <TextField
+                    {...formRegister('address_long')}
+                    label="Latitude"
+                    helperText={getErrorMessage(errors.address_long?.message)}
+                    error={!!errors.address_long?.message}
+                    onBlur={() => getLatLong()}
                   />
                 </Grid>
               }
               mobile={
                 <>
                   <TextField
-                    {...register('address_district')}
+                    {...formRegister('address_district')}
                     label="Bairro"
                     helperText={getErrorMessage(
                       errors.address_district?.message
@@ -217,10 +257,24 @@ function NewSchool() {
                     error={!!errors.address_district?.message}
                   />
                   <TextField
-                    {...register('address_number')}
+                    {...formRegister('address_number')}
                     label="Número"
                     helperText={getErrorMessage(errors.address_number?.message)}
                     error={!!errors.address_number?.message}
+                  />
+                  <TextField
+                    {...formRegister('address_lat')}
+                    label="Longitude"
+                    variant="standard"
+                    helperText={getErrorMessage(errors.address_lat?.message)}
+                    error={!!errors.address_lat?.message}
+                  />
+                  <TextField
+                    {...formRegister('address_long')}
+                    label="Latitude"
+                    variant="standard"
+                    helperText={getErrorMessage(errors.address_long?.message)}
+                    error={!!errors.address_long?.message}
                   />
                 </>
               }

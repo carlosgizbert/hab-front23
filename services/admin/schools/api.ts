@@ -14,7 +14,8 @@ export async function getSchools() {
 }
 
 export async function getSchool(id: string) {
-  const response = await axios.get<ISchoolDTO>(`${API_URL}/schools/${id}`, {
+  const response = await axios.get<ISchoolDTO>(`${API_URL}/schools/`, {
+    params: { _id: id },
     headers: HEADERS,
   })
   const transformed: any = response.data

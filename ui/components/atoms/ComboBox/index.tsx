@@ -20,6 +20,7 @@ export default function ComboBox({
   width = '100%',
   disablePortal = true,
   disabled = false,
+  ...props
 }: IComboBox) {
   return (
     <Autocomplete
@@ -32,6 +33,7 @@ export default function ComboBox({
       renderInput={(params) => (
         <TextField {...params} variant="standard" label={label} />
       )}
+      {...props}
     />
   )
 }

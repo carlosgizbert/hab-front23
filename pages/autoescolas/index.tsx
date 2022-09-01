@@ -5,6 +5,8 @@ import { useGetSchoolsByCity } from '@/services/app/search/schools'
 import { useGetCitiesByUf } from '@/services/common/static_api'
 import { ISchoolDTO } from '@/services/app/search/schools/interfaces'
 
+import { geocodeByLatLng } from 'react-google-places-autocomplete'
+
 import { Typography } from '@mui/material'
 import ComboBox from '@/ui/atoms/ComboBox'
 
@@ -45,8 +47,8 @@ const UFList = [
 export default function Home() {
   const [schools, setSchools] = useState<ISchoolDTO[]>([])
   const [selectedUf, setSelectedUf] = useState<string>('')
-  const [selectedCity, setSelectedCity] = useState<string>('')
-  const [currentCities, setCurrentCities] = useState<string[]>([])
+  // const [selectedCity, setSelectedCity] = useState<string>('')
+  // const [currentCities, setCurrentCities] = useState<string[]>([])
   const [searchOpened, setSearchOpen] = useState(false)
 
   const {
@@ -56,30 +58,40 @@ export default function Home() {
     isRefetching: getCitiesIsRefetching,
   } = useGetCitiesByUf(selectedUf!)
 
-  const {
-    data: getSchools,
-    refetch: getSchoolsRefetch,
-    isLoading: getSchoolsIsLoading,
-    isRefetching: getSchoolsIsRefetching,
-  } = useGetSchoolsByCity()
+  // const {
+  //   data: getSchools,
+  //   refetch: getSchoolsRefetch,
+  //   isLoading: getSchoolsIsLoading,
+  //   isRefetching: getSchoolsIsRefetching,
+  // } = useGetSchoolsByCity()
+
+  const getAddress = () => {
+    geocodeByLatLng({ lat: -324.0190822, lng: -46.4688663 })
+      .then((results) => console.log(results))
+      .catch((error) => console.error(error))
+  }
+
+  useEffect(() => {
+    getAddress()
+  }, [])
 
   const hasSchools = !!schools && !!schools?.length
 
-  useEffect(() => {
-    if (getCities) setCurrentCities(getCities)
-  }, [getCities])
+  // useEffect(() => {
+  //   if (getCities) setCurrentCities(getCities)
+  // }, [getCities])
 
-  useEffect(() => {
-    getCitiesRefetch()
-  }, [selectedUf])
+  // useEffect(() => {
+  //   getCitiesRefetch()
+  // }, [selectedUf])
 
-  useEffect(() => {
-    if (getSchools) setSchools(getSchools)
-  }, [getSchools])
+  // useEffect(() => {
+  //   if (getSchools) setSchools(getSchools)
+  // }, [getSchools])
 
-  useEffect(() => {
-    getSchoolsRefetch()
-  }, [selectedCity])
+  // useEffect(() => {
+  //   getSchoolsRefetch()
+  // }, [selectedCity])
 
   return (
     <PublicLayout>
@@ -93,7 +105,7 @@ export default function Home() {
             />
           </S.HeaderWrapper>
         </S.Header>
-        <S.SchoolsList.Wrapper>
+        {/* <S.SchoolsList.Wrapper>
           <S.SchoolsList.Body>
             {(getSchoolsIsLoading || getSchoolsIsRefetching) && !hasSchools && (
               <div>Buscando...</div>
@@ -131,7 +143,7 @@ export default function Home() {
                 </S.ResultNoSearch>
               )}
           </S.SchoolsList.Body>
-        </S.SchoolsList.Wrapper>
+        </S.SchoolsList.Wrapper> */}
       </S.Wrapper>
     </PublicLayout>
   )

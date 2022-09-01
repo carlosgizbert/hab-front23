@@ -70,7 +70,7 @@ export default function SearchView({ onClose, value }: Props) {
         {
           placeId: placePredictions[0].place_id,
         },
-        (placeDetails) => console.log(placeDetails)
+        (placeDetails) => console.log('searchView', placeDetails)
       )
   }, [placePredictions])
 

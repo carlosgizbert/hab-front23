@@ -44,18 +44,15 @@ function useUpdateSchool(
   handleOnError: () => void
 ) {
   const queryClient = useQueryClient()
-  return useMutation(
-    (school: ISchoolDTO) => updateSchool(school),
-    {
-      onSuccess: () => {
-        INVALIDATE_QUERIES.map((q) => queryClient.invalidateQueries(q))
-        handleOnSuccess()
-      },
-      onError: () => {
-        handleOnError()
-      },
-    }
-  )
+  return useMutation((school: ISchoolDTO) => updateSchool(school), {
+    onSuccess: () => {
+      INVALIDATE_QUERIES.map((q) => queryClient.invalidateQueries(q))
+      handleOnSuccess()
+    },
+    onError: () => {
+      handleOnError()
+    },
+  })
 }
 
 function useDeleteSchool(
