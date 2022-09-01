@@ -1,27 +1,28 @@
-import { forwardRef, useState } from 'react';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import Slide from '@mui/material/Slide';
-import { TransitionProps } from '@mui/material/transitions';
+import { forwardRef } from 'react'
+import Button from '@mui/material/Button'
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogContent from '@mui/material/DialogContent'
+import DialogContentText from '@mui/material/DialogContentText'
+import DialogTitle from '@mui/material/DialogTitle'
+import Slide from '@mui/material/Slide'
+import { TransitionProps } from '@mui/material/transitions'
 
 const Transition = forwardRef(function Transition(
   props: TransitionProps & {
-    children: React.ReactElement<any, any>;
+    children: React.ReactElement<any, any>
   },
-  ref: React.Ref<unknown>,
+  ref: React.Ref<unknown>
 ) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
+  return <Slide direction="up" ref={ref} {...props} />
+})
 
 interface IModalDialog {
   title: string
   text: string
   ref?: any
-  callbackAgree: () => void 
+  loading?: boolean
+  callbackAgree: () => void
   callbackDisagree: () => void
   callbackClose?: () => void
 }
@@ -33,8 +34,8 @@ export default function ModalDialog({
   callbackDisagree,
   callbackClose,
   ref,
+  loading,
 }: IModalDialog) {
-  
   return (
     <div>
       <Dialog
@@ -53,9 +54,11 @@ export default function ModalDialog({
         </DialogContent>
         <DialogActions>
           <Button onClick={callbackDisagree}>Cancelar</Button>
-          <Button onClick={callbackAgree}>Confirmar</Button>
+          <Button onClick={callbackAgree} disabled={loading}>
+            Confirmar
+          </Button>
         </DialogActions>
       </Dialog>
     </div>
-  );
+  )
 }

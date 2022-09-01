@@ -111,6 +111,7 @@ export default function GridSchools() {
           text="Tem certeza que deseja apagar permanentemente?"
           callbackAgree={() => deleteSchool()}
           callbackDisagree={() => setModalOpen(false)}
+          loading={isLoading}
         />
       )}
       <Toaster />
