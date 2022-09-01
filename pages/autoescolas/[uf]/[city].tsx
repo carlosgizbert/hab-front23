@@ -20,20 +20,28 @@ export default function Home() {
   const { uf, city } = router.query
   const {
     data: getSchools,
+    refetch: getSchoolsRefetch,
     isFetching: getSchoolsIsFetching,
     isLoading: getSchoolsIsLoading,
     isRefetching: getSchoolsIsRefetching,
   } = useGetSchools({
-    address_uf: String(uf!),
-    address_city: String(city)!,
+    address_uf: String(uf),
+    address_city: String(city),
   })
 
   const hasSchools = !!schools && !!schools?.length
 
   useEffect(() => {
     if (!uf && !city) return
-    if (getSchools) setSchools(getSchools)
+    if (getSchools) {
+      setSearchOpen(false)
+      setSchools(getSchools)
+    }
   }, [getSchools])
+
+  useEffect(() => {
+    getSchoolsRefetch()
+  }, [city, uf])
 
   return (
     <>
