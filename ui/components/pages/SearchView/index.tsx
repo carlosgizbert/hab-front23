@@ -31,6 +31,7 @@ export default function SearchView({ onClose }: Props) {
   const [inputValue, setInputValue] = useState('')
   const [userLatLong, setUserLatLong] = useState<ILatLong>()
   const [userRegion, setUserRegion] = useState<IUserRegion>()
+  const [addressSelected, setAddressSelected] = useState<string>()
 
   const router = useRouter()
 
@@ -68,17 +69,20 @@ export default function SearchView({ onClose }: Props) {
     getAddressSuggestions({ input: e.target.value })
   }
 
-  const handleSuggestionClicked = async (suggestionAddress: any) => {
-    if (suggestionAddress) {
-      await geocodeByAddress(suggestionAddress)
-        .then((results: any) => getLatLng(results[0]))
-        .then(({ lat, lng }) => setUserLatLong({ lat, long: lng }))
-        .finally(() => {
-          if (userLatLong) getCityRefetch()
-        })
-        .catch((e) => console.log(e))
+  useEffect(() => {
+    const fetchCityUF = async () => {
+      if (addressSelected) {
+        await geocodeByAddress(addressSelected)
+          .then((results: any) => getLatLng(results[0]))
+          .then(({ lat, lng }) => setUserLatLong({ lat, long: lng }))
+          .finally(() => {
+            if (userLatLong) getCityRefetch()
+          })
+          .catch((e) => console.log(e))
+      }
     }
-  }
+    fetchCityUF()
+  }, [addressSelected])
 
   useEffect(() => {
     if (userLatLong) getCityRefetch()
@@ -101,7 +105,7 @@ export default function SearchView({ onClose }: Props) {
     return (
       <div
         key={`suggestion${address.description}`}
-        onClick={() => handleSuggestionClicked(address.description)}
+        onClick={() => setAddressSelected(address.description)}
       >
         <S.SuggestionItem>
           <IconPlace color="primary" /> <div>{address.description}</div>
