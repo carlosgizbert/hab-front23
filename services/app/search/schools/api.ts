@@ -5,7 +5,7 @@ import { ISchoolDTO, ISchoolQ, ISchoolR } from './interfaces'
 
 export async function getRegionyByLatLong(latitude: string, longitude: string) {
   const response = await axios.get<any>(
-    `http://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyDbL7Ty4i6Dbu76TaWN_8WQxWOFuI3zq6E`
+    `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyDbL7Ty4i6Dbu76TaWN_8WQxWOFuI3zq6E`
   )
   let uf = 'UF não encontrado'
   let city = 'Cidade não encontrada'
