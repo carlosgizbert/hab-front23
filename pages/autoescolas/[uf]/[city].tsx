@@ -16,8 +16,10 @@ import * as S from '../../../styles/autoescolas'
 export default function Home() {
   const [schools, setSchools] = useState<ISchoolDTO[]>([])
   const [searchOpened, setSearchOpen] = useState(false)
+
   const router = useRouter()
   const { uf, city } = router.query
+
   const {
     data: getSchools,
     refetch: getSchoolsRefetch,
