@@ -24,7 +24,7 @@ export default function Header({
   return (
     <S.Header>
       <IconButton size="large" color="primary" onClick={onClickClose}>
-        <IconChevronLeft />
+        <IconChevronLeft color="primary" />
       </IconButton>
       <NoBorderInput
         autoFocus

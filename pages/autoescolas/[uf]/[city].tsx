@@ -61,17 +61,22 @@ export default function Home() {
           </S.Header>
           <S.SchoolsList.Wrapper>
             <S.SchoolsList.Body>
-              {schools && (
+              {/* {schools && !getSchoolsIsFetching && !getSchoolsIsLoading && (
                 <S.ResultNoSearch>
                   <div>{schools.length} autoescolas em</div>{' '}
                   <div style={{ fontWeight: 'bold', marginLeft: '6px' }}>
                     {city}, {uf}
                   </div>
                 </S.ResultNoSearch>
-              )}
+              )} */}
               <S.SchoolsList.Cards>
                 {(getSchoolsIsFetching || getSchoolsIsLoading) && (
                   <div>
+                    <Skeleton
+                      style={{ marginBottom: '1rem' }}
+                      height={24}
+                      borderRadius="1rem"
+                    />
                     <div style={{ marginBottom: '1.5rem' }}>
                       <Skeleton
                         style={{ marginBottom: '0.4rem' }}
@@ -98,8 +103,8 @@ export default function Home() {
                       key={school.id}
                       imageUrl="https://portalpopline.com.br/wp-content/uploads/2022/08/harry-potter-serie.jpg"
                       textTitle={school.name}
-                      textTag={school.address_district}
-                      textSub={`${school.address_uf}, ${school.address_city}, ${school.address_district}, ${school.address_postal}, ${school.address_number}`}
+                      textTag={`bairro ${school.address_district}`}
+                      textSub={`${school.address_city}, ${school.address_district}, ${school.address_postal}, ${school.address_number}`}
                     />
                   ))}
               </S.SchoolsList.Cards>

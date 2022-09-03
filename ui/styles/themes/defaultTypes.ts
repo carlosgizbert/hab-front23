@@ -29,7 +29,7 @@ export type IGridSpace = {
   spacing_SM: string
   spacing_MD: string
   spacing_LG: string
-  spacing_XLG: String
+  spacing_XLG: string
 }
 
 type ICommonSize = {

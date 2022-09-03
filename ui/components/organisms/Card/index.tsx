@@ -1,3 +1,4 @@
+import LocationOnRoundedIcon from '@mui/icons-material/LocationOnRounded';
 import { Card } from './style'
 
 interface ICardSchool {
@@ -17,13 +18,14 @@ export default function CardSchool({
 }: ICardSchool) {
   return (
     <Card.Container onClick={onClick}>
-      <Card.Header.Image imageUrl={imageUrl}>
+      <Card.Header.Wrapper imageUrl={imageUrl}>
         <Card.Header.Tag>{textTag}</Card.Header.Tag>
-      </Card.Header.Image>
-      <Card.Body.Wrapper>
-        <Card.Body.Title>{textTitle}</Card.Body.Title>
-        <Card.Body.Subtitle>{textSub}</Card.Body.Subtitle>
-      </Card.Body.Wrapper>
+        <Card.Header.Title>{textTitle}</Card.Header.Title>
+        <Card.Body.Subtitle>
+          <LocationOnRoundedIcon />
+          {textSub}
+        </Card.Body.Subtitle>
+      </Card.Header.Wrapper>
     </Card.Container>
   )
 }

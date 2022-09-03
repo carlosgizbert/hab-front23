@@ -10,27 +10,31 @@ export const Card = {
     cursor: pointer;
   `,
   Header: {
-    Image: styled.div<{ imageUrl: string }>`
-      position: relative;
-      background-image: url(${({ imageUrl }) => imageUrl});
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-size: cover;
+    Wrapper: styled.div<{ imageUrl: string }>`
+      display: flex;
+      flex-direction: column;
+      gap: 0.6em;
+      padding: 1.5rem;
       width: 100%;
-      height: 120px;
+
       border-radius: 1rem;
+      background-color: ${(props) => props.theme.colors.white};
+      box-shadow: ${(props) => props.theme.shadowLevel.level_1};
+      transition: ease-in-out 0.4s;
+      &:hover {
+        box-shadow: ${(props) => props.theme.shadowLevel.level_2};
+        transition: ease-in-out 0.4s;
+      }
     `,
     Tag: styled.div`
-      position: absolute;
-      top: 0;
-      left: 0;
-
-      padding: 0.5rem;
-      border-radius: 1rem 0 1rem 0;
-
-      color: white;
-      background-color: rgb(0, 0, 0, 0.8);
+      color: ${(props) => props.theme.colors.neutral_90};
       font-size: 14px;
+      font-weight: bold;
+    `,
+    Title: styled.div`
+      font-size: 20px;
+      font-weight: bold;
+      color: ${(props) => props.theme.colors.black};
     `,
   },
   Body: {
@@ -39,12 +43,12 @@ export const Card = {
       flex-direction: column;
       gap: 0.5rem;
     `,
-    Title: styled.div`
-      font-size: 16px;
-      font-weight: bold;
-    `,
     Subtitle: styled.div`
-      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+      font-size: 12px;
+      color: ${(props) => props.theme.colors.neutral_90};
     `,
   },
 }
