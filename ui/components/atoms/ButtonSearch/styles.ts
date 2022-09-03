@@ -4,7 +4,7 @@ export const ButtonSearch = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  border-radius: 0.8rem;
+  border-radius: 1rem;
   border: 1px solid rgb(200, 200, 200, 0.6);
   padding: 1rem;
   gap: 0.5rem;
