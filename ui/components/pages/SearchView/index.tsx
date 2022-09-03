@@ -6,19 +6,8 @@ import IconChevronLeft from '@mui/icons-material/ChevronLeft'
 import IconPlace from '@mui/icons-material/Place'
 import { Button, Divider, IconButton } from '@mui/material'
 
-// import { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete'
-import usePlacesService from 'react-google-autocomplete/lib/usePlacesAutocompleteService'
-import LoadingView from '@/ui/atoms/LoadingView'
-
 import Geocode from 'react-geocode'
-
-import { useGetUserRegion } from '@/services/app/search/schools'
 import * as S from './styles'
-
-interface ILatLong {
-  lat: number
-  long: number
-}
 
 interface IUserRegion {
   city: string
@@ -33,7 +22,9 @@ interface Props {
 
 export default function SearchView({ onClose }: Props) {
   const [inputValue, setInputValue] = useState('')
-  const [addressSelected, setAddressSelected] = useState<string>('')
+  const [suggestions, setSuggestions] = useState<any>()
+  const [addressSelected, setAddressSelected] = useState<any>()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [userRegion, setUserRegion] = useState<IUserRegion>({
     city: '',
     uf: '',
@@ -48,78 +39,73 @@ export default function SearchView({ onClose }: Props) {
   Geocode.setLocationType('ROOFTOP')
 
   // const {
-  //   data: getCity,
-  //   isLoading: getCityIsLoading,
-  //   isFetching: getCityIsFetching,
-  //   refetch: getCityRefetch,
-  // } = useGetUserRegion(String(userLatLong?.lat), String(userLatLong?.long))
-
-  const {
-    placePredictions: addressSuggestions,
-    getPlacePredictions: getAddressSuggestions,
-    isPlacePredictionsLoading,
-  } = usePlacesService({
-    apiKey: process.env.REACT_APP_GOOGLE,
-    options: {
-      componentRestrictions: {
-        country: 'br',
-      },
-      language: 'pt-BR',
-      input: inputValue,
-    },
-  })
+  //   placePredictions: addressSuggestions,
+  //   getPlacePredictions: getAddressSuggestions,
+  //   isPlacePredictionsLoading,
+  // } = usePlacesService({
+  //   apiKey: process.env.REACT_APP_GOOGLE,
+  //   options: {
+  //     componentRestrictions: {
+  //       country: 'br',
+  //     },
+  //     language: 'pt-BR',
+  //     input: inputValue,
+  //   },
+  // })
 
   const NoBorderInput = styled(InputBase)(({ theme }) => ({
     border: 'none',
     height: '56px',
   }))
 
-  const handleInput = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setInputValue(e.target.value)
-    getAddressSuggestions({ input: e.target.value })
-  }
+  useEffect(() => {
+    setIsLoading(true)
+    Geocode.fromAddress(inputValue)
+      .then(
+        (addressResponse: any) => {
+          const { lat, lng } = addressResponse.results[0].geometry.location
+          Geocode.fromLatLng(lat, lng).then(
+            (response: any) => {
+              setSuggestions(response.results.map((address: any) => address))
+            },
+            (error: any) => {
+              console.error(error)
+            }
+          )
+        },
+        (error: any) => {
+          setIsLoading(false)
+          console.error(error)
+        }
+      )
+      .finally(() => setIsLoading(false))
+    if (inputValue === '') setSuggestions([])
+  }, [inputValue])
 
   useEffect(() => {
-    Geocode.fromAddress(addressSelected).then(
-      (addressResponse: any) => {
-        const { lat, lng } = addressResponse.results[0].geometry.location
-        Geocode.fromLatLng(lat, lng).then(
-          (response: any) => {
-            // const address = response.results[0].formatted_address
-            response.results[0].address_components.forEach((result: any) => {
-              result.types.forEach((type: any) => {
-                switch (type) {
-                  case 'administrative_area_level_2':
-                    setUserRegion((s) => ({ ...s, city: result.long_name }))
-                    break
-                  case 'administrative_area_level_1':
-                    setUserRegion((s) => ({ ...s, uf: result.long_name }))
-                    break
-                  case 'sublocality_level_1':
-                    setUserRegion((s) => ({ ...s, district: result.long_name }))
-                    break
-                  case 'country':
-                    setUserRegion((s) => ({ ...s, country: result.long_name }))
-                    break
-                  default:
-                    return null
-                    break
-                }
-                return null
-              })
-            })
-          },
-          (error: any) => {
-            console.error(error)
+    if (addressSelected) {
+      addressSelected.address_components.forEach((result: any) => {
+        result.types.forEach((type: any) => {
+          switch (type) {
+            case 'administrative_area_level_2':
+              setUserRegion((s) => ({ ...s, city: result.long_name }))
+              break
+            case 'administrative_area_level_1':
+              setUserRegion((s) => ({ ...s, uf: result.long_name }))
+              break
+            case 'sublocality_level_1':
+              setUserRegion((s) => ({ ...s, district: result.long_name }))
+              break
+            case 'country':
+              setUserRegion((s) => ({ ...s, country: result.long_name }))
+              break
+            default:
+              return null
           }
-        )
-      },
-      (error: any) => {
-        console.error(error)
-      }
-    )
+          return null
+        })
+      })
+    }
   }, [addressSelected])
 
   useEffect(() => {
@@ -128,21 +114,7 @@ export default function SearchView({ onClose }: Props) {
         pathname: '/autoescolas/[uf]/[city]',
         query: { uf: userRegion.uf, city: userRegion.city },
       })
-    // setUserRegion(undefined)
   }, [userRegion])
-
-  function renderItem(address: any) {
-    return (
-      <div
-        key={`suggestion${address.description}`}
-        onClick={() => setAddressSelected(address.description)}
-      >
-        <S.SuggestionItem>
-          <IconPlace color="primary" /> <div>{address.description}</div>
-        </S.SuggestionItem>
-      </div>
-    )
-  }
 
   return (
     <S.Search>
@@ -157,19 +129,28 @@ export default function SearchView({ onClose }: Props) {
             size="medium"
             placeholder="Onde você está?"
             value={inputValue}
-            onChange={(e) => {
-              handleInput(e)
-            }}
+            onChange={(e) => setInputValue(e.target.value)}
           />
         </S.Header>
         <Divider />
         <S.SuggestionsContainer>
-          {isPlacePredictionsLoading && (
+          {isLoading && (
             <div style={{ textAlign: 'center', marginTop: '1rem' }}>
               Buscando.....
             </div>
           )}
-          {addressSuggestions.map((suggestion) => renderItem(suggestion))}
+          {suggestions &&
+            suggestions.map((address: any) => (
+              <div
+                key={`suggestion${address.formatted_address + 1}`}
+                onClick={() => setAddressSelected(address)}
+              >
+                <S.SuggestionItem>
+                  <IconPlace color="primary" />
+                  <div>{address.formatted_address}</div>
+                </S.SuggestionItem>
+              </div>
+            ))}
         </S.SuggestionsContainer>
       </S.Wrapper>
       <S.Button>
