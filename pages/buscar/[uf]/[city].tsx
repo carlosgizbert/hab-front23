@@ -54,7 +54,7 @@ export default function Home() {
             <S.HeaderWrapper>
               <Logo />
               <ButtonSearch
-                text="Praia Grande"
+                text={`${city}, ${uf}`}
                 onClick={() => setSearchOpen(true)}
               />
             </S.HeaderWrapper>

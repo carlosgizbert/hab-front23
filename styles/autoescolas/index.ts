@@ -16,7 +16,19 @@ export const Header = styled.div`
   padding: 2rem 0;
   width: 100%;
   color: ${(props) => props.theme.colors.sucess_90};
-  background-color: ${(props) => props.theme.colors.black};
+  background: #1fa2ff; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #1fa2ff,
+    #1fa2ff,
+    #12d8fa
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #1fa2ff,
+    #1fa2ff,
+    #12d8fa
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 `
 
 export const HeaderWrapper = styled.div`
