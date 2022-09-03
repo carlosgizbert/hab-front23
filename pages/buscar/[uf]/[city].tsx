@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import PublicLayout from '@/ui/templates/PublicLayout'
-import CardSchool from '@/ui/organisms/Card'
+import CardSchool from '@/ui/organisms/CardSchool'
 import { ISchoolDTO } from '@/services/app/search/schools/interfaces'
 
 import { Typography } from '@mui/material'
@@ -105,6 +105,12 @@ export default function Home() {
                       textTitle={school.name}
                       textTag={`bairro ${school.address_district}`}
                       textSub={`${school.address_city}, ${school.address_district}, ${school.address_postal}, ${school.address_number}`}
+                      onClick={() =>
+                        router.push({
+                          pathname: '/autoescola/[id]',
+                          query: { id: school.id },
+                        })
+                      }
                     />
                   ))}
               </S.SchoolsList.Cards>

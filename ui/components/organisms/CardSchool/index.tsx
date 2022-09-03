@@ -1,4 +1,4 @@
-import LocationOnRoundedIcon from '@mui/icons-material/LocationOnRounded';
+import LocationOnRoundedIcon from '@mui/icons-material/LocationOnRounded'
 import { Card } from './style'
 
 interface ICardSchool {
