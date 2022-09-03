@@ -110,7 +110,7 @@ export default function SearchView({ onClose }: Props) {
   useEffect(() => {
     if (!!userRegion.city && !!userRegion.uf)
       router.push({
-        pathname: '/autoescolas/[uf]/[city]',
+        pathname: '/buscar/[uf]/[city]',
         query: { uf: userRegion.uf, city: userRegion.city },
       })
   }, [userRegion])
@@ -154,7 +154,7 @@ export default function SearchView({ onClose }: Props) {
           fullWidth
           size="large"
           variant="contained"
-          onClick={() => router.push('/autoescolas')}
+          onClick={() => router.push('/buscar')}
         >
           Buscar
         </Button>
