@@ -23,7 +23,7 @@ export const HeaderContent = styled.div`
   flex-direction: column;
   width: 100%;
   max-width: 900px;
-  padding: 0 1rem;
+  padding: 0 2rem;
 `
 
 export const Title = styled.h1`
@@ -45,5 +45,5 @@ export const BodyContent = styled.div`
   flex-direction: column;
   width: 100%;
   max-width: 900px;
-  padding: 0 1rem;
+  padding: 0 2rem;
 `
