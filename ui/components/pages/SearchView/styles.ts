@@ -4,6 +4,7 @@ export const Search = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100vw;
   height: 100vh;
   padding: 0 1rem;
@@ -15,6 +16,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  max-width: 720px;
   height: 100%;
 `
 
@@ -34,6 +36,6 @@ export const SuggestionItem = styled.div`
   cursor: pointer;
 
   &:hover {
-    background-color: ${(props) => props.theme.colors.neutral_70};
+    box-shadow: ${(props) => props.theme.shadowLevel.level_1};
   }
 `

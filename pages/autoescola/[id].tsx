@@ -18,6 +18,8 @@ import LocalPhoneRoundedIcon from '@mui/icons-material/LocalPhoneRounded'
 import LocationOnRoundedIcon from '@mui/icons-material/LocationOnRounded'
 import { iconWhatsApp } from '@/static/icons'
 
+import { flexbox } from '@mui/system'
+import Link from 'next/link'
 import * as S from '../../styles/autoescola'
 
 export default function Home() {
@@ -36,6 +38,12 @@ export default function Home() {
   } = useGetSchools({
     id: String(id),
   })
+
+  const goToMap = () => {
+    router.push({
+      href: `https://www.google.com/maps/@?api=1&map_action=pano&${schools[0]?.address_postal}, ${schools[0]?.address_city}, ${schools[0]?.address_district}`,
+    })
+  }
 
   const hasSchools = !!schools && !!schools?.length
 
@@ -123,18 +131,27 @@ export default function Home() {
                       textTag={`bairro ${schools[0]?.address_district}`}
                       textSub={`${schools[0]?.address_city}, ${schools[0]?.address_district}, ${schools[0]?.address_postal}, ${schools[0]?.address_number}`}
                     />
-                    <ButtonCard
-                      icon={iconWhatsApp}
-                      label="Falar com Atendente"
-                    />
-                    <ButtonCard
-                      icon={<LocationOnRoundedIcon color="primary" />}
-                      label="Ver no mapa"
-                    />
-                    <ButtonCard
-                      icon={<LocalPhoneRoundedIcon color="warning" />}
-                      label="Telefonar"
-                    />
+                    <div
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '1rem',
+                      }}
+                    >
+                      <ButtonCard
+                        onClick={() => goToMap()}
+                        icon={iconWhatsApp}
+                        label="Falar com Atendente"
+                      />
+                      <ButtonCard
+                        icon={<LocationOnRoundedIcon />}
+                        label="Ver no mapa"
+                      />
+                      <ButtonCard
+                        icon={<LocalPhoneRoundedIcon />}
+                        label="Telefonar"
+                      />
+                    </div>
                   </>
                 )}
               </S.SchoolsList.Cards>
