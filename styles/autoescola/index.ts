@@ -19,13 +19,19 @@ export const Header = styled.div`
   background-color: ${(props) => props.theme.colors.black};
 `
 
-export const HeaderWrapper = styled.div`
+export const HeaderWrapper = styled.div<{ iconBack: boolean }>`
   display: flex;
   flex-direction: column;
   gap: 1rem;
   width: 100%;
   max-width: 720px;
   padding: 0 1rem;
+`
+
+export const HeaderTop = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 `
 
 export const SchoolsList = {
