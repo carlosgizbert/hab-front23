@@ -9,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
   }
   body {
     margin: 0;
-    font-family: 'Metropolis', 'Montserrat', 'Verdana', sans-serif;
+    font-family: 'Montserrat', 'Verdana', sans-serif;
     -webkit-font-smoothing: antialiased !important;
     -moz-osx-font-smoothing: grayscale;
     background-color: ${(props) => props.theme.colors.white};

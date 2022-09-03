@@ -10,6 +10,7 @@ export const ButtonSearch = styled.div`
   gap: 0.5rem;
   color: white;
   cursor: pointer;
+  transition: ease-in-out 0.4s;
   &:hover {
     border: 1px solid rgb(200, 200, 200, 1);
     transition: ease-in-out 0.4s;
