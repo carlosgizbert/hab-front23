@@ -6,9 +6,11 @@ import IconChevronLeft from '@mui/icons-material/ChevronLeft'
 import IconPlace from '@mui/icons-material/Place'
 import { Button, Divider, IconButton } from '@mui/material'
 
-import { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete'
+// import { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete'
 import usePlacesService from 'react-google-autocomplete/lib/usePlacesAutocompleteService'
 import LoadingView from '@/ui/atoms/LoadingView'
+
+import Geocode from 'react-geocode'
 
 import { useGetUserRegion } from '@/services/app/search/schools'
 import * as S from './styles'
@@ -21,6 +23,8 @@ interface ILatLong {
 interface IUserRegion {
   city: string
   uf: string
+  district: string
+  country: string
 }
 
 interface Props {
@@ -29,18 +33,26 @@ interface Props {
 
 export default function SearchView({ onClose }: Props) {
   const [inputValue, setInputValue] = useState('')
-  const [userLatLong, setUserLatLong] = useState<ILatLong>()
-  const [userRegion, setUserRegion] = useState<IUserRegion>()
-  const [addressSelected, setAddressSelected] = useState<string>()
+  const [addressSelected, setAddressSelected] = useState<string>('')
+  const [userRegion, setUserRegion] = useState<IUserRegion>({
+    city: '',
+    uf: '',
+    country: '',
+    district: '',
+  })
 
   const router = useRouter()
+  Geocode.setApiKey('AIzaSyDbL7Ty4i6Dbu76TaWN_8WQxWOFuI3zq6E')
+  Geocode.setLanguage('pt-br')
+  Geocode.setRegion('br')
+  Geocode.setLocationType('ROOFTOP')
 
-  const {
-    data: getCity,
-    isLoading: getCityIsLoading,
-    isFetching: getCityIsFetching,
-    refetch: getCityRefetch,
-  } = useGetUserRegion(String(userLatLong?.lat), String(userLatLong?.long))
+  // const {
+  //   data: getCity,
+  //   isLoading: getCityIsLoading,
+  //   isFetching: getCityIsFetching,
+  //   refetch: getCityRefetch,
+  // } = useGetUserRegion(String(userLatLong?.lat), String(userLatLong?.long))
 
   const {
     placePredictions: addressSuggestions,
@@ -70,35 +82,53 @@ export default function SearchView({ onClose }: Props) {
   }
 
   useEffect(() => {
-    const fetchCityUF = async () => {
-      if (addressSelected) {
-        await geocodeByAddress(addressSelected)
-          .then((results: any) => getLatLng(results[0]))
-          .then(({ lat, lng }) => setUserLatLong({ lat, long: lng }))
-          .finally(() => {
-            if (userLatLong) getCityRefetch()
-          })
-          .catch((e) => console.log(e))
+    Geocode.fromAddress(addressSelected).then(
+      (addressResponse: any) => {
+        const { lat, lng } = addressResponse.results[0].geometry.location
+        Geocode.fromLatLng(lat, lng).then(
+          (response: any) => {
+            // const address = response.results[0].formatted_address
+            response.results[0].address_components.forEach((result: any) => {
+              result.types.forEach((type: any) => {
+                switch (type) {
+                  case 'administrative_area_level_2':
+                    setUserRegion((s) => ({ ...s, city: result.long_name }))
+                    break
+                  case 'administrative_area_level_1':
+                    setUserRegion((s) => ({ ...s, uf: result.long_name }))
+                    break
+                  case 'sublocality_level_1':
+                    setUserRegion((s) => ({ ...s, district: result.long_name }))
+                    break
+                  case 'country':
+                    setUserRegion((s) => ({ ...s, country: result.long_name }))
+                    break
+                  default:
+                    return null
+                    break
+                }
+                return null
+              })
+            })
+          },
+          (error: any) => {
+            console.error(error)
+          }
+        )
+      },
+      (error: any) => {
+        console.error(error)
       }
-    }
-    fetchCityUF()
+    )
   }, [addressSelected])
 
   useEffect(() => {
-    if (userLatLong) getCityRefetch()
-  }, [userLatLong])
-
-  useEffect(() => {
-    if (getCity) setUserRegion(getCity)
-  }, [getCity])
-
-  useEffect(() => {
-    if (userRegion)
+    if (!!userRegion.city && !!userRegion.uf)
       router.push({
         pathname: '/autoescolas/[uf]/[city]',
         query: { uf: userRegion.uf, city: userRegion.city },
       })
-    setUserRegion(undefined)
+    // setUserRegion(undefined)
   }, [userRegion])
 
   function renderItem(address: any) {
@@ -116,7 +146,6 @@ export default function SearchView({ onClose }: Props) {
 
   return (
     <S.Search>
-      {(getCityIsFetching || getCityIsLoading) && <LoadingView />}
       <S.Wrapper>
         <S.Header>
           <IconButton size="large" color="primary" onClick={onClose}>
