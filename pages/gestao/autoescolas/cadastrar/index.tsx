@@ -8,11 +8,11 @@ import { Button, TextField } from '@mui/material'
 import Grid from '@/ui/atoms/Grid'
 import MediaQuery from '@/ui/utils/MediaQuery'
 
+import Geocode from 'react-geocode'
+
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import toast, { Toaster } from 'react-hot-toast'
-
-import { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete'
 import { useCreateSchool } from '@/services/admin/schools'
 import { schoolSchema } from '../../../../schemas/school'
 
@@ -48,6 +48,11 @@ const UF_LIST = [
   { label: 'TO - Tocantins', value: 'TO' },
 ]
 
+Geocode.setApiKey('AIzaSyDbL7Ty4i6Dbu76TaWN_8WQxWOFuI3zq6E')
+Geocode.setLanguage('pt-br')
+Geocode.setRegion('br')
+Geocode.setLocationType('APPROXIMATE')
+
 function NewSchool() {
   const [latLong, setLatLong] = useState({ lat: '0', long: '0' })
 
@@ -76,28 +81,6 @@ function NewSchool() {
   const getErrorMessage = (msg: any) => {
     if (msg) return msg
     return ''
-  }
-
-  const getLatLong = async () => {
-    const {
-      address_postal: postal,
-      address_number: number,
-      address_uf: uf,
-      address_city: city,
-      address_district: district,
-    } = getFormValues()
-
-    if (postal || number || uf || city || district) {
-      await geocodeByAddress(
-        ` ${postal}, ${number}, ${district}, ${city}, ${uf}`
-      )
-        .then((results: any) => getLatLng(results[0]))
-        .then(({ lat, lng }) =>
-          setLatLong({ lat: String(lat), long: String(lng) })
-        )
-      setFormValue('address_lat', latLong.lat, { shouldValidate: true })
-      setFormValue('address_long', latLong.long, { shouldValidate: true })
-    }
   }
 
   const onSubmitHandler = (data: any) => {
@@ -196,7 +179,6 @@ function NewSchool() {
                 label="CEP"
                 helperText={getErrorMessage(errors.address_postal?.message)}
                 error={!!errors.address_postal?.message}
-                onBlur={() => getLatLong()}
               />
               {/* <ComboBox
                 label="Estado"
@@ -208,14 +190,12 @@ function NewSchool() {
                 label="Estado"
                 helperText={getErrorMessage(errors.address_uf?.message)}
                 error={!!errors.address_uf?.message}
-                onBlur={() => getLatLong()}
               />
               <TextField
                 {...formRegister('address_city')}
                 label="Cidade"
                 helperText={getErrorMessage(errors.address_city?.message)}
                 error={!!errors.address_city?.message}
-                onBlur={() => getLatLong()}
               />
             </Grid>
           }
@@ -226,21 +206,18 @@ function NewSchool() {
                 label="CEP"
                 helperText={getErrorMessage(errors.address_postal?.message)}
                 error={!!errors.address_postal?.message}
-                onBlur={() => getLatLong()}
               />
               <TextField
                 {...formRegister('address_uf')}
                 label="Estado"
                 helperText={getErrorMessage(errors.address_uf?.message)}
                 error={!!errors.address_uf?.message}
-                onBlur={() => getLatLong()}
               />
               <TextField
                 {...formRegister('address_city')}
                 label="Cidade"
                 helperText={getErrorMessage(errors.address_city?.message)}
                 error={!!errors.address_city?.message}
-                onBlur={() => getLatLong()}
               />
             </Grid>
           }
@@ -254,28 +231,26 @@ function NewSchool() {
                 label="Bairro"
                 helperText={getErrorMessage(errors.address_district?.message)}
                 error={!!errors.address_district?.message}
-                onBlur={() => getLatLong()}
               />
               <TextField
                 {...formRegister('address_number')}
                 label="Número"
                 helperText={getErrorMessage(errors.address_number?.message)}
                 error={!!errors.address_number?.message}
-                onBlur={() => getLatLong()}
               />
               <TextField
                 {...formRegister('address_lat')}
                 label="Longitude"
                 helperText={getErrorMessage(errors.address_lat?.message)}
                 error={!!errors.address_lat?.message}
-                onBlur={() => getLatLong()}
+                disabled
               />
               <TextField
                 {...formRegister('address_long')}
                 label="Latitude"
                 helperText={getErrorMessage(errors.address_long?.message)}
                 error={!!errors.address_long?.message}
-                onBlur={() => getLatLong()}
+                disabled
               />
             </Grid>
           }

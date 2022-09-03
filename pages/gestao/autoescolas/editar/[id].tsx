@@ -9,7 +9,6 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { useGetSchool, useUpdateSchool } from '@/services/admin/schools'
-import { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete'
 import { ISchoolDTO } from '@/services/admin/schools/interfaces'
 
 import { Button, TextField } from '@mui/material'
@@ -50,27 +49,27 @@ function NewSchool() {
     return ''
   }
 
-  const getLatLong = async () => {
-    const {
-      address_postal: postal,
-      address_number: number,
-      address_uf: uf,
-      address_city: city,
-      address_district: district,
-    } = getFormValues()
+  // const getLatLong = async () => {
+  //   const {
+  //     address_postal: postal,
+  //     address_number: number,
+  //     address_uf: uf,
+  //     address_city: city,
+  //     address_district: district,
+  //   } = getFormValues()
 
-    if (postal || number || uf || city || district) {
-      await geocodeByAddress(
-        ` ${postal}, ${number}, ${district}, ${city}, ${uf}`
-      )
-        .then((results: any) => getLatLng(results[0]))
-        .then(({ lat, lng }) =>
-          setLatLong({ lat: String(lat), long: String(lng) })
-        )
-      setFormValue('address_lat', latLong.lat, { shouldValidate: true })
-      setFormValue('address_long', latLong.long, { shouldValidate: true })
-    }
-  }
+  //   if (postal || number || uf || city || district) {
+  //     await geocodeByAddress(
+  //       ` ${postal}, ${number}, ${district}, ${city}, ${uf}`
+  //     )
+  //       .then((results: any) => getLatLng(results[0]))
+  //       .then(({ lat, lng }) =>
+  //         setLatLong({ lat: String(lat), long: String(lng) })
+  //       )
+  //     setFormValue('address_lat', latLong.lat, { shouldValidate: true })
+  //     setFormValue('address_long', latLong.long, { shouldValidate: true })
+  //   }
+  // }
 
   const onSubmitHandler = (data: any) => {
     const payload = {
@@ -235,14 +234,12 @@ function NewSchool() {
                     label="Longitude"
                     helperText={getErrorMessage(errors.address_lat?.message)}
                     error={!!errors.address_lat?.message}
-                    onBlur={() => getLatLong()}
                   />
                   <TextField
                     {...formRegister('address_long')}
                     label="Latitude"
                     helperText={getErrorMessage(errors.address_long?.message)}
                     error={!!errors.address_long?.message}
-                    onBlur={() => getLatLong()}
                   />
                 </Grid>
               }

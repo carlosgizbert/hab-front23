@@ -8,6 +8,11 @@ import Geocode from 'react-geocode'
 import * as S from './styles'
 import Header from './Header'
 
+Geocode.setApiKey('AIzaSyDbL7Ty4i6Dbu76TaWN_8WQxWOFuI3zq6E')
+Geocode.setLanguage('pt-br')
+Geocode.setRegion('br')
+Geocode.setLocationType('APPROXIMATE')
+
 interface IUserRegion {
   city: string
   uf: string
@@ -32,10 +37,6 @@ export default function SearchView({ onClose }: Props) {
   })
 
   const router = useRouter()
-  Geocode.setApiKey('AIzaSyDbL7Ty4i6Dbu76TaWN_8WQxWOFuI3zq6E')
-  Geocode.setLanguage('pt-br')
-  Geocode.setRegion('br')
-  Geocode.setLocationType('APPROXIMATE')
 
   // const {
   //   placePredictions: addressSuggestions,
@@ -52,9 +53,9 @@ export default function SearchView({ onClose }: Props) {
   //   },
   // })
 
-  const handleInput = (e: any) => {
+  const handleInput = (value: any) => {
     setSuggestions([])
-    setInputValue(e.target.value)
+    setInputValue(value)
   }
 
   useEffect(() => {
@@ -119,7 +120,7 @@ export default function SearchView({ onClose }: Props) {
       <S.Wrapper>
         <Header
           inputValue={inputValue}
-          onChange={(e: any) => setInputValue(e.target.value)}
+          onChange={(e: any) => handleInput(e.target.value)}
           onClickClose={onClose}
         />
         <Divider />
