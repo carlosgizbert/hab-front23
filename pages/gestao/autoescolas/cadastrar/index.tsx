@@ -104,13 +104,20 @@ function NewSchool() {
       <S.Form onSubmit={handleFormSubmit(onSubmitHandler)}>
         <MediaQuery
           desktop={
-            <Grid columns="1fr" gap={2}>
+            <Grid columns="1fr 1fr" gap={2}>
               <TextField
                 autoFocus
                 {...formRegister('name')}
                 label="Nome da autoescola"
                 helperText={getErrorMessage(errors.name?.message)}
                 error={!!errors.name?.message}
+              />
+              <TextField
+                type="file"
+                {...formRegister('imgCover')}
+                label="Imagem de capa"
+                helperText={getErrorMessage(errors.imgCover?.message)}
+                error={!!errors.imgCover?.message}
               />
             </Grid>
           }
@@ -243,14 +250,12 @@ function NewSchool() {
                 label="Longitude"
                 helperText={getErrorMessage(errors.address_lat?.message)}
                 error={!!errors.address_lat?.message}
-                disabled
               />
               <TextField
                 {...formRegister('address_long')}
                 label="Latitude"
                 helperText={getErrorMessage(errors.address_long?.message)}
                 error={!!errors.address_long?.message}
-                disabled
               />
             </Grid>
           }

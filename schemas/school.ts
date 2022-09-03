@@ -12,4 +12,5 @@ export const schoolSchema = yup.object().shape({
   address_number: yup.string().required('Insira o número.'),
   address_lat: yup.string().required('Insira o CEP.'),
   address_long: yup.string().required('Insira o número.'),
+  imgCover: yup.string().optional(),
 })
