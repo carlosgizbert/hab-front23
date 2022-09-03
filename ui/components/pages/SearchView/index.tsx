@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import IconPlace from '@mui/icons-material/Place'
 import { Divider } from '@mui/material'
 import 'react-loading-skeleton/dist/skeleton.css'
 
 import Geocode from 'react-geocode'
 import * as S from './styles'
 import Header from './Header'
+import ListSuggestions from './ListSuggestions'
 
 Geocode.setApiKey('AIzaSyDbL7Ty4i6Dbu76TaWN_8WQxWOFuI3zq6E')
 Geocode.setLanguage('pt-br')
@@ -38,28 +38,13 @@ export default function SearchView({ onClose }: Props) {
 
   const router = useRouter()
 
-  // const {
-  //   placePredictions: addressSuggestions,
-  //   getPlacePredictions: getAddressSuggestions,
-  //   isPlacePredictionsLoading,
-  // } = usePlacesService({
-  //   apiKey: process.env.REACT_APP_GOOGLE,
-  //   options: {
-  //     componentRestrictions: {
-  //       country: 'br',
-  //     },
-  //     language: 'pt-BR',
-  //     input: inputValue,
-  //   },
-  // })
-
   const handleInput = (value: any) => {
     setSuggestions([])
     setInputValue(value)
   }
 
   useEffect(() => {
-    if (inputValue.length > 4) {
+    if (inputValue.length > 2) {
       setIsLoading(true)
       Geocode.fromAddress(inputValue)
         .then(
@@ -126,41 +111,12 @@ export default function SearchView({ onClose }: Props) {
           onClickClose={onClose}
         />
         <Divider />
-        <S.SuggestionsContainer>
-          {isLoading && (
-            <div style={{ textAlign: 'center', marginTop: '1rem' }}>
-              Buscando ...
-            </div>
-          )}
-          {/* {!isLoading && !suggestions && (
-            <div style={{ textAlign: 'center', marginTop: '1rem' }}>
-              Insira seu CEP, Rua ou Cidade ...
-            </div>
-          )} */}
-          {suggestions &&
-            suggestions.map((address: any) => (
-              <div
-                key={`suggestion${address.formatted_address + 1}`}
-                onClick={() => setAddressSelected(address)}
-              >
-                <S.SuggestionItem>
-                  <IconPlace color="primary" />
-                  <div>{address.formatted_address}</div>
-                </S.SuggestionItem>
-              </div>
-            ))}
-        </S.SuggestionsContainer>
+        <ListSuggestions
+          isLoading={isLoading}
+          schools={suggestions}
+          onClickAddressCallBack={(address: any) => setAddressSelected(address)}
+        />
       </S.Wrapper>
-      {/* <S.Button>
-        <Button
-          fullWidth
-          size="large"
-          variant="contained"
-          onClick={() => router.push('/buscar')}
-        >
-          Buscar
-        </Button>
-      </S.Button> */}
     </S.Search>
   )
 }

@@ -19,23 +19,3 @@ export const Wrapper = styled.div`
   max-width: 720px;
   height: 100%;
 `
-
-export const SuggestionsContainer = styled.div`
-  margin-top: 0.5rem;
-  height: 100%;
-`
-
-export const SuggestionItem = styled.div`
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-  width: 100%;
-  height: 70px;
-  padding: 0 1rem;
-  border-radius: 1rem;
-  cursor: pointer;
-
-  &:hover {
-    box-shadow: ${(props) => props.theme.shadowLevel.level_1};
-  }
-`
