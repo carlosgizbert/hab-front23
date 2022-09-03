@@ -61,14 +61,14 @@ export default function Home() {
           </S.Header>
           <S.SchoolsList.Wrapper>
             <S.SchoolsList.Body>
-              {/* {schools && !getSchoolsIsFetching && !getSchoolsIsLoading && (
+              {schools && !getSchoolsIsFetching && !getSchoolsIsLoading && (
                 <S.ResultNoSearch>
-                  <div>{schools.length} autoescolas em</div>{' '}
-                  <div style={{ fontWeight: 'bold', marginLeft: '6px' }}>
+                  <b>autoescolas próximas</b>{' '}
+                  {/* <div style={{ fontWeight: 'bold', marginLeft: '6px' }}>
                     {city}, {uf}
-                  </div>
+                  </div> */}
                 </S.ResultNoSearch>
-              )} */}
+              )}
               <S.SchoolsList.Cards>
                 {(getSchoolsIsFetching || getSchoolsIsLoading) && (
                   <div>
@@ -103,7 +103,7 @@ export default function Home() {
                       key={school.id}
                       imageUrl="https://portalpopline.com.br/wp-content/uploads/2022/08/harry-potter-serie.jpg"
                       textTitle={school.name}
-                      textTag={`bairro ${school.address_district}`}
+                      textTag={`${school.address_district.toLowerCase()}`}
                       textSub={`${school.address_city}, ${school.address_district}, ${school.address_postal}, ${school.address_number}`}
                       onClick={() =>
                         router.push({
