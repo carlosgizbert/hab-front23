@@ -12,7 +12,7 @@ export interface ISchoolDTO {
 }
 
 export interface ISchoolQ {
-  id?: string
+  _id?: string
   name?: string
   phone?: string
   whatsapp?: string

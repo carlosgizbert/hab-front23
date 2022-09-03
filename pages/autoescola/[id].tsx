@@ -4,12 +4,10 @@ import PublicLayout from '@/ui/templates/PublicLayout'
 import CardSchool from '@/ui/organisms/CardSchool'
 import { ISchoolDTO } from '@/services/app/search/schools/interfaces'
 
-import { Typography } from '@mui/material'
 import SearchView from '@/ui/pages/SearchView'
 import Skeleton from 'react-loading-skeleton'
 import Logo from '@/ui/atoms/Logo'
 import ButtonSearch from '@/ui/atoms/ButtonSearch'
-import { useGetSchools } from '@/services/admin/schools'
 import ButtonCard from '@/ui/organisms/ButtonCard'
 
 import { IconButton } from '@material-ui/core'
@@ -17,13 +15,11 @@ import IconChevronLeft from '@mui/icons-material/ChevronLeft'
 import LocalPhoneRoundedIcon from '@mui/icons-material/LocalPhoneRounded'
 import LocationOnRoundedIcon from '@mui/icons-material/LocationOnRounded'
 import { iconWhatsApp } from '@/static/icons'
-
-import { flexbox } from '@mui/system'
-import Link from 'next/link'
+import { useGetSchools } from '@/services/admin/schools'
 import * as S from '../../styles/autoescola'
 
 export default function Home() {
-  const [schools, setSchools] = useState<ISchoolDTO[]>([])
+  const [school, setSchools] = useState<ISchoolDTO[]>([])
   const [searchOpened, setSearchOpen] = useState(false)
 
   const router = useRouter()
@@ -31,21 +27,19 @@ export default function Home() {
 
   const {
     data: getSchools,
-    refetch: getSchoolsRefetch,
-    isFetching: getSchoolsIsFetching,
-    isLoading: getSchoolsIsLoading,
-    isRefetching: getSchoolsIsRefetching,
+    refetch: schoolRefetch,
+    isFetching: schoolIsFetching,
+    isLoading: schoolIsLoading,
+    isRefetching: schoolIsRefetching,
   } = useGetSchools({
-    id: String(id),
+    _id: String(id),
   })
 
   const goToMap = () => {
     router.push({
-      href: `https://www.google.com/maps/@?api=1&map_action=pano&${schools[0]?.address_postal}, ${schools[0]?.address_city}, ${schools[0]?.address_district}`,
+      href: `https://www.google.com/maps/@?api=1&map_action=pano&${school[0]?.address_postal}, ${school[0]?.address_city}, ${school[0]?.address_district}`,
     })
   }
-
-  const hasSchools = !!schools && !!schools?.length
 
   useEffect(() => {
     if (!id) return
@@ -56,7 +50,7 @@ export default function Home() {
   }, [getSchools])
 
   useEffect(() => {
-    getSchoolsRefetch()
+    schoolRefetch()
   }, [id])
 
   return (
@@ -88,7 +82,7 @@ export default function Home() {
           </S.Header>
           <S.SchoolsList.Wrapper>
             <S.SchoolsList.Body>
-              {/* {schools && !getSchoolsIsFetching && !getSchoolsIsLoading && (
+              {/* {schools && !getSchoolIsFetching && !getSchoolIsLoading && (
                 <S.ResultNoSearch>
                   <div>{schools.length} autoescolas em</div>{' '}
                   <div style={{ fontWeight: 'bold', marginLeft: '6px' }}>
@@ -97,7 +91,7 @@ export default function Home() {
                 </S.ResultNoSearch>
               )} */}
               <S.SchoolsList.Cards>
-                {(getSchoolsIsFetching || getSchoolsIsLoading) && (
+                {(schoolIsFetching || schoolIsLoading) && (
                   <div>
                     <Skeleton
                       style={{ marginBottom: '1rem' }}
@@ -122,14 +116,14 @@ export default function Home() {
                     </div>
                   </div>
                 )}
-                {!getSchoolsIsLoading && !getSchoolsIsRefetching && schools && (
+                {!schoolIsLoading && !schoolIsRefetching && school && (
                   <>
                     <CardSchool
-                      key={schools[0]?.id}
+                      key={school[0]?.id}
                       imageUrl="https://portalpopline.com.br/wp-content/uploads/2022/08/harry-potter-serie.jpg"
-                      textTitle={schools[0]?.name}
-                      textTag={`bairro ${schools[0]?.address_district}`}
-                      textSub={`${schools[0]?.address_city}, ${schools[0]?.address_district}, ${schools[0]?.address_postal}, ${schools[0]?.address_number}`}
+                      textTitle={school[0]?.name}
+                      textTag={`bairro ${school[0]?.address_district}`}
+                      textSub={`${school[0]?.address_city}, ${school[0]?.address_district}, ${school[0]?.address_postal}, ${school[0]?.address_number}`}
                     />
                     <div
                       style={{
@@ -155,16 +149,6 @@ export default function Home() {
                   </>
                 )}
               </S.SchoolsList.Cards>
-              {!hasSchools &&
-                !getSchoolsIsLoading &&
-                !getSchoolsIsRefetching &&
-                id && (
-                  <S.ResultNoSearch>
-                    <Typography variant="subtitle1">
-                      Nenhuma autoescola parceira nessa região :(
-                    </Typography>
-                  </S.ResultNoSearch>
-                )}
             </S.SchoolsList.Body>
           </S.SchoolsList.Wrapper>
         </S.Wrapper>

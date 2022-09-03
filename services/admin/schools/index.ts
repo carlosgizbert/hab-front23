@@ -1,13 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { ISchoolQ } from '@/services/app/search/schools/interfaces'
 import { ISchoolDTO } from './interfaces'
-import {
-  createSchool,
-  updateSchool,
-  deleteSchool,
-  getSchools,
-  getSchool,
-} from './api'
+import { createSchool, updateSchool, deleteSchool, getSchools } from './api'
 
 const INVALIDATE_QUERIES: any[] = ['getSchools']
 
@@ -15,10 +9,6 @@ function useGetSchools(params?: ISchoolQ) {
   return useQuery(['getSchools'], () => getSchools(params), {
     refetchOnWindowFocus: false,
   })
-}
-
-function useGetSchool(id: string) {
-  return useQuery([], () => getSchool(id))
 }
 
 function useCreateSchool(
@@ -70,10 +60,4 @@ function useDeleteSchool(
   })
 }
 
-export {
-  useGetSchools,
-  useGetSchool,
-  useCreateSchool,
-  useUpdateSchool,
-  useDeleteSchool,
-}
+export { useGetSchools, useCreateSchool, useUpdateSchool, useDeleteSchool }
