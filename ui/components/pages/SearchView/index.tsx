@@ -59,26 +59,28 @@ export default function SearchView({ onClose }: Props) {
   }
 
   useEffect(() => {
-    setIsLoading(true)
-    Geocode.fromAddress(inputValue)
-      .then(
-        (addressResponse: any) => {
-          const { lat, lng } = addressResponse.results[0].geometry.location
-          Geocode.fromLatLng(lat, lng).then(
-            (response: any) => {
-              setSuggestions(response.results.map((address: any) => address))
-            },
-            (error: any) => {
-              console.error(error)
-            }
-          )
-        },
-        (error: any) => {
-          setIsLoading(false)
-          console.error(error)
-        }
-      )
-      .finally(() => setIsLoading(false))
+    if (inputValue.length > 4) {
+      setIsLoading(true)
+      Geocode.fromAddress(inputValue)
+        .then(
+          (addressResponse: any) => {
+            const { lat, lng } = addressResponse.results[0].geometry.location
+            Geocode.fromLatLng(lat, lng).then(
+              (response: any) => {
+                setSuggestions(response.results.map((address: any) => address))
+              },
+              (error: any) => {
+                console.error(error)
+              }
+            )
+          },
+          (error: any) => {
+            setIsLoading(false)
+            console.error(error)
+          }
+        )
+        .finally(() => setIsLoading(false))
+    }
   }, [inputValue])
 
   useEffect(() => {
