@@ -12,6 +12,8 @@ import ButtonSearch from '@/ui/atoms/ButtonSearch'
 import { useGetSchools } from '@/services/admin/schools'
 import ButtonCard from '@/ui/organisms/ButtonCard'
 
+import { IconButton } from '@material-ui/core'
+import IconChevronLeft from '@mui/icons-material/ChevronLeft'
 import LocalPhoneRoundedIcon from '@mui/icons-material/LocalPhoneRounded'
 import LocationOnRoundedIcon from '@mui/icons-material/LocationOnRounded'
 import { iconWhatsApp } from '@/static/icons'
@@ -55,8 +57,16 @@ export default function Home() {
       <PublicLayout>
         <S.Wrapper>
           <S.Header>
-            <S.HeaderWrapper>
-              <Logo />
+            <S.HeaderWrapper iconBack>
+              <S.HeaderTop>
+                <IconButton size="medium" color="primary">
+                  <IconChevronLeft
+                    color="primary"
+                    onClick={() => router.push(-1)}
+                  />
+                </IconButton>
+                <Logo />
+              </S.HeaderTop>
               <ButtonSearch
                 text="Praia Grande"
                 onClick={() => setSearchOpen(true)}
