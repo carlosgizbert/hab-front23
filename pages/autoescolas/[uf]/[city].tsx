@@ -6,7 +6,7 @@ import { ISchoolDTO } from '@/services/app/search/schools/interfaces'
 
 import { Typography } from '@mui/material'
 import SearchView from '@/ui/pages/SearchView'
-import LoadingView from '@/ui/atoms/LoadingView'
+import Skeleton from 'react-loading-skeleton'
 import Logo from '@/ui/atoms/Logo'
 import ButtonSearch from '@/ui/atoms/ButtonSearch'
 import { useGetSchools } from '@/services/admin/schools'
@@ -47,7 +47,6 @@ export default function Home() {
 
   return (
     <>
-      {(getSchoolsIsFetching || getSchoolsIsLoading) && <LoadingView />}
       {searchOpened && <SearchView onClose={() => setSearchOpen(false)} />}
       <PublicLayout>
         <S.Wrapper>
@@ -73,6 +72,12 @@ export default function Home() {
                 </S.ResultNoSearch>
               )}
               <S.SchoolsList.Cards>
+                {(getSchoolsIsFetching || getSchoolsIsLoading) && (
+                  <>
+                    <Skeleton height={120} borderRadius="0.8rem" />
+                    <Skeleton height={64} borderRadius="0.8rem" />
+                  </>
+                )}
                 {!getSchoolsIsLoading &&
                   !getSchoolsIsRefetching &&
                   schools &&

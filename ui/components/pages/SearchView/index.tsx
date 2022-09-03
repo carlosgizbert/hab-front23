@@ -1,10 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import InputBase from '@mui/material/InputBase'
 import IconChevronLeft from '@mui/icons-material/ChevronLeft'
 import IconPlace from '@mui/icons-material/Place'
 import { Button, Divider, IconButton } from '@mui/material'
+
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 import Geocode from 'react-geocode'
 import * as S from './styles'
@@ -36,7 +39,9 @@ export default function SearchView({ onClose }: Props) {
   Geocode.setApiKey('AIzaSyDbL7Ty4i6Dbu76TaWN_8WQxWOFuI3zq6E')
   Geocode.setLanguage('pt-br')
   Geocode.setRegion('br')
-  Geocode.setLocationType('ROOFTOP')
+  Geocode.setLocationType('APPROXIMATE')
+
+  const inputRef = useRef(null)
 
   // const {
   //   placePredictions: addressSuggestions,
@@ -53,10 +58,15 @@ export default function SearchView({ onClose }: Props) {
   //   },
   // })
 
-  const NoBorderInput = styled(InputBase)(({ theme }) => ({
+  const NoBorderInput: any = styled(InputBase)(({ theme }) => ({
     border: 'none',
     height: '56px',
   }))
+
+  const handleInput = (e: any) => {
+    setSuggestions([])
+    setInputValue(e.target.value)
+  }
 
   useEffect(() => {
     setIsLoading(true)
@@ -79,7 +89,6 @@ export default function SearchView({ onClose }: Props) {
         }
       )
       .finally(() => setIsLoading(false))
-    if (inputValue === '') setSuggestions([])
   }, [inputValue])
 
   useEffect(() => {
@@ -124,21 +133,27 @@ export default function SearchView({ onClose }: Props) {
             <IconChevronLeft />
           </IconButton>
           <NoBorderInput
+            ref={inputRef}
             autoFocus
             fullWidth
             size="medium"
             placeholder="Onde você está?"
             value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
+            onChange={(e: any) => handleInput(e)}
           />
         </S.Header>
         <Divider />
         <S.SuggestionsContainer>
           {isLoading && (
             <div style={{ textAlign: 'center', marginTop: '1rem' }}>
-              Buscando.....
+              Buscando ...
             </div>
           )}
+          {/* {!isLoading && !suggestions && (
+            <div style={{ textAlign: 'center', marginTop: '1rem' }}>
+              Insira seu CEP, Rua ou Cidade ...
+            </div>
+          )} */}
           {suggestions &&
             suggestions.map((address: any) => (
               <div
