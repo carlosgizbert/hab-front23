@@ -61,8 +61,6 @@ export default function Home() {
           </S.Header>
           <S.SchoolsList.Wrapper>
             <S.SchoolsList.Body>
-              {(getSchoolsIsLoading || getSchoolsIsRefetching) &&
-                !hasSchools && <div>Buscando...</div>}
               {schools && (
                 <S.ResultNoSearch>
                   <div>{schools.length} autoescolas em</div>{' '}
