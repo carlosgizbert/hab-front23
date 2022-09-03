@@ -18,13 +18,6 @@ export const Wrapper = styled.div`
   height: 100%;
 `
 
-export const Header = styled.div`
-  display: flex;
-  gap: 1rem;
-  height: 80px;
-  align-items: center;
-`
-
 export const SuggestionsContainer = styled.div`
   margin-top: 0.5rem;
   height: 100%;
@@ -43,8 +36,4 @@ export const SuggestionItem = styled.div`
   &:hover {
     background-color: ${(props) => props.theme.colors.neutral_70};
   }
-`
-
-export const Button = styled.div`
-  margin-bottom: 3rem;
 `

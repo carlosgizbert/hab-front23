@@ -1,16 +1,12 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import styled from 'styled-components'
-import InputBase from '@mui/material/InputBase'
-import IconChevronLeft from '@mui/icons-material/ChevronLeft'
 import IconPlace from '@mui/icons-material/Place'
-import { Button, Divider, IconButton } from '@mui/material'
-
-import Skeleton from 'react-loading-skeleton'
+import { Divider } from '@mui/material'
 import 'react-loading-skeleton/dist/skeleton.css'
 
 import Geocode from 'react-geocode'
 import * as S from './styles'
+import Header from './Header'
 
 interface IUserRegion {
   city: string
@@ -20,7 +16,7 @@ interface IUserRegion {
 }
 
 interface Props {
-  onClose?: () => void
+  onClose: () => void
 }
 
 export default function SearchView({ onClose }: Props) {
@@ -41,8 +37,6 @@ export default function SearchView({ onClose }: Props) {
   Geocode.setRegion('br')
   Geocode.setLocationType('APPROXIMATE')
 
-  const inputRef = useRef(null)
-
   // const {
   //   placePredictions: addressSuggestions,
   //   getPlacePredictions: getAddressSuggestions,
@@ -57,11 +51,6 @@ export default function SearchView({ onClose }: Props) {
   //     input: inputValue,
   //   },
   // })
-
-  const NoBorderInput: any = styled(InputBase)(({ theme }) => ({
-    border: 'none',
-    height: '56px',
-  }))
 
   const handleInput = (e: any) => {
     setSuggestions([])
@@ -128,20 +117,11 @@ export default function SearchView({ onClose }: Props) {
   return (
     <S.Search>
       <S.Wrapper>
-        <S.Header>
-          <IconButton size="large" color="primary" onClick={onClose}>
-            <IconChevronLeft />
-          </IconButton>
-          <NoBorderInput
-            ref={inputRef}
-            autoFocus
-            fullWidth
-            size="medium"
-            placeholder="Onde você está?"
-            value={inputValue}
-            onChange={(e: any) => handleInput(e)}
-          />
-        </S.Header>
+        <Header
+          inputValue={inputValue}
+          onChange={(e: any) => setInputValue(e.target.value)}
+          onClickClose={onClose}
+        />
         <Divider />
         <S.SuggestionsContainer>
           {isLoading && (
