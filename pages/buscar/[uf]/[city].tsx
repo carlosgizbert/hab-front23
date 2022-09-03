@@ -108,7 +108,7 @@ export default function Home() {
                       onClick={() =>
                         router.push({
                           pathname: '/autoescola/[id]',
-                          query: { id: school.id },
+                          query: { id: school.id, city, uf },
                         })
                       }
                     />

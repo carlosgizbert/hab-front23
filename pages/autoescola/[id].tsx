@@ -25,7 +25,7 @@ export default function Home() {
   const [searchOpened, setSearchOpen] = useState(false)
 
   const router = useRouter()
-  const { id } = router.query
+  const { id, uf, city } = router.query
 
   const {
     data: getSchools,
@@ -62,7 +62,12 @@ export default function Home() {
                 <IconButton size="medium" color="primary">
                   <IconChevronLeft
                     color="primary"
-                    onClick={() => router.push(-1)}
+                    onClick={() => {
+                      router.push({
+                        pathname: '/buscar/[uf]/[city]',
+                        query: { uf, city },
+                      })
+                    }}
                   />
                 </IconButton>
                 <Logo />
@@ -112,11 +117,11 @@ export default function Home() {
                 {!getSchoolsIsLoading && !getSchoolsIsRefetching && schools && (
                   <>
                     <CardSchool
-                      key={schools[0].id}
+                      key={schools[0]?.id}
                       imageUrl="https://portalpopline.com.br/wp-content/uploads/2022/08/harry-potter-serie.jpg"
-                      textTitle={schools[0].name}
-                      textTag={`bairro ${schools[0].address_district}`}
-                      textSub={`${schools[0].address_city}, ${schools[0].address_district}, ${schools[0].address_postal}, ${schools[0].address_number}`}
+                      textTitle={schools[0]?.name}
+                      textTag={`bairro ${schools[0]?.address_district}`}
+                      textSub={`${schools[0]?.address_city}, ${schools[0]?.address_district}, ${schools[0]?.address_postal}, ${schools[0]?.address_number}`}
                     />
                     <ButtonCard
                       icon={iconWhatsApp}
