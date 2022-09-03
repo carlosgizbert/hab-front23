@@ -168,7 +168,7 @@ export default function SearchView({ onClose }: Props) {
             ))}
         </S.SuggestionsContainer>
       </S.Wrapper>
-      <S.Button>
+      {/* <S.Button>
         <Button
           fullWidth
           size="large"
@@ -177,7 +177,7 @@ export default function SearchView({ onClose }: Props) {
         >
           Buscar
         </Button>
-      </S.Button>
+      </S.Button> */}
     </S.Search>
   )
 }
