@@ -44,8 +44,8 @@ export default function SearchView({ onClose }: Props) {
   }
 
   useEffect(() => {
-    if (inputValue.length > 2) {
-      setIsLoading(true)
+    setIsLoading(true)
+    const timer = setTimeout(() => {
       Geocode.fromAddress(inputValue)
         .then(
           (addressResponse: any) => {
@@ -65,34 +65,35 @@ export default function SearchView({ onClose }: Props) {
           }
         )
         .finally(() => setIsLoading(false))
-    }
+    }, 1000)
+    return () => clearTimeout(timer)
   }, [inputValue])
 
-  useEffect(() => {
-    if (addressSelected) {
-      addressSelected.address_components.forEach((result: any) => {
-        result.types.forEach((type: any) => {
-          switch (type) {
-            case 'administrative_area_level_2':
-              setUserRegion((s) => ({ ...s, city: result.long_name }))
-              break
-            case 'administrative_area_level_1':
-              setUserRegion((s) => ({ ...s, uf: result.long_name }))
-              break
-            case 'sublocality_level_1':
-              setUserRegion((s) => ({ ...s, district: result.long_name }))
-              break
-            case 'country':
-              setUserRegion((s) => ({ ...s, country: result.long_name }))
-              break
-            default:
-              return null
-          }
-          return null
-        })
-      })
-    }
-  }, [addressSelected])
+  // useEffect(() => {
+  //   if (addressSelected) {
+  //     addressSelected.address_components.forEach((result: any) => {
+  //       result.types.forEach((type: any) => {
+  //         switch (type) {
+  //           case 'administrative_area_level_2':
+  //             setUserRegion((s) => ({ ...s, city: result.long_name }))
+  //             break
+  //           case 'administrative_area_level_1':
+  //             setUserRegion((s) => ({ ...s, uf: result.long_name }))
+  //             break
+  //           case 'sublocality_level_1':
+  //             setUserRegion((s) => ({ ...s, district: result.long_name }))
+  //             break
+  //           case 'country':
+  //             setUserRegion((s) => ({ ...s, country: result.long_name }))
+  //             break
+  //           default:
+  //             return null
+  //         }
+  //         return null
+  //       })
+  //     })
+  //   }
+  // }, [addressSelected])
 
   useEffect(() => {
     if (!!userRegion.city && !!userRegion.uf)
