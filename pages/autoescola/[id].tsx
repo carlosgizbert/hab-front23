@@ -59,7 +59,7 @@ export default function Home() {
       <PublicLayout>
         <S.Wrapper>
           <S.Header>
-            <S.HeaderWrapper iconBack>
+            <S.HeaderWrapper>
               <S.HeaderTop>
                 <IconButton size="medium">
                   <IconChevronLeft
@@ -73,10 +73,6 @@ export default function Home() {
                 </IconButton>
                 <Logo />
               </S.HeaderTop>
-              <ButtonSearch
-                text="Praia Grande"
-                onClick={() => setSearchOpen(true)}
-              />
             </S.HeaderWrapper>
           </S.Header>
           <S.SchoolsList.Wrapper>

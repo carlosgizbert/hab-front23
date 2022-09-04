@@ -9,11 +9,12 @@ export const Wrapper = styled.div`
 
 export const Header = styled.div`
   display: flex;
+  position: sticky;
   flex-direction: column;
   gap: 1rem;
   align-items: center;
   justify-content: center;
-  padding: 1.5rem 1rem;
+  padding: 0.5rem 1rem;
   width: 100%;
   color: ${(props) => props.theme.colors.sucess_90};
   background: #1fa2ff; /* fallback for old browsers */

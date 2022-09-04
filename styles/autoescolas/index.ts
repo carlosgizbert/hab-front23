@@ -8,12 +8,13 @@ export const Wrapper = styled.div`
 `
 
 export const Header = styled.div`
+  position: sticky;
   display: flex;
   flex-direction: column;
   gap: 1rem;
   align-items: center;
   justify-content: center;
-  padding: 1.5rem 1rem;
+  padding: 1rem 1rem;
   width: 100%;
   color: ${(props) => props.theme.colors.sucess_90};
   background: #1fa2ff; /* fallback for old browsers */

@@ -20,10 +20,10 @@ export const Card = {
       border-radius: 1rem;
       background-color: ${(props) => props.theme.colors.white};
       box-shadow: ${(props) => props.theme.shadowLevel.level_1};
-      transition: ease-in-out 0.4s;
+      transition: ease-in-out 0.2s;
       &:hover {
         box-shadow: ${(props) => props.theme.shadowLevel.level_2};
-        transition: ease-in-out 0.4s;
+        transition: ease-in-out 0.2s;
       }
     `,
     Tag: styled.div`
