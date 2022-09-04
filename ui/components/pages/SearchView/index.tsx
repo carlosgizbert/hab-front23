@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
 import { Divider } from '@mui/material'
 import 'react-loading-skeleton/dist/skeleton.css'
@@ -46,6 +46,10 @@ export default function SearchView({ onClose }: Props) {
   useEffect(() => {
     setIsLoading(true)
     const timer = setTimeout(() => {
+      if (inputValue.length < 2) {
+        setIsLoading(false)
+        return
+      }
       Geocode.fromAddress(inputValue)
         .then(
           (addressResponse: any) => {
@@ -69,31 +73,31 @@ export default function SearchView({ onClose }: Props) {
     return () => clearTimeout(timer)
   }, [inputValue])
 
-  // useEffect(() => {
-  //   if (addressSelected) {
-  //     addressSelected.address_components.forEach((result: any) => {
-  //       result.types.forEach((type: any) => {
-  //         switch (type) {
-  //           case 'administrative_area_level_2':
-  //             setUserRegion((s) => ({ ...s, city: result.long_name }))
-  //             break
-  //           case 'administrative_area_level_1':
-  //             setUserRegion((s) => ({ ...s, uf: result.long_name }))
-  //             break
-  //           case 'sublocality_level_1':
-  //             setUserRegion((s) => ({ ...s, district: result.long_name }))
-  //             break
-  //           case 'country':
-  //             setUserRegion((s) => ({ ...s, country: result.long_name }))
-  //             break
-  //           default:
-  //             return null
-  //         }
-  //         return null
-  //       })
-  //     })
-  //   }
-  // }, [addressSelected])
+  useEffect(() => {
+    if (addressSelected) {
+      addressSelected.address_components.forEach((result: any) => {
+        result.types.forEach((type: any) => {
+          switch (type) {
+            case 'administrative_area_level_2':
+              setUserRegion((s) => ({ ...s, city: result.long_name }))
+              break
+            case 'administrative_area_level_1':
+              setUserRegion((s) => ({ ...s, uf: result.long_name }))
+              break
+            case 'sublocality_level_1':
+              setUserRegion((s) => ({ ...s, district: result.long_name }))
+              break
+            case 'country':
+              setUserRegion((s) => ({ ...s, country: result.long_name }))
+              break
+            default:
+              return null
+          }
+          return null
+        })
+      })
+    }
+  }, [addressSelected])
 
   useEffect(() => {
     if (!!userRegion.city && !!userRegion.uf)
@@ -111,7 +115,7 @@ export default function SearchView({ onClose }: Props) {
           onChange={(e: any) => handleInput(e.target.value)}
           onClickClose={onClose}
         />
-        <Divider />
+        {/* <Divider /> */}
         <ListSuggestions
           isLoading={isLoading}
           schools={suggestions}

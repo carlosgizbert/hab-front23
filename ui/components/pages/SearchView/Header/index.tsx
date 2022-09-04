@@ -1,5 +1,5 @@
 import InputBase from '@mui/material/InputBase'
-import { IconButton } from '@mui/material'
+import { IconButton, TextField } from '@mui/material'
 import IconChevronLeft from '@mui/icons-material/ChevronLeft'
 import styled from 'styled-components'
 
@@ -16,19 +16,20 @@ export default function Header({
   onChange,
   inputValue,
 }: IHeader) {
-  const NoBorderInput: any = styled(InputBase)(({ theme }) => ({
-    border: 'none',
-    height: '56px',
-  }))
+  // const NoBorderInput: any = styled(InputBase)(({ theme }) => ({
+  //   border: 'none',
+  //   height: '56px',
+  // }))
 
   return (
     <S.Header>
       <IconButton size="large" onClick={onClickClose}>
         <IconChevronLeft />
       </IconButton>
-      <NoBorderInput
+      <TextField
         autoFocus
         fullWidth
+        variant="standard"
         size="medium"
         placeholder="Onde você está?"
         value={inputValue}

@@ -5,4 +5,5 @@ export const Header = styled.div`
   gap: 1rem;
   height: 80px;
   align-items: center;
+  padding: 0 3rem 0 1rem;
 `
