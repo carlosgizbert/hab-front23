@@ -8,7 +8,7 @@ import toast, { Toaster } from 'react-hot-toast'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
-import { useUpdateSchool } from '@/services/admin/schools'
+import { useGetSchools, useUpdateSchool } from '@/services/admin/schools'
 import { ISchoolDTO } from '@/services/admin/schools/interfaces'
 
 import { Button, TextField } from '@mui/material'
@@ -35,7 +35,9 @@ function NewSchool() {
     resolver: yupResolver(schoolSchema),
   })
 
-  const { data: getSchool, isLoading: getIsLoading } = useGetSchool(String(id))
+  const { data: getSchool, isLoading: getIsLoading } = useGetSchools({
+    _id: String(id),
+  })
 
   const { isLoading: updateLoading, mutate: updateSchool } = useUpdateSchool(
     () => {
