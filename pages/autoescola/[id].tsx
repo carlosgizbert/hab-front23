@@ -61,9 +61,8 @@ export default function Home() {
           <S.Header>
             <S.HeaderWrapper iconBack>
               <S.HeaderTop>
-                <IconButton size="medium" color="primary">
+                <IconButton size="medium">
                   <IconChevronLeft
-                    color="primary"
                     onClick={() => {
                       router.push({
                         pathname: '/buscar/[uf]/[city]',

@@ -37,7 +37,6 @@ export const HeaderWrapper = styled.div<{ iconBack: boolean }>`
   gap: 1rem;
   width: 100%;
   max-width: 720px;
-  padding: 0 1rem;
 `
 
 export const HeaderTop = styled.div`

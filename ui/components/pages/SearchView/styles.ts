@@ -7,7 +7,6 @@ export const Search = styled.div`
   align-items: center;
   width: 100vw;
   height: 100vh;
-  padding: 0 1rem;
   z-index: 100;
   background-color: rgb(255, 255, 255, 0.97);
 `
