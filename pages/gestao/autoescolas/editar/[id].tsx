@@ -8,7 +8,7 @@ import toast, { Toaster } from 'react-hot-toast'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
-import { useGetSchool, useUpdateSchool } from '@/services/admin/schools'
+import { useUpdateSchool } from '@/services/admin/schools'
 import { ISchoolDTO } from '@/services/admin/schools/interfaces'
 
 import { Button, TextField } from '@mui/material'

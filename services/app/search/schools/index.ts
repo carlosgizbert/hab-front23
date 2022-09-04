@@ -2,7 +2,6 @@ import { useQuery } from 'react-query'
 
 import {
   getSchools,
-  getSchool,
   getSchoolsByUf,
   getSchoolsByCity,
   getRegionyByLatLong,
@@ -37,14 +36,4 @@ function useGetSchoolsByCity() {
   })
 }
 
-function useGetSchool(id: string) {
-  return useQuery([], () => getSchool(id))
-}
-
-export {
-  useGetSchools,
-  useGetSchool,
-  useGetSchoolsUf,
-  useGetSchoolsByCity,
-  useGetUserRegion,
-}
+export { useGetSchools, useGetSchoolsUf, useGetSchoolsByCity, useGetUserRegion }
