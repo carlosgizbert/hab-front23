@@ -12,7 +12,7 @@ export const Header = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  padding: 1.8rem 0;
+  padding: 1.5rem 1rem;
 
   color: ${(props) => props.theme.colors.white};
   background-color: ${(props) => props.theme.colors.primary_80};
