@@ -13,7 +13,7 @@ export const Header = styled.div`
   gap: 1rem;
   align-items: center;
   justify-content: center;
-  padding: 2rem 0;
+  padding: 1.5rem 1rem;
   width: 100%;
   color: ${(props) => props.theme.colors.sucess_90};
   background: #1fa2ff; /* fallback for old browsers */
