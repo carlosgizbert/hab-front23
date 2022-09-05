@@ -112,7 +112,7 @@ export default function SearchView({ onClose }: Props) {
       <S.Wrapper>
         <Header
           inputValue={inputValue}
-          onChange={(e: any) => handleInput(e.target.value)}
+          onChange={(value: any) => handleInput(value)}
           onClickClose={onClose}
         />
         {/* <Divider /> */}
