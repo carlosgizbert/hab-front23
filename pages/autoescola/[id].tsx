@@ -10,7 +10,7 @@ import Logo from '@/ui/atoms/Logo'
 import ButtonCard from '@/ui/organisms/ButtonCard'
 
 import { IconButton } from '@material-ui/core'
-import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
+import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded'
 import LocalPhoneRoundedIcon from '@mui/icons-material/LocalPhoneRounded'
 import LocationOnRoundedIcon from '@mui/icons-material/LocationOnRounded'
 import { iconWhatsApp } from '@/static/icons'
