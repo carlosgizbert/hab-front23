@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const Wrapper = styled.div`
+  z-index: 999;
   position: fixed;
   display: flex;
   flex-direction: column;
