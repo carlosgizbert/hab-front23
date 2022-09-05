@@ -17,11 +17,13 @@ export interface ISchoolDTO {
   address_lat: string
   address_long: string
 
-  quantity_media_approved: string
-  differential_special_person: boolean
-  differential_course_recycle: boolean
   differential_simulator: boolean
+  differential_course_recycle: boolean
+  differential_special_person: boolean
+  differential_special_ticket: boolean
+  differential_student_at_home: boolean
 
+  quantity_media_approved: string
   ratings_media_education: string
   ratings_media_transparence: string
   ratings_media_instalations: string
@@ -56,11 +58,13 @@ export interface ISchoolR {
   address_lat: string
   address_long: string
 
-  quantity_media_approved: string
-  differential_special_person: boolean
-  differential_course_recycle: boolean
   differential_simulator: boolean
+  differential_course_recycle: boolean
+  differential_special_person: boolean
+  differential_special_ticket: boolean
+  differential_student_at_home: boolean
 
+  quantity_media_approved: string
   ratings_media_education: string
   ratings_media_transparence: string
   ratings_media_instalations: string
