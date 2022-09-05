@@ -34,6 +34,7 @@ export default function Header({
         onChange={onChange}
       /> */}
       <TextField
+        autoFocus
         fullWidth
         id="clearInput"
         onChange={(e: any) => onChange(e.target.value)}
