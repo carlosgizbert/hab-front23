@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const SuggestionsContainer = styled.div`
   margin-top: 0.5rem;
   height: 100%;
+  padding: 0 1rem;
 `
 
 export const SuggestionItem = styled.div`

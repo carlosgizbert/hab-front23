@@ -70,7 +70,17 @@ export default function Home() {
                     }}
                   />
                 </IconButton>
-                <Logo />
+                <div
+                  style={{
+                    position: 'absolute',
+                    left: '50%',
+                    top: '50%',
+                    marginRight: '-50%',
+                    transform: 'translate(-50%, -50%)',
+                  }}
+                >
+                  <Logo />
+                </div>
               </S.HeaderTop>
             </S.HeaderWrapper>
           </S.Header>
