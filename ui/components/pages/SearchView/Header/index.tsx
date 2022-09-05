@@ -1,7 +1,5 @@
-import InputBase from '@mui/material/InputBase'
+import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded'
 import { IconButton, TextField } from '@mui/material'
-import IconChevronLeft from '@mui/icons-material/ChevronLeft'
-import styled from 'styled-components'
 
 import * as S from './styles'
 
@@ -24,7 +22,7 @@ export default function Header({
   return (
     <S.Header>
       <IconButton size="large" onClick={onClickClose}>
-        <IconChevronLeft />
+        <ChevronLeftRoundedIcon />
       </IconButton>
       <TextField
         autoFocus

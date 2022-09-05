@@ -123,7 +123,6 @@ function NewSchool() {
   return (
     <ṔrivateLayout title="Nova autoescola">
       <S.Form onSubmit={handleFormSubmit(onSubmitHandler)}>
-        <FormLabel>Dados principais</FormLabel>
         <MediaQuery
           desktop={
             <Grid columns="1fr 1fr" gap={2}>

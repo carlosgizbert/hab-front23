@@ -1,3 +1,6 @@
+import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded'
+import { IconButton } from '@mui/material'
+import { useRouter } from 'next/router'
 import * as S from './style'
 
 interface IPrivateLayout {
@@ -6,10 +9,19 @@ interface IPrivateLayout {
 }
 
 export default function PrivateLayout({ children, title }: IPrivateLayout) {
+  const router = useRouter()
+
   return (
     <S.Page>
       <S.Header>
         <S.HeaderContent>
+          <IconButton size="medium">
+            <ChevronLeftRoundedIcon
+              onClick={() => {
+                router.back()
+              }}
+            />
+          </IconButton>
           <S.Title>{title}</S.Title>
         </S.HeaderContent>
       </S.Header>

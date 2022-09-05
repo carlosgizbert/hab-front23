@@ -32,7 +32,7 @@ export const Header = styled.div`
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 `
 
-export const HeaderWrapper = styled.div<{ iconBack: boolean }>`
+export const HeaderWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;

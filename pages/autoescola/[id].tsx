@@ -7,11 +7,10 @@ import { ISchoolDTO } from '@/services/app/search/schools/interfaces'
 import SearchView from '@/ui/pages/SearchView'
 import Skeleton from 'react-loading-skeleton'
 import Logo from '@/ui/atoms/Logo'
-import ButtonSearch from '@/ui/atoms/ButtonSearch'
 import ButtonCard from '@/ui/organisms/ButtonCard'
 
 import { IconButton } from '@material-ui/core'
-import IconChevronLeft from '@mui/icons-material/ChevronLeft'
+import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
 import LocalPhoneRoundedIcon from '@mui/icons-material/LocalPhoneRounded'
 import LocationOnRoundedIcon from '@mui/icons-material/LocationOnRounded'
 import { iconWhatsApp } from '@/static/icons'
@@ -62,7 +61,7 @@ export default function Home() {
             <S.HeaderWrapper>
               <S.HeaderTop>
                 <IconButton size="medium">
-                  <IconChevronLeft
+                  <ChevronLeftRoundedIcon
                     onClick={() => {
                       router.push({
                         pathname: '/buscar/[uf]/[city]',
