@@ -87,26 +87,24 @@ export default function Home() {
               <S.SchoolsList.Cards>
                 {(schoolIsFetching || schoolIsLoading) && (
                   <div>
-                    <Skeleton
-                      style={{ marginBottom: '1rem' }}
-                      height={24}
-                      borderRadius="1rem"
-                    />
                     <div style={{ marginBottom: '1.5rem' }}>
                       <Skeleton
                         style={{ marginBottom: '0.4rem' }}
                         height={120}
                         borderRadius="1rem"
                       />
-                      <Skeleton height={40} borderRadius="1rem" />
-                    </div>
-                    <div>
-                      <Skeleton
-                        style={{ marginBottom: '0.4rem' }}
-                        height={120}
-                        borderRadius="1rem"
-                      />
-                      <Skeleton height={40} borderRadius="1rem" />
+                      <div
+                        style={{
+                          marginTop: '1rem',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          gap: '0.8rem',
+                        }}
+                      >
+                        <Skeleton height={50} borderRadius="1rem" />
+                        <Skeleton height={50} borderRadius="1rem" />
+                        <Skeleton height={50} borderRadius="1rem" />
+                      </div>
                     </div>
                   </div>
                 )}
