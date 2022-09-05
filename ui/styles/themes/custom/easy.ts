@@ -12,9 +12,9 @@ const colors: IColors = {
   info_70: '#88CCEE',
   info_80: '#6699CC',
   info_90: '#4466BB',
-  neutral_70: '#abaeb8',
-  neutral_80: '#A1A3AA',
-  neutral_90: '#88898f',
+  neutral_70: '#99A4B8',
+  neutral_80: '#858DA6',
+  neutral_90: '#717693',
   primary_70: '#63BEFF',
   primary_80: '#0085E3',
   primary_90: '#004271',
@@ -25,7 +25,7 @@ const colors: IColors = {
   sucess_80: '#0E9C44',
   sucess_90: '#074e22',
   white: '#FFF',
-  black: '#191E2A',
+  black: '#5E6080',
 }
 
 const easy: DefaultTheme = {

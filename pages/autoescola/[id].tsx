@@ -114,7 +114,7 @@ export default function Home() {
                       key={school[0]?.id}
                       imageUrl="https://portalpopline.com.br/wp-content/uploads/2022/08/harry-potter-serie.jpg"
                       textTitle={school[0]?.name}
-                      textTag={`bairro ${school[0]?.address_district}`}
+                      textTag={`${school[0]?.address_district}`}
                       textSub={`${school[0]?.address_city}, ${school[0]?.address_district}, ${school[0]?.address_postal}, ${school[0]?.address_number}`}
                     />
                     <div
