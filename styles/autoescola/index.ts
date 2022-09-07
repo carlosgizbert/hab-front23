@@ -10,6 +10,7 @@ export const Wrapper = styled.div`
 export const Header = styled.div`
   display: flex;
   position: sticky;
+  top: 0;
   flex-direction: column;
   gap: 1rem;
   align-items: center;

@@ -53,10 +53,12 @@ export default function Home() {
           <S.Header>
             <S.HeaderWrapper>
               <Logo />
-              <ButtonSearch
-                text={`${city}, ${uf}`}
-                onClick={() => setSearchOpen(true)}
-              />
+              <S.ButtonSearch>
+                <ButtonSearch
+                  text={`${city}, ${uf}`}
+                  onClick={() => setSearchOpen(true)}
+                />
+              </S.ButtonSearch>
             </S.HeaderWrapper>
           </S.Header>
           <S.SchoolsList.Wrapper>

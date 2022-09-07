@@ -35,9 +35,15 @@ export const Header = styled.div`
 export const HeaderWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
   width: 100%;
   max-width: 720px;
+`
+
+export const ButtonSearch = styled.div`
+  position: sticky;
+  top: 0;
+  width: 100%;
+  padding: 0.5rem 0;
 `
 
 export const SchoolsList = {
