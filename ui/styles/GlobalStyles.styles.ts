@@ -6,6 +6,10 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     outline: 0;
+    a {
+      color: ${(props) => props.theme.colors.black};
+      text-decoration: none; /* no underline */
+    }
   }
   body {
     margin: 0;
