@@ -21,7 +21,7 @@ export default function Home() {
             </S.Home.SubTitle>
             <ButtonSearch
               onClick={() => setSearchOpen(true)}
-              text="Insira seu cep, cidade, ou rua..."
+              text="buscar autoescolas..."
             />
           </S.SectionSearch>
         </S.Home.Wrapper>
