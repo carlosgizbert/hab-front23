@@ -8,6 +8,7 @@ const INVALIDATE_QUERIES: any[] = ['getSchools']
 function useGetSchools(params?: ISchoolQ) {
   return useQuery(['getSchools'], () => getSchools(params), {
     refetchOnWindowFocus: false,
+    enabled: false,
   })
 }
 

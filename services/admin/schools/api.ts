@@ -3,7 +3,7 @@ import { ISchoolQ } from '@/services/app/search/schools/interfaces'
 import { ISchoolDTO, ISchoolR } from './interfaces'
 import { HEADERS, API_URL } from '../index'
 
-export async function getSchools(params?: ISchoolQ): Promise<ISchoolDTO[]> {
+export async function getSchools(params: any): Promise<ISchoolDTO[]> {
   const query = new URLSearchParams({ ...params })
   const response = await axios.get<ISchoolR[]>(`${API_URL}/schools?${query}`, {
     headers: HEADERS,
