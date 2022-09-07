@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import PublicLayout from '@/ui/templates/PublicLayout'
@@ -9,12 +10,17 @@ import Skeleton from 'react-loading-skeleton'
 import Logo from '@/ui/atoms/Logo'
 import ButtonCard from '@/ui/organisms/ButtonCard'
 
-import { IconButton } from '@material-ui/core'
+import { IconButton, Typography } from '@material-ui/core'
 import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded'
 import LocalPhoneRoundedIcon from '@mui/icons-material/LocalPhoneRounded'
 import LocationOnRoundedIcon from '@mui/icons-material/LocationOnRounded'
+import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded'
 import { iconWhatsApp } from '@/static/icons'
 import { useGetSchools } from '@/services/admin/schools'
+import Card from '@/ui/atoms/Card'
+import Grid from '@/ui/atoms/Grid'
+import Link from 'next/link'
+import { LinkOff } from '@material-ui/icons'
 import * as S from '../../styles/autoescola'
 
 export default function Home() {
@@ -38,6 +44,136 @@ export default function Home() {
     router.push({
       href: `https://www.google.com/maps/@?api=1&map_action=pano&${school[0]?.address_postal}, ${school[0]?.address_city}, ${school[0]?.address_district}`,
     })
+  }
+
+  const renderDiferencials = () => {
+    const differencials: any = []
+
+    if (school[0]?.differential_course_recycle)
+      differencials.push({
+        name: 'Curso de reciclagem',
+      })
+    if (school[0]?.differential_simulator)
+      differencials.push({
+        name: 'Simulador',
+      })
+    if (school[0]?.differential_special_person)
+      differencials.push({
+        name: 'Atende pessoa deficiênte',
+      })
+    if (school[0]?.differential_special_ticket)
+      differencials.push({
+        name: 'Parcela no boleto',
+      })
+    if (school[0]?.differential_student_at_home)
+      differencials.push({
+        name: 'Busca aluno em casa',
+      })
+
+    return (
+      <Card>
+        <Typography variant="h6">Diferenciais</Typography>
+        {differencials.map((differencial: any) => {
+          return (
+            <div
+              key={`${differencials}Id`}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+              }}
+            >
+              <CheckCircleOutlineRoundedIcon color="success" />
+              {differencial.name}
+            </div>
+          )
+        })}
+      </Card>
+    )
+  }
+
+  const renderRatings = () => {
+    const userRatings: any = []
+    const qtdVotes = {
+      label: 'Média geral',
+      value: school[0]?.ratings_quantity || '-',
+    }
+    const ratingGeneral = {
+      label: 'Média geral',
+      value: school[0]?.ratings_media_general || '-',
+    }
+
+    if (school[0]?.ratings_media_support)
+      userRatings.push({
+        label: 'Atendimento',
+        value: school[0]?.ratings_media_support,
+      })
+    if (school[0]?.ratings_media_schedule)
+      userRatings.push({
+        label: 'Agenda',
+        value: school[0]?.ratings_media_schedule,
+      })
+    if (school[0]?.ratings_media_instalations)
+      userRatings.push({
+        label: 'Ambiente',
+        value: school[0]?.ratings_media_instalations,
+      })
+    if (school[0]?.ratings_media_education)
+      userRatings.push({
+        label: 'Ensino',
+        value: school[0]?.ratings_media_education,
+      })
+    if (school[0]?.ratings_media_localization)
+      userRatings.push({
+        label: 'Localização',
+        value: school[0]?.ratings_media_localization,
+      })
+    if (school[0]?.ratings_media_price)
+      userRatings.push({
+        label: 'Preços',
+        value: school[0]?.ratings_media_price,
+      })
+    if (school[0]?.ratings_media_transparence)
+      userRatings.push({
+        label: 'Transparência',
+        value: school[0]?.ratings_media_transparence,
+      })
+
+    return (
+      <Card>
+        <Typography variant="h6">Avaliações dos alunos</Typography>
+        <S.BoxRating>
+          <div>
+            <span style={{ fontSize: '24px', fontWeight: '400' }}>
+              {ratingGeneral.value}
+            </span>
+            <span style={{ fontSize: '14px' }}>/5</span>
+          </div>
+          <div>com base em {qtdVotes.value} avaliações</div>
+        </S.BoxRating>
+        <Grid columns="1fr" gap={0.5} wrap>
+          {userRatings.map((rating: any) => {
+            return (
+              <div
+                key={`${rating}Id`}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                }}
+              >
+                <S.BoxRating>
+                  <span style={{ fontWeight: '400' }}>
+                    {rating.value} <span style={{ fontSize: '12px' }}> /5</span>
+                  </span>
+                </S.BoxRating>
+                {rating.label}
+              </div>
+            )
+          })}
+        </Grid>
+      </Card>
+    )
   }
 
   useEffect(() => {
@@ -86,14 +222,6 @@ export default function Home() {
           </S.Header>
           <S.SchoolsList.Wrapper>
             <S.SchoolsList.Body>
-              {/* {schools && !getSchoolIsFetching && !getSchoolIsLoading && (
-                <S.ResultNoSearch>
-                  <div>{schools.length} autoescolas em</div>{' '}
-                  <div style={{ fontWeight: 'bold', marginLeft: '6px' }}>
-                    {city}, {uf}
-                  </div>
-                </S.ResultNoSearch>
-              )} */}
               <S.SchoolsList.Cards>
                 {(schoolIsFetching || schoolIsLoading) && (
                   <div>
@@ -134,20 +262,35 @@ export default function Home() {
                         gap: '1rem',
                       }}
                     >
-                      <ButtonCard
-                        onClick={() => goToMap()}
-                        icon={iconWhatsApp}
-                        label="Falar com Atendente"
-                      />
+                      {school[0]?.whatsapp && (
+                        <Link
+                          href={`https://api.whatsapp.com/send?phone=${school[0]?.whatsapp}&text=Olá,%20vim%20do%20habilita`}
+                          passHref
+                        >
+                          <a target="_blank" rel="noopener noreferrer">
+                            <ButtonCard
+                              onClick={() => goToMap()}
+                              icon={iconWhatsApp}
+                              label="Falar com Atendente"
+                            />
+                          </a>
+                        </Link>
+                      )}
                       <ButtonCard
                         icon={<LocationOnRoundedIcon />}
                         label="Ver no mapa"
                       />
-                      <ButtonCard
-                        icon={<LocalPhoneRoundedIcon />}
-                        label="Telefonar"
-                      />
+                      {school[0]?.phone && (
+                        <Link target="_blank" href={`tel:${school[0]?.phone}`}>
+                          <ButtonCard
+                            icon={<LocalPhoneRoundedIcon />}
+                            label="Ligar"
+                          />
+                        </Link>
+                      )}
                     </div>
+                    {renderDiferencials()}
+                    {renderRatings()}
                   </>
                 )}
               </S.SchoolsList.Cards>

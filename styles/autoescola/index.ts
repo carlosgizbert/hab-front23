@@ -74,3 +74,16 @@ export const ResultNoSearch = styled.div`
   display: flex;
   font-size: 16px;
 `
+
+export const BoxRating = styled.div<{ padding?: string }>`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  min-width: 64px;
+  padding: ${(props) => (props.padding ? props.padding : '8px 8px')};
+  background-color: ${(props) => props.theme.colors.black};
+  border-radius: 8px;
+  color: white;
+`

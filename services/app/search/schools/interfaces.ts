@@ -1,38 +1,89 @@
 export interface ISchoolDTO {
   id: string
-  name: string
-  phone: string
-  whatsapp: string
-  instagram: string
-  address_uf: string
   address_city: string
   address_district: string
-  address_postal: string
+  address_lat: string
+  address_long: string
   address_number: string
+  address_postal: string
+  address_uf: string
+  differential_course_recycle: boolean
+  differential_simulator: boolean
+  differential_special_person: boolean
+  differential_special_ticket: boolean
+  differential_student_at_home: boolean
+  instagram: string
+  name: string
+  phone: string
+  quantity_media_approved: string
+  ratings_media_education: string
+  ratings_media_general: string
+  ratings_media_instalations: string
+  ratings_media_localization: string
+  ratings_media_price: string
+  ratings_media_schedule: string
+  ratings_media_support: string
+  ratings_media_transparence: string
+  ratings_quantity: string
+  whatsapp: string
 }
 
 export interface ISchoolQ {
   _id?: string
-  name?: string
-  phone?: string
-  whatsapp?: string
-  instagram?: string
-  address_uf?: string
   address_city?: string
   address_district?: string
-  address_postal?: string
+  address_lat?: string
+  address_long?: string
   address_number?: string
+  address_postal?: string
+  address_uf?: string
+  differential_course_recycle?: boolean
+  differential_simulator?: boolean
+  differential_special_person?: boolean
+  differential_special_ticket?: boolean
+  differential_student_at_home?: boolean
+  instagram?: string
+  name?: string
+  phone?: string
+  quantity_media_approved?: string
+  ratings_media_education?: string
+  ratings_media_general?: string
+  ratings_media_instalations?: string
+  ratings_media_localization?: string
+  ratings_media_price?: string
+  ratings_media_schedule?: string
+  ratings_media_support?: string
+  ratings_media_transparence?: string
+  ratings_quantity?: string
+  whatsapp?: string
 }
 
 export interface ISchoolR {
   _id: string
-  name: string
-  phone: string
-  whatsapp: string
-  instagram: string
-  address_uf: string
   address_city: string
   address_district: string
-  address_postal: string
+  address_lat: string
+  address_long: string
   address_number: string
+  address_postal: string
+  address_uf: string
+  differential_course_recycle: boolean
+  differential_simulator: boolean
+  differential_special_person: boolean
+  differential_special_ticket: boolean
+  differential_student_at_home: boolean
+  instagram: string
+  name: string
+  phone: string
+  quantity_media_approved: string
+  ratings_media_education: string
+  ratings_media_general: string
+  ratings_media_instalations: string
+  ratings_media_localization: string
+  ratings_media_price: string
+  ratings_media_schedule: string
+  ratings_media_support: string
+  ratings_media_transparence: string
+  ratings_quantity: string
+  whatsapp: string
 }

@@ -6,7 +6,7 @@ export const ButtonSearch = styled.div`
   justify-content: center;
   width: 100%;
   border-radius: 1rem;
-  border: 1px solid ${(props) => props.theme.colors.white};
+  border: 1px solid rgb(255, 255, 255, 0.2);
   padding: 1rem;
   gap: 0.2rem;
   color: white;
@@ -14,7 +14,7 @@ export const ButtonSearch = styled.div`
   background-color: rgb(0, 0, 0, 0.2);
   transition: ease-in-out 0.2s;
   &:hover {
-    border: 1px solid rgb(200, 200, 200, 1);
+    border: 1px solid rgb(255, 255, 255, 0.6);
     transition: ease-in-out 0.2s;
   }
 
