@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 export const Header = styled.div`
-  z-index: 50;
   display: flex;
   gap: 1rem;
   height: 80px;

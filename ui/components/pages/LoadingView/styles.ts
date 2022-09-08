@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const Wrapper = styled.div`
+  z-index: 100;
   position: absolute;
   display: flex;
   align-items: center;

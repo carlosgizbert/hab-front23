@@ -2,7 +2,6 @@ import styled from 'styled-components'
 
 export const Card = {
   Container: styled.div`
-    z-index: 10;
     position: relative;
     width: 100%;
     display: flex;

@@ -8,7 +8,6 @@ export const Wrapper = styled.div`
 `
 
 export const Header = styled.div`
-  z-index: 50;
   position: sticky;
   display: flex;
   flex-direction: column;
@@ -41,7 +40,6 @@ export const HeaderWrapper = styled.div`
 `
 
 export const ButtonSearch = styled.div`
-  z-index: 40;
   position: sticky;
   top: 0;
   width: 100%;

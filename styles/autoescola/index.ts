@@ -8,7 +8,6 @@ export const Wrapper = styled.div`
 `
 
 export const Header = styled.div`
-  z-index: 50;
   display: flex;
   position: sticky;
   top: 0;
