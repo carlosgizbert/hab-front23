@@ -22,6 +22,15 @@ export async function getSchool(id: string): Promise<ISchoolDTO[]> {
   return transformed
 }
 
+export async function createMass(schoolsMass: Omit<ISchoolDTO, 'id'>[]) {
+  const response = schoolsMass.map((school) => {
+    return axios.post(`${API_URL}/schools`, school, {
+      headers: HEADERS,
+    })
+  })
+  return response
+}
+
 export async function createSchool(
   schoolDto: Omit<ISchoolDTO, 'id'> | Omit<ISchoolDTO[], 'id'>
 ) {

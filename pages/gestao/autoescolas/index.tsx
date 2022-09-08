@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useCreateSchool } from '@/services/admin/schools'
+import { useCreateMass } from '@/services/admin/schools'
 import toast from 'react-hot-toast'
 import { Button } from '@mui/material'
 import { Stack } from '@mui/system'
@@ -24,9 +24,9 @@ function Home(_props: NextPage) {
   const {
     isLoading: createIsLoading,
     isSuccess: createSuccess,
-    mutate: createSchool,
-  } = useCreateSchool(
-    () => toast.success('Autoescolas criadas com sucesso!'),
+    mutate: createMass,
+  } = useCreateMass(
+    () => toast.success('Massa criada com sucesso!'),
     () => toast.error('Ops! Tente novamente.')
   )
 
@@ -97,7 +97,7 @@ function Home(_props: NextPage) {
             <Button
               variant="contained"
               color="error"
-              onClick={() => createSchool(schoolsUpload)}
+              onClick={() => createMass(schoolsUpload)}
             >
               Cadastrar {schoolsUpload.length} autoescolas
             </Button>
