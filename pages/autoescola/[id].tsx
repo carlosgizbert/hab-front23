@@ -20,7 +20,6 @@ import { useGetSchools } from '@/services/admin/schools'
 import Card from '@/ui/atoms/Card'
 import Grid from '@/ui/atoms/Grid'
 import Link from 'next/link'
-import { LinkOff } from '@material-ui/icons'
 import * as S from '../../styles/autoescola'
 
 export default function Home() {
@@ -254,6 +253,8 @@ export default function Home() {
                       textTitle={school[0]?.name}
                       textTag={`${school[0]?.address_district}`}
                       textSub={`${school[0]?.address_city}, ${school[0]?.address_district}, ${school[0]?.address_postal}, ${school[0]?.address_number}`}
+                      qtdRatings={school[0]?.ratings_quantity}
+                      rating={school[0]?.ratings_media_general}
                     />
                     <div
                       style={{

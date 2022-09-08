@@ -110,6 +110,8 @@ export default function Home() {
                       textTitle={school.name}
                       textTag={`${school.address_district.toLowerCase()}`}
                       textSub={`${school.address_city}, ${school.address_district}, ${school.address_postal}, ${school.address_number}`}
+                      qtdRatings={school.ratings_quantity}
+                      rating={school.ratings_media_general}
                       onClick={() =>
                         router.push({
                           pathname: '/autoescola/[id]',

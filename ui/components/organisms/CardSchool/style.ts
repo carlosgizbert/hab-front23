@@ -2,6 +2,8 @@ import styled from 'styled-components'
 
 export const Card = {
   Container: styled.div`
+    z-index: 10;
+    position: relative;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -25,6 +27,20 @@ export const Card = {
         box-shadow: ${(props) => props.theme.shadowLevel.level_2};
         transition: ease-in-out 0.2s;
       }
+    `,
+    Rating: styled.div`
+      right: 0;
+      top: 0;
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      padding: 0.5rem;
+      background-color: ${(props) => props.theme.colors.black};
+      border-radius: 0 16px 0 0;
     `,
     Tag: styled.div`
       color: ${(props) => props.theme.colors.neutral_90};
