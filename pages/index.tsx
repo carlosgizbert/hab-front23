@@ -20,8 +20,9 @@ export default function Home() {
               Encontre autoescolas perto de você
             </S.Home.SubTitle>
             <ButtonSearch
+              textAlign="center"
               onClick={() => setSearchOpen(true)}
-              text="buscar autoescolas..."
+              text="Insira seu cep, cidade ou rua..."
             />
           </S.SectionSearch>
         </S.Home.Wrapper>

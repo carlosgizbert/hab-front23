@@ -4,11 +4,16 @@ import * as S from './styles'
 interface IButtonProps {
   onClick?: () => void
   text: string
+  textAlign?: 'center' | 'left'
 }
 
-export default function ButtonSearch({ onClick, text }: IButtonProps) {
+export default function ButtonSearch({
+  onClick,
+  text,
+  textAlign,
+}: IButtonProps) {
   return (
-    <S.ButtonSearch onClick={onClick}>
+    <S.ButtonSearch align={textAlign} onClick={onClick}>
       <IconSearch /> <div>{text}</div>
     </S.ButtonSearch>
   )

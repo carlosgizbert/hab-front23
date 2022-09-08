@@ -58,14 +58,14 @@ export const SchoolsList = {
   Body: styled.div`
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
     width: 100%;
     max-width: 94vw;
   `,
   Cards: styled.div`
     display: flex;
     flex-direction: column;
-    gap: 1.8rem;
+    gap: 1.5rem;
   `,
 }
 

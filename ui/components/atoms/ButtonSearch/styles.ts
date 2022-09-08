@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
-export const ButtonSearch = styled.div`
-  display: flex;
+export const ButtonSearch = styled.div<{ align?: string }>`
+  /* display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -15,6 +15,22 @@ export const ButtonSearch = styled.div`
   transition: ease-in-out 0.2s;
   &:hover {
     border: 1px solid rgb(255, 255, 255, 0.6);
+    transition: ease-in-out 0.2s;
+  } */
+
+  display: flex;
+  align-items: center;
+  justify-content: ${(props) => (props.align ? props.align : 'left')};
+  width: 100%;
+  border-radius: 1rem;
+  padding: 1rem 1.5rem;
+  gap: 0.3em;
+  color: white;
+  background-color: ${(props) => props.theme.colors.primary_80};
+  cursor: pointer;
+  transition: ease-in-out 0.2s;
+  &:hover {
+    background-color: ${(props) => props.theme.colors.primary_80};
     transition: ease-in-out 0.2s;
   }
 

@@ -76,22 +76,12 @@ export default function Home() {
                   <div>
                     <div style={{ marginBottom: '1rem' }}>
                       <Skeleton
-                        style={{ marginBottom: '1rem' }}
-                        height={24}
-                        borderRadius="1rem"
-                      />
-                      <Skeleton
                         style={{ marginBottom: '0.4rem' }}
                         height={120}
                         borderRadius="1rem"
                       />
                     </div>
                     <div>
-                      <Skeleton
-                        style={{ marginBottom: '1rem' }}
-                        height={24}
-                        borderRadius="1rem"
-                      />
                       <Skeleton
                         style={{ marginBottom: '0.4rem' }}
                         height={120}
