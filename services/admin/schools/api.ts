@@ -22,7 +22,9 @@ export async function getSchool(id: string): Promise<ISchoolDTO[]> {
   return transformed
 }
 
-export async function createSchool(schoolDto: Omit<ISchoolDTO, 'id'>) {
+export async function createSchool(
+  schoolDto: Omit<ISchoolDTO, 'id'> | Omit<ISchoolDTO[], 'id'>
+) {
   const response = axios.post(`${API_URL}/schools`, schoolDto, {
     headers: HEADERS,
   })

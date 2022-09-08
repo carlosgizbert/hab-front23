@@ -8,7 +8,6 @@ const INVALIDATE_QUERIES: any[] = ['getSchools']
 function useGetSchools(params?: ISchoolQ) {
   return useQuery(['getSchools'], () => getSchools(params), {
     refetchOnWindowFocus: false,
-    enabled: false,
   })
 }
 
@@ -17,15 +16,18 @@ function useCreateSchool(
   handleOnError: () => void
 ) {
   const queryClient = useQueryClient()
-  return useMutation((school: ISchoolDTO) => createSchool(school), {
-    onSuccess: () => {
-      INVALIDATE_QUERIES.map((q) => queryClient.invalidateQueries(q))
-      handleOnSuccess()
-    },
-    onError: () => {
-      handleOnError()
-    },
-  })
+  return useMutation(
+    (school: ISchoolDTO | ISchoolDTO[]) => createSchool(school),
+    {
+      onSuccess: () => {
+        INVALIDATE_QUERIES.map((q) => queryClient.invalidateQueries(q))
+        handleOnSuccess()
+      },
+      onError: () => {
+        handleOnError()
+      },
+    }
+  )
 }
 
 function useUpdateSchool(
