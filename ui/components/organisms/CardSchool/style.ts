@@ -39,7 +39,7 @@ export const Card = {
       color: white;
       padding: 0.5rem;
       background-color: ${(props) => props.theme.colors.black};
-      border-radius: 0 16px 0 0;
+      border-radius: 0 16px 0 8px;
     `,
     Tag: styled.div`
       color: ${(props) => props.theme.colors.neutral_90};
