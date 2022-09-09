@@ -71,7 +71,9 @@ export default function Home() {
 
     return (
       <Card>
-        <Typography variant="h6">Diferenciais</Typography>
+        <Typography variant="h6" style={{ fontWeight: 'bold' }}>
+          Diferenciais
+        </Typography>
         {differencials.map((differencial: any) => {
           return (
             <div
@@ -140,10 +142,12 @@ export default function Home() {
 
     return (
       <Card>
-        <Typography variant="h6">Avaliações dos alunos</Typography>
+        <Typography variant="h6" style={{ fontWeight: 'bold' }}>
+          Avaliações dos alunos
+        </Typography>
         <S.BoxRating>
           <div>
-            <span style={{ fontSize: '24px', fontWeight: '400' }}>
+            <span style={{ fontSize: '24px', fontWeight: 'bold' }}>
               {ratingGeneral.value}
             </span>
             <span style={{ fontSize: '14px' }}>/5</span>
@@ -163,7 +167,8 @@ export default function Home() {
               >
                 <S.BoxRating>
                   <span style={{ fontWeight: '400' }}>
-                    {rating.value} <span style={{ fontSize: '12px' }}> /5</span>
+                    {rating.value}
+                    <span style={{ fontSize: '12px' }}>/5</span>
                   </span>
                 </S.BoxRating>
                 {rating.label}

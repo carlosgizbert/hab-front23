@@ -78,7 +78,8 @@ export const BoxRating = styled.div<{ padding?: string }>`
   gap: 2px;
   min-width: 64px;
   padding: ${(props) => (props.padding ? props.padding : '8px 8px')};
-  background-color: ${(props) => props.theme.colors.primary_80};
+  background-color: ${(props) => props.theme.colors.white};
+  border: 1px solid ${(props) => props.theme.colors.primary_80};
   border-radius: 2rem;
-  color: white;
+  color: ${(props) => props.theme.colors.primary_80};
 `
