@@ -4,6 +4,6 @@ export const Logo = styled.div`
   font-size: 24px;
   font-weight: 600;
   text-align: center;
-  color: ${(props) => props.theme.colors.primary_80};
+  color: ${(props) => props.theme.colors.secondary_80};
   cursor: pointer;
 `
