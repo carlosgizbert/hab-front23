@@ -3,8 +3,8 @@ import type { AppProps } from 'next/app'
 
 import ThemeStyled from '@/config/theme'
 import Loading from '@/ui/pages/LoadingView'
-import TagManager, { TagManagerArgs } from 'react-gtm-module'
 import { useEffect } from 'react'
+import TagManager, { TagManagerArgs } from 'react-gtm-module'
 
 const queryClient = new QueryClient()
 
