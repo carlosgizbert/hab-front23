@@ -18,7 +18,7 @@ export const Card = {
       padding: 1.5rem;
       width: 100%;
 
-      border-radius: 1rem;
+      border-radius: 2rem;
       background-color: ${(props) => props.theme.colors.white};
       box-shadow: ${(props) => props.theme.shadowLevel.level_1};
       transition: ease-in-out 0.2s;
@@ -39,7 +39,7 @@ export const Card = {
       color: white;
       padding: 0.5rem;
       background-color: ${(props) => props.theme.colors.black};
-      border-radius: 0 16px 0 8px;
+      border-radius: 0 2rem 0 1rem;
     `,
     Tag: styled.div`
       color: ${(props) => props.theme.colors.neutral_90};

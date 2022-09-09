@@ -22,15 +22,16 @@ export const ButtonSearch = styled.div<{ align?: string }>`
   align-items: center;
   justify-content: ${(props) => (props.align ? props.align : 'left')};
   width: 100%;
-  border-radius: 1rem;
+  border-radius: 2rem;
   padding: 1rem 1.5rem;
   gap: 0.3em;
-  color: white;
-  background-color: ${(props) => props.theme.colors.primary_80};
+  color: ${(props) => props.theme.colors.black};
+  background-color: ${(props) => props.theme.colors.white};
+  border: 1px solid ${(props) => props.theme.colors.neutral_70};
   cursor: pointer;
   transition: ease-in-out 0.2s;
   &:hover {
-    background-color: ${(props) => props.theme.colors.primary_80};
+    background-color: ${(props) => props.theme.colors.white};
     transition: ease-in-out 0.2s;
   }
 
