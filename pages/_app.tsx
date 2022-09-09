@@ -10,10 +10,7 @@ const queryClient = new QueryClient()
 
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
-    const tagManagerArgs = {
-      gtmId: 'GTM-MHW8MZX',
-    }
-    TagManager.initialize(tagManagerArgs)
+    TagManager.initialize({ gtmId: 'GTM-MHW8MZX' })
   }, [])
 
   return (
