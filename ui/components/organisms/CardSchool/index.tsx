@@ -34,7 +34,7 @@ export default function CardSchool({
             </div>
           </Card.Header.Rating>
         )}
-        <Card.Header.Tag>{textTag}</Card.Header.Tag>
+        <Card.Header.Tag>{textTag.toLocaleLowerCase()}</Card.Header.Tag>
         <Card.Header.Title>{textTitle}</Card.Header.Title>
         <Card.Body.Subtitle>
           <LocationOnRoundedIcon />
