@@ -426,7 +426,7 @@ function NewSchool() {
               <div style={{ height: '40px' }}>
                 <TextField
                   {...formRegister('ratings_quantity')}
-                  InputProps={{ inputProps: { min: 1 } }}
+                  InputProps={{ inputProps: { min: 0 } }}
                   size="small"
                   type="number"
                   style={{ width: 120 }}
@@ -435,7 +435,7 @@ function NewSchool() {
               <div style={{ height: '40px' }}>
                 <TextField
                   {...formRegister('ratings_media_general')}
-                  InputProps={{ inputProps: { min: 1, max: 5, step: '0.10' } }}
+                  InputProps={{ inputProps: { min: 0, max: 5, step: '0.10' } }}
                   size="small"
                   type="number"
                   style={{ width: 120 }}
@@ -444,7 +444,7 @@ function NewSchool() {
               <div style={{ height: '40px' }}>
                 <TextField
                   {...formRegister('ratings_media_education')}
-                  InputProps={{ inputProps: { min: 1, max: 5, step: '0.10' } }}
+                  InputProps={{ inputProps: { min: 0, max: 5, step: '0.10' } }}
                   size="small"
                   type="number"
                   style={{ width: 120 }}
@@ -453,7 +453,7 @@ function NewSchool() {
               <div style={{ height: '40px' }}>
                 <TextField
                   {...formRegister('ratings_media_instalations')}
-                  InputProps={{ inputProps: { min: 1, max: 5, step: '0.10' } }}
+                  InputProps={{ inputProps: { min: 0, max: 5, step: '0.10' } }}
                   size="small"
                   type="number"
                   style={{ width: 120 }}
@@ -462,7 +462,7 @@ function NewSchool() {
               <div style={{ height: '40px' }}>
                 <TextField
                   {...formRegister('ratings_media_support')}
-                  InputProps={{ inputProps: { min: 1, max: 5, step: '0.10' } }}
+                  InputProps={{ inputProps: { min: 0, max: 5, step: '0.10' } }}
                   size="small"
                   type="number"
                   style={{ width: 120 }}
@@ -539,7 +539,7 @@ function NewSchool() {
               <div style={{ height: '40px' }}>
                 <TextField
                   {...formRegister('ratings_media_schedule')}
-                  InputProps={{ inputProps: { min: 1, max: 5, step: '0.10' } }}
+                  InputProps={{ inputProps: { min: 0, max: 5, step: '0.10' } }}
                   size="small"
                   type="number"
                   style={{ width: 120 }}
@@ -548,7 +548,7 @@ function NewSchool() {
               <div style={{ height: '40px' }}>
                 <TextField
                   {...formRegister('quantity_media_approved')}
-                  InputProps={{ inputProps: { min: 1, max: 5, step: '0.10' } }}
+                  InputProps={{ inputProps: { min: 0, step: '0.10' } }}
                   size="small"
                   type="number"
                   style={{ width: 120 }}
@@ -557,7 +557,7 @@ function NewSchool() {
               <div style={{ height: '40px' }}>
                 <TextField
                   {...formRegister('ratings_media_transparence')}
-                  InputProps={{ inputProps: { min: 1, max: 5, step: '0.10' } }}
+                  InputProps={{ inputProps: { min: 0, max: 5, step: '0.10' } }}
                   size="small"
                   type="number"
                   style={{ width: 120 }}
@@ -566,7 +566,7 @@ function NewSchool() {
               <div style={{ height: '40px' }}>
                 <TextField
                   {...formRegister('ratings_media_price')}
-                  InputProps={{ inputProps: { min: 1, max: 5, step: '0.10' } }}
+                  InputProps={{ inputProps: { min: 0, max: 5, step: '0.10' } }}
                   size="small"
                   type="number"
                   style={{ width: 120 }}
@@ -575,7 +575,7 @@ function NewSchool() {
               <div style={{ height: '40px' }}>
                 <TextField
                   {...formRegister('ratings_media_localization')}
-                  InputProps={{ inputProps: { min: 1, max: 5, step: '0.10' } }}
+                  InputProps={{ inputProps: { min: 0, max: 5, step: '0.10' } }}
                   size="small"
                   type="number"
                   style={{ width: 120 }}

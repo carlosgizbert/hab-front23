@@ -74,7 +74,7 @@ export default function Home() {
         <Typography variant="h6" style={{ fontWeight: 'bold' }}>
           Diferenciais
         </Typography>
-        {differencials.map((differencial: any) => {
+        {differencials?.map((differencial: any) => {
           return (
             <div
               key={`${differencials}Id`}
