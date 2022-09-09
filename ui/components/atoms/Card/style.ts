@@ -9,6 +9,7 @@ export const Card = styled.div`
   cursor: pointer;
 
   border-radius: 2rem;
+  color: ${(props) => props.theme.colors.black};
   background-color: ${(props) => props.theme.colors.white};
   box-shadow: ${(props) => props.theme.shadowLevel.level_1};
   transition: ease-out 0.2s;

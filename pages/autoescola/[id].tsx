@@ -228,7 +228,7 @@ export default function Home() {
                       <Skeleton
                         style={{ marginBottom: '0.4rem' }}
                         height={120}
-                        borderRadius="1rem"
+                        borderRadius="2rem"
                       />
                       <div
                         style={{
@@ -238,9 +238,9 @@ export default function Home() {
                           gap: '0.8rem',
                         }}
                       >
-                        <Skeleton height={50} borderRadius="1rem" />
-                        <Skeleton height={50} borderRadius="1rem" />
-                        <Skeleton height={50} borderRadius="1rem" />
+                        <Skeleton height={50} borderRadius="2rem" />
+                        <Skeleton height={50} borderRadius="2rem" />
+                        <Skeleton height={50} borderRadius="2rem" />
                       </div>
                     </div>
                   </div>

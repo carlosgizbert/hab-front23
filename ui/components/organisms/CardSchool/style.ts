@@ -38,18 +38,18 @@ export const Card = {
       justify-content: center;
       color: white;
       padding: 0.5rem;
-      background-color: ${(props) => props.theme.colors.black};
+      background-color: ${(props) => props.theme.colors.primary_80};
       border-radius: 0 2rem 0 1rem;
     `,
     Tag: styled.div`
-      color: ${(props) => props.theme.colors.neutral_90};
+      color: ${(props) => props.theme.colors.black};
       font-size: 14px;
       font-weight: bold;
     `,
     Title: styled.div`
       font-size: 20px;
       font-weight: bold;
-      color: ${(props) => props.theme.colors.black};
+      color: ${(props) => props.theme.colors.primary_80};
     `,
   },
   Body: {
@@ -63,7 +63,7 @@ export const Card = {
       align-items: center;
       gap: 0.2rem;
       font-size: 12px;
-      color: ${(props) => props.theme.colors.neutral_90};
+      color: ${(props) => props.theme.colors.black};
     `,
   },
 }

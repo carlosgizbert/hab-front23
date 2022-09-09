@@ -78,14 +78,14 @@ export default function Home() {
                       <Skeleton
                         style={{ marginBottom: '0.4rem' }}
                         height={120}
-                        borderRadius="1rem"
+                        borderRadius="2rem"
                       />
                     </div>
                     <div>
                       <Skeleton
                         style={{ marginBottom: '0.4rem' }}
                         height={120}
-                        borderRadius="1rem"
+                        borderRadius="2rem"
                       />
                     </div>
                   </div>
