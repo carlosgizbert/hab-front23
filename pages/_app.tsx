@@ -3,14 +3,18 @@ import type { AppProps } from 'next/app'
 
 import ThemeStyled from '@/config/theme'
 import Loading from '@/ui/pages/LoadingView'
-import TagManager from 'react-gtm-module'
+import TagManager, { TagManagerArgs } from 'react-gtm-module'
 import { useEffect } from 'react'
 
 const queryClient = new QueryClient()
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const gtmId = process.env.NEXT_PUBLIC_GTM_ID || ''
+  const tagManagerArgs: TagManagerArgs = {
+    gtmId,
+  }
   useEffect(() => {
-    TagManager.initialize({ gtmId: 'GTM-MHW8MZX' })
+    TagManager.initialize(tagManagerArgs)
   }, [])
 
   return (
