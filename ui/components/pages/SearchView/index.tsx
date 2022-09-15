@@ -1,6 +1,5 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { Divider } from '@mui/material'
 import 'react-loading-skeleton/dist/skeleton.css'
 
 import Geocode from 'react-geocode'
