@@ -13,7 +13,11 @@ import { useGetSchools } from '@/services/admin/schools'
 
 import * as S from '../../../styles/autoescolas'
 
-export default function Home() {
+const removeAcents = (text: string) => {
+  return text.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+}
+
+export default function Search() {
   const [schools, setSchools] = useState<ISchoolDTO[]>([])
   const [searchOpened, setSearchOpen] = useState(false)
 
@@ -28,7 +32,7 @@ export default function Home() {
     isRefetching: getSchoolsIsRefetching,
   } = useGetSchools({
     address_uf: String(uf),
-    address_city: String(city),
+    address_city: removeAcents(String(city)),
   })
 
   const hasSchools = !!schools && !!schools?.length
