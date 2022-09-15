@@ -44,5 +44,5 @@ export const BodyContent = styled.div`
   flex-direction: column;
   width: 100%;
   max-width: 900px;
-  padding: 0 2rem;
+  padding: 0 0 4rem 0;
 `
