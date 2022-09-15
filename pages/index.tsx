@@ -17,7 +17,7 @@ export default function Home() {
           <S.SectionSearch>
             <Logo />
             <S.Home.SubTitle>
-              Encontre autoescolas perto de você
+              Autoescolas credenciadas pelo detran perto de você
             </S.Home.SubTitle>
             <ButtonSearch
               textAlign="center"
