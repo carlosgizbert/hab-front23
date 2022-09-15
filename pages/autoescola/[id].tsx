@@ -257,7 +257,13 @@ export default function Home() {
                       imageUrl="https://portalpopline.com.br/wp-content/uploads/2022/08/harry-potter-serie.jpg"
                       textTitle={school[0]?.name}
                       textTag={`${school[0]?.address_district}`}
-                      textSub={`${school[0]?.address_city}, ${school[0]?.address_district}, ${school[0]?.address_postal}, ${school[0]?.address_number}`}
+                      textSub={`${school[0]?.address_city}, ${
+                        school[0]?.address_district
+                      }, ${
+                        school[0]?.address_postal
+                          ? `${school[0]?.address_postal}, `
+                          : ''
+                      }${school[0]?.address_number}`}
                       qtdRatings={school[0]?.ratings_quantity}
                       rating={school[0]?.ratings_media_general}
                     />
