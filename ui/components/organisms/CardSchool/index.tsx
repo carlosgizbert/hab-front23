@@ -26,7 +26,7 @@ export default function CardSchool({
         {qtdRatings && rating && (
           <Card.Header.Rating>
             <div style={{ fontWeight: '600' }}>
-              {parseFloat(rating).toFixed(1)}
+              {rating === '--' ? '--' : parseFloat(rating).toFixed(1)}
             </div>
             <div style={{ display: 'flex', fontSize: '12px' }}>
               {qtdRatings}
