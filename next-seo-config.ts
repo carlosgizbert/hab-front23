@@ -7,6 +7,7 @@ export const SEO = {
   title: TITLE,
   description: DESCRIPTION,
   canonical: URL,
+  lang: 'br',
   openGraph: {
     title: TITLE,
     description: DESCRIPTION,

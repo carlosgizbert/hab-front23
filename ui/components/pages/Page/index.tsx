@@ -12,7 +12,7 @@ export default function Page({ title, description, path, children }: IPage) {
   const url = `https://habilita.app/${path}`
 
   return (
-    <html lang="br">
+    <>
       <NextSeo
         title={title}
         description={description}
@@ -48,6 +48,6 @@ export default function Page({ title, description, path, children }: IPage) {
         }}
       />
       {children}
-    </html>
+    </>
   )
 }
