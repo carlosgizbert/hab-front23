@@ -9,9 +9,10 @@ import TagManager, { TagManagerArgs } from 'react-gtm-module'
 const queryClient = new QueryClient()
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const gtmId = process.env.NEXT_PUBLIC_GTM_ID || ''
+  const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || ''
+
   const tagManagerArgs: TagManagerArgs = {
-    gtmId,
+    gtmId: GTM_ID,
   }
   useEffect(() => {
     TagManager.initialize(tagManagerArgs)

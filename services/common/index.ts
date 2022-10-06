@@ -1,4 +1,5 @@
-export const STATIC_API = process.env.URL_API || 'http://localhost:3000/api'
+export const STATIC_API =
+  process.env.NEXT_URL_API || 'http://localhost:3000/api'
 
 export const HEADERS = { 'Access-Control-Allow-Origin': '*' }
 

@@ -3,14 +3,10 @@ import { useRouter } from 'next/router'
 import 'react-loading-skeleton/dist/skeleton.css'
 
 import Geocode from 'react-geocode'
-import * as S from './styles'
 import Header from './Header'
 import ListSuggestions from './ListSuggestions'
 
-Geocode.setApiKey('AIzaSyDbL7Ty4i6Dbu76TaWN_8WQxWOFuI3zq6E')
-Geocode.setLanguage('pt-br')
-Geocode.setRegion('br')
-Geocode.setLocationType('APPROXIMATE')
+import * as S from './styles'
 
 interface IUserRegion {
   city: string
@@ -34,6 +30,12 @@ export default function SearchView({ onClose }: Props) {
     country: '',
     district: '',
   })
+
+  const MAPS_API_KEY = process.env.NEXT_GOOGLE_MAPS_HTTP || ''
+  Geocode.setApiKey(MAPS_API_KEY)
+  Geocode.setLanguage('pt-br')
+  Geocode.setRegion('br')
+  Geocode.setLocationType('APPROXIMATE')
 
   const router = useRouter()
 
