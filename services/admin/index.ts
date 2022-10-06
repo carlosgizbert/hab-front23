@@ -1,5 +1,4 @@
-export const API_URL =
-  process.env.NEXT_URL_API || 'https://hab-api23.herokuapp.com'
+export const API_URL = process.env.URL_API || 'https://hab-api23.herokuapp.com'
 
 export const HEADERS = { 'Access-Control-Allow-Origin': '*' }
 

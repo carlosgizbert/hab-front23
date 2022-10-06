@@ -31,8 +31,7 @@ export default function SearchView({ onClose }: Props) {
     district: '',
   })
 
-  const MAPS_API_KEY = process.env.NEXT_GOOGLE_MAPS_HTTP || ''
-  Geocode.setApiKey(MAPS_API_KEY)
+  Geocode.setApiKey(process.env.NEXT_PUBLIC_GOOGLE_MAPS_HTTP || '')
   Geocode.setLanguage('pt-br')
   Geocode.setRegion('br')
   Geocode.setLocationType('APPROXIMATE')
