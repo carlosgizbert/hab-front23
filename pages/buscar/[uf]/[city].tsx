@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+
+import Page from '@/ui/pages/Page'
+
 import PublicLayout from '@/ui/templates/PublicLayout'
 import CardSchool from '@/ui/organisms/CardSchool'
 import { ISchoolDTO } from '@/services/app/search/schools/interfaces'
@@ -50,7 +53,10 @@ export default function Search() {
   }, [city, uf])
 
   return (
-    <>
+    <Page
+      title={`Autoescolas em ${city}, ${uf} | habilita.app`}
+      description={`Sua primeira habilitação em ${city}.`}
+    >
       {searchOpened && <SearchView onClose={() => setSearchOpen(false)} />}
       <PublicLayout>
         <S.Wrapper>
@@ -135,6 +141,6 @@ export default function Search() {
           </S.SchoolsList.Wrapper>
         </S.Wrapper>
       </PublicLayout>
-    </>
+    </Page>
   )
 }

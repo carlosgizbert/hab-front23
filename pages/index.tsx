@@ -1,4 +1,7 @@
 import { useState } from 'react'
+
+import Page from '@/ui/pages/Page'
+
 import SearchView from '@/ui/pages/SearchView'
 import LayoutPublic from '@/ui/templates/PublicLayout'
 import Logo from '@/ui/atoms/Logo'
@@ -10,7 +13,10 @@ export default function Home() {
   const [searchOpened, setSearchOpen] = useState(false)
 
   return (
-    <>
+    <Page
+      title="habilita - Autoescolas da sua região"
+      description="Saiba onde tirar a primeira habilitação na sua cidade."
+    >
       {searchOpened && <SearchView onClose={() => setSearchOpen(false)} />}
       <LayoutPublic>
         <S.Home.Wrapper>
@@ -27,6 +33,6 @@ export default function Home() {
           </S.SectionSearch>
         </S.Home.Wrapper>
       </LayoutPublic>
-    </>
+    </Page>
   )
 }

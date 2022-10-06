@@ -5,6 +5,8 @@ import PublicLayout from '@/ui/templates/PublicLayout'
 import CardSchool from '@/ui/organisms/CardSchool'
 import { ISchoolDTO } from '@/services/app/search/schools/interfaces'
 
+import Page from '@/ui/pages/Page'
+
 import SearchView from '@/ui/pages/SearchView'
 import Skeleton from 'react-loading-skeleton'
 import Logo from '@/ui/atoms/Logo'
@@ -20,6 +22,7 @@ import { useGetSchools } from '@/services/admin/schools'
 import Card from '@/ui/atoms/Card'
 import Grid from '@/ui/atoms/Grid'
 import Link from 'next/link'
+
 import * as S from '../../styles/autoescola'
 
 export default function Home() {
@@ -193,7 +196,10 @@ export default function Home() {
   }, [id])
 
   return (
-    <>
+    <Page
+      title={`${school[0]?.name} - ${school[0]?.address_city}, ${school[0]?.address_uf}`}
+      description="Autoescolas confiáveis para primeira habilitação de todo."
+    >
       {searchOpened && <SearchView onClose={() => setSearchOpen(false)} />}
       <PublicLayout>
         <S.Wrapper>
@@ -310,6 +316,6 @@ export default function Home() {
           </S.SchoolsList.Wrapper>
         </S.Wrapper>
       </PublicLayout>
-    </>
+    </Page>
   )
 }
