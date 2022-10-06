@@ -54,6 +54,7 @@ export default function Search() {
 
   return (
     <Page
+      path={`/buscar/${uf}/${city}`}
       title={`Autoescolas em ${city}, ${uf} | habilita.app`}
       description={`Sua primeira habilitação em ${city}.`}
     >

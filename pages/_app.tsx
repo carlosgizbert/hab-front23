@@ -1,9 +1,11 @@
-import { QueryClient, QueryClientProvider } from 'react-query'
+import { useEffect } from 'react'
+import { DefaultSeo } from 'next-seo'
+import { SEO } from 'next-seo-config'
 import type { AppProps } from 'next/app'
 
+import { QueryClient, QueryClientProvider } from 'react-query'
 import ThemeStyled from '@/config/theme'
 import Loading from '@/ui/pages/LoadingView'
-import { useEffect } from 'react'
 import TagManager, { TagManagerArgs } from 'react-gtm-module'
 
 const queryClient = new QueryClient()
@@ -17,12 +19,15 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [])
 
   return (
-    <ThemeStyled>
-      <Loading />
-      <QueryClientProvider client={queryClient}>
-        <Component {...pageProps} />
-      </QueryClientProvider>
-    </ThemeStyled>
+    <>
+      <DefaultSeo {...SEO} />
+      <ThemeStyled>
+        <Loading />
+        <QueryClientProvider client={queryClient}>
+          <Component {...pageProps} />
+        </QueryClientProvider>
+      </ThemeStyled>
+    </>
   )
 }
 

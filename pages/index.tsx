@@ -14,6 +14,7 @@ export default function Home() {
 
   return (
     <Page
+      path="/"
       title="habilita - Autoescolas da sua região"
       description="Saiba onde tirar a primeira habilitação na sua cidade."
     >

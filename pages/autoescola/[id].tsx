@@ -197,6 +197,7 @@ export default function Home() {
 
   return (
     <Page
+      path="/autoescola/"
       title={`${school[0]?.name} - ${school[0]?.address_city}, ${school[0]?.address_uf}`}
       description="Autoescolas confiáveis para primeira habilitação de todo."
     >
