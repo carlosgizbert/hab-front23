@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import ThemeStyled from '@/config/theme'
 import Loading from '@/ui/pages/LoadingView'
 import TagManager, { TagManagerArgs } from 'react-gtm-module'
+import Head from 'next/head'
 
 const queryClient = new QueryClient()
 
@@ -20,6 +21,12 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
+      <Head>
+        <meta
+          name="google-site-verification"
+          content="_im2HbQGXbIVjNq2f94ovfQ3leY3MFNQAAdtLVTM2C8"
+        />
+      </Head>
       <DefaultSeo {...SEO} />
       <ThemeStyled>
         <Loading />
