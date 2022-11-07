@@ -8,7 +8,7 @@ export const Card = styled.div`
   width: 100%;
   cursor: pointer;
 
-  border-radius: 2rem;
+  border-radius: 0.5rem;
   color: ${(props) => props.theme.colors.black};
   background-color: ${(props) => props.theme.colors.white};
   box-shadow: ${(props) => props.theme.shadowLevel.level_1};

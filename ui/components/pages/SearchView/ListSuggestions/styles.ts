@@ -13,7 +13,7 @@ export const SuggestionItem = styled.div`
   width: 100%;
   height: 70px;
   padding: 0 1rem;
-  border-radius: 2rem;
+  border-radius: 0.5rem;
   cursor: pointer;
 
   &:hover {

@@ -42,6 +42,17 @@ export default function Home() {
     _id: String(id),
   })
 
+  const schoolNormalized = {
+    id: school[0]?.id,
+    name: school[0]?.name,
+    address: `${school[0]?.address_city}, ${school[0]?.address_district}, ${
+      school[0]?.address_postal ? `${school[0]?.address_postal}, ` : ''
+    }${school[0]?.address_number}`,
+    district: `${school[0]?.address_district}`,
+    qtdRatings: school[0]?.ratings_quantity,
+    rating: school[0]?.ratings_media_general,
+  }
+
   const goToMap = () => {
     router.push({
       href: `https://www.google.com/maps/@?api=1&map_action=pano&${school[0]?.address_postal}, ${school[0]?.address_city}, ${school[0]?.address_district}`,
@@ -240,19 +251,19 @@ export default function Home() {
                       <Skeleton
                         style={{ marginBottom: '0.4rem' }}
                         height={120}
-                        borderRadius="2rem"
+                        borderRadius="0.5rem"
                       />
                       <div
                         style={{
                           marginTop: '1rem',
                           display: 'flex',
                           flexDirection: 'column',
-                          gap: '0.8rem',
+                          gap: '0.5rem',
                         }}
                       >
-                        <Skeleton height={50} borderRadius="2rem" />
-                        <Skeleton height={50} borderRadius="2rem" />
-                        <Skeleton height={50} borderRadius="2rem" />
+                        <Skeleton height={50} borderRadius="0.5rem" />
+                        <Skeleton height={50} borderRadius="0.5rem" />
+                        <Skeleton height={50} borderRadius="0.5rem" />
                       </div>
                     </div>
                   </div>
@@ -260,19 +271,13 @@ export default function Home() {
                 {!schoolIsLoading && !schoolIsRefetching && school && (
                   <>
                     <CardSchool
-                      key={school[0]?.id}
+                      key={schoolNormalized.id}
+                      textTitle={schoolNormalized.name}
+                      textTag={schoolNormalized.district}
+                      textSub={schoolNormalized.address}
+                      qtdRatings={schoolNormalized.qtdRatings}
+                      rating={schoolNormalized.rating}
                       imageUrl="https://portalpopline.com.br/wp-content/uploads/2022/08/harry-potter-serie.jpg"
-                      textTitle={school[0]?.name}
-                      textTag={`${school[0]?.address_district}`}
-                      textSub={`${school[0]?.address_city}, ${
-                        school[0]?.address_district
-                      }, ${
-                        school[0]?.address_postal
-                          ? `${school[0]?.address_postal}, `
-                          : ''
-                      }${school[0]?.address_number}`}
-                      qtdRatings={school[0]?.ratings_quantity}
-                      rating={school[0]?.ratings_media_general}
                     />
                     <div
                       style={{
@@ -296,6 +301,7 @@ export default function Home() {
                         </Link>
                       )}
                       <ButtonCard
+                        onClick={() => goToMap()}
                         icon={<LocationOnRoundedIcon />}
                         label="Ver no mapa"
                       />

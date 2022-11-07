@@ -89,14 +89,14 @@ export default function Search() {
                       <Skeleton
                         style={{ marginBottom: '0.4rem' }}
                         height={120}
-                        borderRadius="2rem"
+                        borderRadius="0.5rem"
                       />
                     </div>
                     <div>
                       <Skeleton
                         style={{ marginBottom: '0.4rem' }}
                         height={120}
-                        borderRadius="2rem"
+                        borderRadius="0.5rem"
                       />
                     </div>
                   </div>

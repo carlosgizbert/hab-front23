@@ -22,7 +22,7 @@ export const ButtonSearch = styled.div<{ align?: string }>`
   align-items: center;
   justify-content: ${(props) => (props.align ? props.align : 'left')};
   width: 100%;
-  border-radius: 2rem;
+  border-radius: 0.5rem;
   padding: 1rem 1.5rem;
   gap: 0.3em;
   color: ${(props) => props.theme.colors.black};
